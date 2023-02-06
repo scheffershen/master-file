@@ -1,0 +1,38 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'profile' | trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'profile' | trans }}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    {{ include('UserManagement/User/_detail.html.twig') }}
+                </div>
+            </div>    
+
+            <div class="form-group">
+                <a href="{{ path('user_change_password', {'username': app.user.username }) }}" class="btn waves-effect waves-light btn-purple">
+                    <i class="fas fa-key"></i>&nbsp;&nbsp;
+                    {{ 'action.change_password'|trans }}</a>
+                </div>
+            </div>
+                    
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+{% endblock %}

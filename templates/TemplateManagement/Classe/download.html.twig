@@ -1,0 +1,30 @@
+<meta charset="UTF-8" />
+<table>
+    <thead>
+        <tr>
+          <th>{{ 'classe.title'|trans }}</th>
+          <th>{{ 'variable.balise'|trans }}</th>
+          <th>{{ 'section.label'|trans }}</th>   
+        </tr>
+    </thead>    
+    <tbody>
+       {% for classe in classes %}
+          <tr>      
+            <td valign="top">{{ classe.title }}</td>
+            <td valign="top"> {% if classe.variables|length > 0 %}
+                    {% for variable in classe.variables %}
+                       {{ variable.balise }}<br/>
+                    {% endfor %}
+                {% endif %}
+            </td>
+            <td valign="top">
+                {% if classe.sections|length > 0 %}
+                    {% for section in classe.sections %}
+                        {{ section.title }}<br/>
+                    {% endfor %}
+                {% endif %}    
+            </td>
+          </tr>
+       {% endfor %}
+    </tbody>
+</table>

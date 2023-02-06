@@ -1,0 +1,88 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondances'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'variables'|trans }} / {{ 'correspondance.globale'|trans }}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'variable.label'|trans }}</th>
+                                <th>{{ 'variable.balise'|trans }}</th>
+                                <th>{{ 'lov.typeVariable'|trans }}</th>
+                                <th>{{ 'lov.scope'|trans }}</th>
+                                <th>{{ 'label.obligation'|trans }}</th>
+                                <th>{{ 'lov.classe'|trans }}</th>
+                                <th>{{ 'correspondance.label'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                                {#<th>{{ 'label.userHelp'|trans }}</th> #}     
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for variable in variables %}
+                            <tr>
+                                <td>{{ variable.label }}</td>
+                                <td>{{ variable.balise }}</td>
+                                <td>{{ variable.type }}</td>
+                                <td>{{ variable.scope }}</td>
+                                <td>{{ variable.obligation.code=='VO'?'oui':'non' }}</td>
+                                <td>
+                                    {% if variable.classes|length > 0 %}
+                                        <select>
+                                            {% for classe in variable.classes %}
+                                                <option>{{ classe.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}   
+                                </td>                                
+                                <td>
+                                    {% if variable.correspondanceGlobale %}                                        
+                                        {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE')  %}
+                                            {% if variable.correspondanceGlobale.valueLocal|isImage == true %}
+                                                <img src="{{ path('admin_private_upload', {'upload': variable.correspondanceGlobale.valueLocal}) }}" class="img-fluid">
+                                            {% endif %}    
+                                        {% else %}
+                                            {{ variable.correspondanceGlobale.valueLocal }} 
+                                        {% endif %}     
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if variable.correspondanceGlobale %}
+                                        <a class="icon text-purple" href="{{ path('admin_correspondance_edit', {'variable': variable.id, 'id': variable.correspondanceGlobale.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                            <i class="fas fa-lg fa-pencil-alt"></i>
+                                        </a>    
+                                        <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Correspondance', id: variable.correspondanceGlobale.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> 
+                                    {% else %}
+                                        <a class="icon text-danger" href="{{ path('admin_correspondance_new', {'variable': variable.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.add'|trans }}">
+                                            <i class="fas fa-lg fa-plus"></i>
+                                        </a>    
+                                    {% endif %}
+                                </td>                                
+                                {#<td>{{ variable.userHelp }}</td>#}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                
+{% endblock %}

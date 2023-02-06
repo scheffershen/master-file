@@ -1,0 +1,132 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondances'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right mt-2">
+                            <a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_psmf_correspondance_locale3_edit', {'psmf': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}" >
+                                <i class="fas fa-pencil-alt"></i>&nbsp;{{ 'action.edit'|trans }}
+                            </a>
+                            &nbsp;
+                            <a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'pdf'}) }}" target="_blank">
+                                <i class="fas fa-file-pdf"></i>&nbsp; {{ 'action.preview'|trans }}
+                            </a>
+                            &nbsp;
+                            <a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_psmf_correspondance_locale3_download', {'psmf': psmf.id, 'format': 'csv'}) }}" target="_blank">
+                                <i class="fas fa-solid fa-file-csv"></i>&nbsp; {{ 'document.download'|trans }}
+                            </a>
+                        </div>                        
+                        <h4 class="page-title">
+                            {{ psmf.title }} <span class="d-none">{{ variablesLocalesDisables|length }} variablesLocalesDisables</span>
+                            {#&nbsp;&nbsp;<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-CorrespondanceLocaleHistory'}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> #}
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceLocale_disable_text(psmf, variablesLocalesDisables)}}
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceGlobale_missing_text(variablesGlobale)}}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3 bg-light">
+                        <div class="card-header">                        
+                            {{ 'psmf.label'|trans }} 
+                            {#<a href="javascript:void();" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" id="localHelp" class=" text-muted"><i class="fas fa-lg fa-question-circle text-purple"></i></a> <button type="button" class="btn btn-purple waves-effect waves-light btn-sm float-right mt-2" id="psmfBtn"><i class="fas fa-angle-right"></i> Show</button>#}
+                        </div>
+                        <div class="card-body" id="psmfBlock">
+                            {{ include('PSMFManagement/PSMF/_detail.html.twig') }}  
+                        </div>  
+                    </div>
+                        
+                    <div class="card mt-4">
+                        <div class="card-header">{{ 'psmf.locale'|trans }}
+                            &nbsp;&nbsp;{{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}
+                        </div>
+
+                        <div class="card-body"> 
+                            <div class="bg-light">
+                                <table class="table">
+                                    <tr><td>{{ 'section.filtre'|trans }}</td><td>
+                                    <select id="sectionFilter" class="chosen">
+                                        <option value="all">{{ 'correspondance.all'|trans }}</option>
+                                        {{ correspondances.correspondanceLocale_option(sections) }}
+                                    </select>
+                                    </td></tr>
+                                </table>
+                            </div>  
+
+                            <br/>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'variable.label'|trans }}</th>
+                                        <th>{{ 'variable.balise'|trans }}</th>
+                                        <th>{{ 'lov.typeVariable'|trans }}</th>
+                                        <th>{{ 'label.obligation'|trans }}</th>
+                                        <th>{{ 'correspondance.label'|trans }}</th>    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for variable in variables %}
+                                    {% if variable.isValid %}
+                                        <tr class="correspondanceLocale {{ correspondances.correspondanceLocale_variable_classe(variable) }}">
+                                            <td>{{ variable.label }}</td>
+                                            <td>
+                                            {% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                                                <span class="text-danger">{{ variable.balise }}</span>
+                                            {% else %}
+                                                <span class="text-success">{{ variable.balise }}</span>
+                                            {% endif %}
+                                            </td>
+                                            <td>{{ variable.type }}</td>
+                                            <td>{{ variable.obligation.code==constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE')?'oui':'non' }}</td>                          
+                                            <td>
+                                                {{ correspondances.correspondanceLocale_valueLocal(psmf, variable)}}
+                                                {{ correspondances.correspondanceLocale_action3(psmf, variable)}}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
+                </div>      
+            </div>
+
+        </div> 
+           
+    </div>
+</div>        
+
+<button class="btn waves-effect waves-light btn-purple floatUp" data-toggle="tooltip" data-original-title="{{ 'Top' | trans }}" >
+    <i class="fas fa-angle-up"></i>
+</button> 
+<button class="btn waves-effect waves-light btn-purple floatDown" data-toggle="tooltip" data-placement="right" data-original-title="{{ 'Bottom' | trans }}" >
+    <i class="fas fa-angle-down"></i>
+</button>
+        
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    {{ encore_entry_script_tags('js/localeShow') }} 
+{% endblock %}

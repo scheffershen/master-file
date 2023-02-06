@@ -1,0 +1,46 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmf.edit'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'psmfs'|trans }} / {{ 'psmf.edit'|trans }}&nbsp;&nbsp;{{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+            <div class="row">
+                <div class="col-12">    
+    				{{ include('PSMFManagement/PSMF/_form.html.twig') }}
+    			</div>		
+    		</div>
+
+            {#<div class="row mt-2">
+                <div class="col-12">
+                        <h6 class="header-title">{{ 'correspondance.locale'|trans}}</h6>    
+                       {{ include('PSMFManagement/Correspondance/_list.html.twig') }}  
+                </div>      
+            </div>#}
+            
+    	</div>
+
+    </div>    			
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

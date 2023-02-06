@@ -1,0 +1,36 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'plateforme.edit'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'plateforme.edit'|trans }}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+            <div class="row">
+                <div class="col-12">    
+                    {{ include('Plateforme/_form.html.twig') }}
+                </div>      
+            </div>
+        </div>
+
+    </div>              
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

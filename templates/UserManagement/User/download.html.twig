@@ -1,0 +1,60 @@
+<meta charset="UTF-8" />
+<table>
+    <thead>
+        <tr>                                
+            <th>{{ 'label.firstname'|trans }}</th>
+            <th>{{ 'label.lastname'|trans }}</th>
+            <th>{{ 'label.username'|trans }}</th>
+            <th>{{ 'label.email'|trans }}</th>
+            <th>{{ 'user.role'|trans }}</th>
+            <th>{{ 'client.label'|trans }}</th>
+            <th>{{ 'PV User'|trans }}</th>
+            <th>{{ 'lov.workRole'|trans }}</th>
+            <th>{{ 'lov.rattachement'|trans }}</th>
+            <th>{{ 'user.workFunction'|trans }}</th>
+            <th>{{ 'user.workName'|trans }}</th>
+            <th>mails d’alerte</th>
+        </tr>
+    </thead>                         
+    <tbody>
+    {% for user in users %}
+        {% if user.id > 1 %}
+            <tr>
+                <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.firstName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.lastName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.username }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.email }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                <td>
+                    {% if user.roles|length > 1 %}
+                        {% for role in user.roles %}
+                            {% if role == 'ROLE_UTILISATEUR' or role == 'ROLE_CONSULTANT' or role == 'ROLE_SUPER_CONSULTANT' or role == 'ROLE_ADMIN' %}
+                                {{ role }}<br/>
+                            {% endif %}    
+                        {% endfor %}
+                    {% endif %}  
+                </td>
+                <td>
+                    {% if user.clients|length > 0 %}
+                        {% for client in user.clients %}
+                            {{ client }}<br/>
+                        {% endfor %}
+                    {% endif %}    
+                </td>  
+                <td>{{ user.pvUser?'yes':'no' }}
+                </td>                                    
+                <td>
+                    {% if user.pvUser and user.workRoles|length > 0 %}
+                        {% for workRole in user.workRoles %}
+                            {{ workRole }}<br/>
+                        {% endfor %}
+                    {% endif %}   
+                </td>
+                <td>{% if user.pvUser %}{{ user.workAttachment|default('-') }}{% else %}-{% endif %}</td>
+                <td>{% if user.pvUser %}{{ user.workFunction|default('-') }}{% else %}-{% endif %}</td>
+                <td>{% if user.pvUser %}{{ user.workName|default('-') }}{% else %}-{% endif %}</td> 
+                <td>{{ user.mailAlerte?'yes':'no' }}</td>        
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

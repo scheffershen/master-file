@@ -1,0 +1,101 @@
+documents: Documents
+document:
+  label: Document
+  applicables: Applicables
+  archives: Archives  
+  actifs: Actifs
+  comentary: Commentaire
+  importer: Importer le document signé
+  import_history: Histories d'import du document signé
+  status:
+    published: Publié
+    downloaded: Téléchargé 
+    signed: Signé
+    archived: Archivé  
+    applicable: Applicable
+    en_attente: En attente
+  pdf: PDF 
+  version: Version
+  published_at: Publié le
+  author: Auteur
+  detail:  Détail des modifications
+  download: Télécharger
+  statut: Statut
+  archive: Archivé
+  publie: Publié  
+  last: Dernières modifications
+  history: Historique des versions
+  new_version: Nouvelle version  
+  new_document: Un nouveau document a été créé
+  no_changed: Aucun changement depuis la dernière version
+  flash:
+    created: "Un document a été créé."
+
+psmfs: Projets clients
+psmf:
+  label: Projet client 
+  title: Nom du projet
+  client: Client
+  euqppvEntity: Entité de l'EUQPPV
+  eudravigNum: Numéro d'enregistrement sur EudraVigilance
+  euQPPV: EUQPPV Name
+  frRPV: RPV FR
+  deputyEUQPPV: Deputy EUQPPV Name
+  contactPvClient: Contact PV client 
+  activitesUM: Select activities performed according to UM standard processes.
+  localQPPVPays: Local QPPV Pays
+  localQPPVUM: Countries where a UM employee is responsible for local QPPV
+  localQPPVOther: Countries where an other person is responsible for local QPPV
+  basePV: PV database used
+  hasOtherPVProviders: Check if other PV providers must to be described
+  isOldClientBbac: Check if it is an old client of BBac  
+  version_active: Version validée
+  document_active: Document validé
+  version_draft: Version en conception
+  document_draft: Document en conception  
+  draft_word: Document en conception Word
+  draft_pdf: Document en conception PDF
+  pdf_2_word: "Comment ouvrir un fichier PDF et l'enregistrer dans un fichier Word par Microsoft Word"
+  draft_html: Document en conception HTML
+  draft: Document en conception  
+  nbCorrespondanceLocaleMissing: Nb de valeurs locales manquantes
+  correspondanceLocaleMissing: Valeur(s) locale(s) manquante(s)
+  nbCorrespondanceLocaleDisabled: Nb de valeurs locales désactivés
+  correspondanceLocaleDisabled: Local correspondances désactivés
+  nbCorrespondanceGlobaleMissing: Nb de valeurs globales manquantes
+  correspondanceGlobaleMissing: Valeur(s) globale(s) manquante(s)  
+  locale: Client projet values
+  localeImageDelete: Suppression de l'image
+  last: Dernières modifications
+  add: "Ajouter un projet client"
+  edit: "Editer un projet client"
+  action:
+    monter_version: Monter de version
+    publier: Publier
+  flash:
+    created: "Un projet client a été créé."
+    updated: "Le projet client a été mis à jour."
+    enable: "Un projet client a été activé."
+    disable: "Un projet client a été désactivé."
+
+psmfHistory:
+  label: Historique des modifications des projets clients
+  modification_variables: Historique des modifications sur les valeurs locales
+  modification_variables_globale: Historique des modifications sur les valeurs globales   
+  modification_section: Historique des modifications sur les sections du Modèle
+  change_client_project: Change in the client project part. 
+  change_um: Change in the UM part.
+  change: Change
+  last_week: Historique des modifications sur le projet client depuis la semaine dernière
+  commentaire: Commentaire
+  section: Section
+  action: Action
+  date: Date
+  author: Auteur
+  detail: Detail  
+  key: Valeur
+  entity: Entity
+  created: Projet client modifié 
+  value:
+    old: Ancienne valeur
+    new: Nouvelle valeur  

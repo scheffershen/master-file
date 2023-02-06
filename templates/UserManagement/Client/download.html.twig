@@ -1,0 +1,21 @@
+<meta charset="UTF-8" />
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'label.name'|trans }}</th>
+            <th>{{ 'label.adresse'|trans }}</th>
+        </tr>
+    </thead>                        
+    <tbody>
+    {% for client in clients %}
+        <tr>
+            <td>
+                <span class="ml-2">
+                    {% if client.isValid == false %}<del>{% endif %}{{ client.name }}{% if client.isValid == false %}</del>{% endif %}
+                </span>
+            </td>
+            <td>{% if client.isValid == false %}<del>{% endif %}{{ client.adress }}{% if client.isValid == false %}</del>{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

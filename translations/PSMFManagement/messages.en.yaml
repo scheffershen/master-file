@@ -1,0 +1,101 @@
+documents: Documents
+document:
+  label: Document
+  applicables: Applicables
+  archives: Archives
+  actifs: Actifs  
+  comentary: Comment
+  importer: Import the signed document
+  import_history: History of the signed document imported
+  status:
+    published: Published
+    downloaded: Dowloaded 
+    signed: Signed
+    archived: Archived
+    applicable: Applicable
+    en_attente: In waiting
+  pdf: PDF   
+  version: Version
+  published_at: Published at
+  author: Autor  
+  detail:  Détail des modifications
+  download: Download
+  statut: status
+  archive: Archived
+  publie: Published
+  last: Latest changes
+  history: PSMF version history
+  new_version: New version
+  new_document: New document has been created
+  no_changed: Nothing has changed since the last release version
+  flash:
+    created: "A document has been created."
+
+psmfs: Customer projects
+psmf:
+  label: Customer project
+  title: Title
+  client: Customer
+  euqppvEntity: Entity EUQPPV
+  eudravigNum: Eudravig Number
+  euQPPV: EUQPPV Name
+  frRPV: RPV FR
+  deputyEUQPPV: Deputy EUQPPV Name
+  contactPvCustomer: Contact PV Customer
+  activitesUM: Select activities performed according to UM standard processes.
+  localQPPVPays: Local QPPV Pays
+  localQPPVUM: Countries where a UM employee is responsible for local QPPV
+  localQPPVOther: Countries where an other person is responsible for local QPPV
+  basePV: PV database used
+  hasOtherPVProviders: Check if other PV providers must to be described
+  isOldCustomerBbac: Check if it is an old Customer of BBac  
+  version_active: Active version
+  document_active: Active document
+  version_draft: Draft version
+  document_draft: Draft document
+  draft_word: Draft Word
+  draft_pdf: Draft PDF
+  pdf_2_word: How to open a PDF file and save it in a Word file by Microsoft Word
+  draft_html: Draft HTML
+  draft: Draft
+  nbCorrespondanceLocaleMissing: Nb of missing local correspondances
+  correspondanceLocaleMissing: Missing local correspondances
+  nbCorrespondanceLocaleDisabled: Nb of disactivated local correspondances
+  correspondanceLocaleDisabled: Disactivated local correspondances  
+  nbCorrespondanceGlobaleMissing: Nb of missing globale correspondances
+  correspondanceGlobaleMissing: Missing globale correspondances  
+  locale: Customer project information
+  localeImageDelete: Delete the image
+  last: Latest changes
+  add: "Add a psmf"
+  edit: "Edit a psmf"
+  action:
+    monter_version: PSMF Upgrade
+    publier: Publish
+  flash:
+    created: "A psmf has been created."
+    updated: "The psmf has been updated."
+    enable: "A psmf has been activated."
+    disable: "A psmf has been disabled."
+    
+psmfHistory:
+  label: PSMF modification history
+  modification_variables: Modification history of the local equivalences
+  modification_variables_globale: Modification history of the global equivalences  
+  modification_section: Modification history of the template
+  last_week: PSMF modification history since last week
+  change_client_project: Change in the client project part. 
+  change_um: Change in the UM part.
+  change: Change  
+  commentaire: Comment
+  section: Section
+  action: Action
+  date: Date
+  author: Author
+  detail: Detail
+  key: Parameter
+  entity: Entity
+  created: PSMF is changed
+  value:
+    old: Old value
+    new: New value

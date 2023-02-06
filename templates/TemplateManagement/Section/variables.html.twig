@@ -1,0 +1,66 @@
+<div id="accordion" class="mb-3">
+    <div class="card mb-1">
+        <div class="card-header" id="headingOne">
+            <h5 class="m-0">
+                <a class="text-dark" data-toggle="collapse" href="#collapseOne" aria-expanded="true">
+                    <i class="mdi mdi-code-tags mr-1"></i> 
+                    {{ 'label.systeme'|trans}}
+                </a>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        	<div class="slimscroll-menu">
+			    <ol>
+				{% for systeme in systemes %}
+					<li><small class="text-muted" data-toggle="tooltip" data-placement="top" title="{{ systeme.label }}">{{ systeme.balise }} </small></li>
+				{% endfor %}
+				</ol>
+			</div>	
+        </div>	
+    </div>
+
+    <div class="card mb-1">
+        <div class="card-header" id="headingTwo">
+            <h5 class="m-0">
+                <a class="text-dark" data-toggle="collapse" href="#collapseTwo" aria-expanded="true">
+                    <i class="mdi mdi-code-tags mr-1 "></i> 
+                    {{ 'label.globale'|trans}}
+                </a>
+            </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+		    <div class="slimscroll-menu">
+		    	<ol>
+				{% for globale in globales %}
+					<li><small class="text-muted" data-toggle="tooltip" data-placement="top" title="{{ globale.label }}">{{ globale.balise }} </small>
+					</li>
+				{% endfor %}
+				</ol>  
+			</div>	      	
+        </div>
+    </div>
+
+    <div class="card mb-1">
+        <div class="card-header" id="headingThree">
+            <h5 class="m-0">
+                <a class="text-dark" data-toggle="collapse" href="#collapseThree" aria-expanded="true">
+                    <i class="mdi mdi-code-tags mr-1"></i> 
+                    {{ 'label.locale'|trans }}
+                </a>
+            </h5>
+        </div>
+
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+		    <div class="slimscroll-menu">
+		    	<ol>
+					{% for locale in locales %}
+						<li><small class="text-muted" data-toggle="tooltip" data-placement="top" title="{{ locale.label }}">{{ locale.balise }} </small>
+						</li>
+					{% endfor %}
+				</ol> 
+			</div>	       	
+        </div>
+    </div>
+</div>	

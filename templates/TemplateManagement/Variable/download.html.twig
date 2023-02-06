@@ -1,0 +1,33 @@
+<meta charset="UTF-8" />
+<table>
+    <thead>
+        <tr>
+          <th>{{ "variable.balise" | trans  }}</th>
+          <th>{{ "lov.scope" | trans  }}</th>
+          <th>{{ 'lov.typeVariable'|trans }}</th>
+          <th>{{ "label.obligation" | trans  }}</th>
+          <th>{{ 'lov.classe'|trans }}</th> 
+          <th>{{ 'variable.label'|trans }}</th>
+          <th>{{ 'label.description'|trans }}</th>    
+        </tr>
+    </thead>    
+    <tbody>
+       {% for variable in variables %}
+          <tr>      
+            <td>{{ variable.balise }}</td>
+            <td>{{ variable.scope }}</td>
+            <td>{{ variable.type }}</td>
+            <td>{{ variable.obligation.code=='VO'?'oui':'non' }}</td>            
+            <td>
+                {% if variable.classes|length > 0 %}
+                    {% for classe in variable.classes %}
+                      {{ classe.title }}; 
+                    {% endfor %}
+                {% endif %}          
+            </td>
+            <td>{{ variable.label }}</td>
+            <td>{{ variable.description|default('') }}</td>
+          </tr>
+       {% endfor %}
+    </tbody>
+</table>

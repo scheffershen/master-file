@@ -1,0 +1,102 @@
+variables: Variables
+variable:
+    list: Liste
+    variable: Variable
+    label: Name
+    balise: Balise  
+    add: "Add a variable "
+    edit: "Edit a variable"
+    delete: Delete a variable
+    disable: Disable a variable
+    enable: Enable a variable     
+    in_used: This variable is in used
+    create: Creation
+    update: Edit
+    revision: Révision
+    flash:
+        created: "A variable has been created."
+        updated: "Variable has been updated."
+        enabled: "Variable has been enabled."
+        disabled: "Variable has been disabled."
+        deleted: "Variable has been deleted."
+
+correspondances: Valeur
+correspondance:
+    globale: Global data
+    locale: Local equivalences   
+    label: Equivalence
+    valueLocal: Value    
+    valueLocalImage: Image
+    nb_correspondance: Number of equivalences associated
+    nb_psmf: PSMFs associated
+    nb_section: Number of template sections associated 
+    all: All template sections    
+    add: "Add a equivalence"
+    edit: "Edit a equivalence"
+    create: Creation
+    update: Edit
+    delete: Delete
+    revision: Révision
+    flash:
+        created: "A equivalence has been created."
+        updated: "A equivalence has been updated."
+
+classes: Classes
+classe:
+    list: Classe
+    title: Class name
+    label: Classe
+    add: "Add a classe"
+    edit: "Edit a classe"
+    create: Creation
+    update: Edit
+    disable: Disable a classe
+    enable: Enable a classe      
+    delete: Delete a classe   
+    in_used: This classe is in used
+    nb_varaible: Nombre de variables
+    flash:
+        created: "A classe has been created."
+        updated: "Classe has been updated."
+        enabled: "classe has been enabled."
+        disabled: "classe has been disabled."
+        deleted: "classe has been deleted."
+
+templates: Template
+
+sections: Template section
+section:
+    list: Section
+    title_name: Titre de la section
+    label: Section
+    add: "Add a section"
+    add_subsection: "Add a subsection"
+    edit: "Edit a section"
+    create: Creation
+    update: Edit
+    delete: Delete a section
+    disable: Disable a section
+    enable: Enable a section    
+    title: Section title (SYS_PART_TITRE)
+    position: Position
+    isValid: Section active
+    isAnnexe: Annexe section 
+    allowSubSection: Allow Subsection
+    isPageBreak: Page break
+    isMajeur: Tracing the modification
+    isMineur: Not tracing the modification
+    filtre: "Filter section:"
+    parent: Parent    
+    contenu: Content
+    reason: Reason
+    last: Latest changes
+    flash:
+        created: "A section has been created."
+        updated: "Section has been updated."
+        enable: "Section has been enabled."
+        disable: "Section has been disabled."
+        deleted: "Section has been deleted"
+
+nav:
+    outil: Tools
+    configuration: Configuration

@@ -1,0 +1,130 @@
+<table class="table">
+    <tbody>
+        {% if user.pvUser and user.cvUri is not null %}
+            <tr>
+                <td colspan="2"><img class="img-fluid" src="{{ path('admin_private_upload', {'upload': user.cvUri }) }}" id="preview" alt="cv"></th>
+            </tr>
+        {% endif %}                        
+        <tr>
+            <th>{{ 'label.firstname'|trans }}</th>
+            <td>{{ user.firstName }}</td>
+        </tr>                        
+        <tr>
+            <th>{{ 'label.lastname'|trans }}</th>
+            <td>{{ user.lastName }}</td>
+        </tr> 
+        <tr>
+            <th>{{ 'label.username'|trans }}</th>
+            <td>{{ user.username }}</td>
+        </tr>         
+        <tr>
+            <th>{{ 'label.email'|trans }}</th>
+            <td>{{ user.email }}</td>
+        </tr>  
+        <tr>    
+            <th>{{ 'user.isEnable'|trans }}</th>
+            <td>{% if user.isEnable %}
+                    <span class="icon text-purple"><i class="fas fa-lg fa-check"></i></span>
+                {% else %}
+                    <span class="icon text-danger"><i class="fas fa-lg fa-times"></i></span>
+                {% endif %}
+            </td>
+        </tr> 
+        {% if user.roles|length > 0%}  
+        <tr>
+            <th>{{ 'user.role'|trans }}</th>
+            <td>
+                {% for id, value in user.roles %}
+                    {% if value == 'ROLE_UTILISATEUR' or value == 'ROLE_CONSULTANT' or value == 'ROLE_SUPER_CONSULTANT' or value == 'ROLE_ADMIN' %}
+                        <label class="custom-control custom-checkbox">                          
+                            <input type="checkbox" name="user[roles][]" value="{{ id }}" class="custom-control-input" checked="checked"/>
+                            <span class="custom-control-label">{{ value }}</span>  
+                        </label>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>  
+        {% endif %}              
+        {% if user.clients|length > 0%}                                                     
+            <tr>
+                <th>{{ 'user.client'|trans }}</th>
+                <td>{#<select class="form-control">#}
+                        {% for client in user.clients %}
+                            <option>{{ client }}</option>
+                        {% endfor %}
+                    {#</select>#}
+                </td>
+            </tr> 
+        {% endif %}
+        <tr>
+            <th>{{ 'user.mailAlerte'|trans }}</th>
+            <td>
+                {% if user.mailAlerte %}
+                    <span class="icon text-purple"><i class="fas fa-lg fa-check"></i></span>
+                {% else %}
+                    <span class="icon text-danger"><i class="fas fa-lg fa-times"></i></span>
+                {% endif %}
+            </td>
+        </tr>         
+        {% if user.pvUser %}
+            <tr><th colspan="2"><h5 class="page-title">{{ 'user.data_pv'|trans }}</h5></th></tr>
+            <tr>
+                <th>{{ 'lov.gender'|trans }}</th>
+                <td>{{ user.gender }}</td>
+            </tr>
+            {% if user.workRoles|length > 0%}  
+                <tr>
+                    <th>{{ 'lov.workRole'|trans }}</th>
+                    <td>{#<select class="form-control">#}
+                            {% for workRole in user.workRoles %}
+                                <option>{{ workRole }}</option>
+                            {% endfor %}
+                        {#</select>#}
+                    </td>
+                </tr>
+            {% endif %}   
+            {% if user.workFunction %}
+            <tr>
+                <th>{{ 'user.workFunction'|trans }}</th>
+                <td>{{ user.workFunction }}</td>
+            </tr>
+            {% endif %} 
+            {% if user.mobile %}                            
+            <tr>
+                <th>{{ 'label.mobile'|trans }}</th>
+                <td>{{ user.mobile }}</td>
+            </tr>  
+            {% endif %} 
+            {% if user.fixe %}                 
+            <tr>
+                <th>{{ 'label.fixe'|trans }}</th>
+                <td>{{ user.fixe }}</td>
+            </tr> 
+            {% endif %} 
+            {% if user.fax %}                 
+            <tr>
+                <th>{{ 'label.fax'|trans }}</th>
+                <td>{{ user.fax }}</td>
+            </tr> 
+            {% endif %}             
+            {% if user.workAttachment %}                  
+            <tr>
+                <th>{{ 'lov.rattachement'|trans }}</th>
+                <td>{{ user.workAttachment }}</td>
+            </tr>  
+            {% endif %} 
+            {% if user.workName %}                 
+            <tr>
+                <th>{{ 'user.workName'|trans }}</th>
+                <td>{{ user.workName }}</td>
+            </tr>
+            {% endif %} 
+            {% if user.adresse %}                   
+            <tr>
+                <th>{{ 'label.adresse'|trans }}</th>
+                <td>{{ user.adresse }}</td>
+            </tr>
+            {% endif %}   
+        {% endif %}                                                     
+    </tbody>
+</table> 

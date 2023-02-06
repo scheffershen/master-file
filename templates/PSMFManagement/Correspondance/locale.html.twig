@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondance.locale'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right mt-2">
+                            <a class="btn waves-effect waves-light btn-purple float-right" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'html'}) }}" target="_blank">
+                                <i class="fas fa-globe"></i> {{ 'action.preview'|trans }}
+                            </a>
+                        </div>
+                        <h4 class="page-title">{{ psmf.title }} &nbsp;&nbsp;{{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+            <div class="row">
+                <div class="col-12">
+                    {#<h6 class="header-title">{{ 'psmf.label'|trans}}</h6>  
+                    {{ include('PSMFManagement/PSMF/_detail.html.twig') }} #}
+                    <h6 class="header-title">{{ 'correspondance.locale'|trans}}</h6> 
+                    {{ include('PSMFManagement/Correspondance/_list.html.twig') }} 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                
+{% endblock %}

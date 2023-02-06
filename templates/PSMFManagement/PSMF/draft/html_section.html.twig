@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="PSMF">
+    <link rel="icon" sizes="192x153" href="{{ asset('images/icons/chrome-touch-icon-192x192.png') }}">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PSMF">
+    <link rel="apple-touch-icon" href="{{ asset('images/icons/apple-touch-icon.png') }}">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="{{ asset('images/icons/icon-144x144.png') }}">
+    <meta name="msapplication-TileColor" content="#0069d9">
+
+    <!-- Color the status bar on mobile devices -->
+    <meta name="theme-color" content="#ffffff">    
+    </head>
+    <body>
+        <table width="595" height="842" border="1">
+             <thead>
+                <tr>
+                    <th align="center">
+                        {% autoescape %}
+                            {{ header|raw }} 
+                        {% endautoescape %} 
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td valign="top"> 
+                        {% autoescape %}
+                            {{  page|raw }} 
+                        {% endautoescape %}  
+                    </td>
+                </tr>
+            </tbody>                                         
+            <tfoot>
+                <tr>
+                    <td align="center">
+                        {% autoescape %}
+                            {{ footer|raw }} 
+                        {% endautoescape %} 
+                    </td>
+                </tr>
+            </tfoot>
+        </table>  
+        {#<table width="595" height="20" border="1">
+            <tr>
+                <td align="center">
+                    <h5>Page {{ loop.index }}</h5>
+                </td>
+            </tr>
+        </table>#} 
+    </body>
+</html>

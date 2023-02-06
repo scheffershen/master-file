@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Exception {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="account-pages w-100 mt-5 mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <div class="card">
+                    <div class="card-header alert alert-dismissible alert-danger">{{ 'message.error404'|trans }}</div>
+
+                    <div class="card-body">
+                         <a href="{{ path('home')}}">
+                            <p>
+                           {{ 'action.go_back'|trans }}
+                         </p></a>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <!-- end container -->    
+</div>  
+{% endblock %}

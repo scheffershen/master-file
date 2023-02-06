@@ -1,0 +1,164 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'users'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} / {{ 'user.list'|trans }}
+                        <a href="/docs/{{ app.request.locale }}/site/users/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                        <a class="btn btn-sm btn-purple float-right mt-2" href="{{ path('admin_user_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>     
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->    
+
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'label.firstname'|trans }}</th>
+                                <th>{{ 'label.lastname'|trans }}</th>
+                                <th>{{ 'label.username'|trans }}</th>
+                                <th>{{ 'label.email'|trans }}</th>
+                                <th>{{ 'user.role'|trans }}</th>
+                                <th>{{ 'client.label'|trans }}</th>
+                                <th>{{ 'PV User'|trans }}</th>
+                                <th>{{ 'lov.workRole'|trans }}</th>
+                                <th>{{ 'lov.rattachement'|trans }}</th>
+                                <th>{{ 'user.workFunction'|trans }}</th>
+                                <th>{{ 'user.workName'|trans }}</th>
+                                <th>mails d’alerte</th>
+                                <th class="col-2">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                            <tr>                                
+                                <th>{{ 'label.firstname'|trans }}</th>
+                                <th>{{ 'label.lastname'|trans }}</th>
+                                <th>{{ 'label.username'|trans }}</th>
+                                <th>{{ 'label.email'|trans }}</th>
+                                <th>{{ 'client.label'|trans }}</th>
+                                <th>{{ 'user.role'|trans }}</th>
+                                <th>{{ 'PV User'|trans }}</th>
+                                <th>{{ 'lov.workRole'|trans }}</th>
+                                <th>{{ 'lov.rattachement'|trans }}</th>
+                                <th>{{ 'user.workFunction'|trans }}</th>
+                                <th>{{ 'user.workName'|trans }}</th>
+                                <th>mails d’alerte</th>
+                                <th class="col-2">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>                         
+                        <tbody>
+                        {% for user in users %}
+                            {% if user.id > 1 %}
+                                <tr>
+                                    <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.firstName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                    <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.lastName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                    <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.username }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                    <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.email }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                    <td>
+                                        {% if user.roles|length > 1 %}
+                                            <select class="form-control">
+                                                {% for role in user.roles %}
+                                                    {% if role == 'ROLE_UTILISATEUR' or role == 'ROLE_CONSULTANT' or role == 'ROLE_SUPER_CONSULTANT' or role == 'ROLE_ADMIN' %}
+                                                        <option>{{ role }}</option>
+                                                    {% endif %}    
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}  
+                                    </td>
+                                    <td>
+                                        {% if user.clients|length > 0 %}
+                                            <select class="form-control">
+                                                {% for client in user.clients %}
+                                                    <option>{{ client }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}    
+                                    </td>  
+                                    <td>{{ user.pvUser?'yes':'no' }}
+                                    </td>                                    
+                                    <td>
+                                        {% if user.pvUser and user.workRoles|length > 0 %}
+                                            <select class="form-control">
+                                                {% for workRole in user.workRoles %}
+                                                    <option>{{ workRole }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        {% endif %}   
+                                    </td>
+                                    <td>{% if user.pvUser %}{{ user.workAttachment|default('-') }}{% else %}-{% endif %}</td>
+                                    <td>{% if user.pvUser %}{{ user.workFunction|default('-') }}{% else %}-{% endif %}</td>
+                                    <td>{% if user.pvUser %}{{ user.workName|default('-') }}{% else %}-{% endif %}</td> 
+                                    <td>{{ user.mailAlerte?'yes':'no' }}</td>        
+                                    <td>
+                                        <span class="badge badge-pill badge-purple" data-toggle="tooltip" data-placement="top" title="{{ 'publishedDocuments'|trans }}">{{ user.publishedDocuments|length }}</span>
+                                         <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#user{{ user.id }}" data-toggle="modal">
+                                                            <i class="fas fa-lg fa-eye"></i>
+                                                    </a>
+                                        <a class="icon text-purple" href="{{ path('admin_user_edit', {'id': user.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                            <i class="fas fa-lg fa-pencil-alt"></i>
+                                        </a>
+                                        {#<a class="icon text-danger" href="{{ path('admin_user_show', {'id': user.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                            <i class="fas fa-lg fa-trash"></i>
+                                        </a>#}                                
+                                        {% if user.isEnable %}
+                                            <a class="icon text-purple"  href="{{ path('admin_user_show', {'id': user.id, 'action': 'disable'}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                        {% else %}
+                                            <a class="icon text-danger" href="{{ path('admin_user_show', {'id': user.id, 'action': 'enable'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                        {% endif %}
+                                        <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-UserManagement-User', id: user.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> 
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+<a href="{{ path('admin_user_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>        
+
+{% for user in users %}
+<div class="modal fade" id="user{{ user.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ user.username }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ include('UserManagement/User/_detail.html.twig') }}                       
+            </div>
+        </div>
+    </div>    
+</div>  
+{% endfor %}
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    {{ encore_entry_script_tags('js/datatables') }}
+{% endblock %}

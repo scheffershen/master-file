@@ -1,0 +1,121 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmfs'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'psmfs'|trans }}
+                            &nbsp;&nbsp;
+                            <a href="/docs/{{ app.request.locale }}/site/psmf/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceGlobale_missing_text(variablesGlobale)}} 
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'psmf.title'|trans }}</th>
+                                <th>{{ 'psmf.client'|trans }}</th>
+                                <th>{{ 'psmf.nbCorrespondanceLocaleMissing'|trans }}</th>
+                                <th>{{ 'psmf.version_draft'|trans }}</th>
+                                <th>{{ 'psmf.document_draft'|trans }}</th> 
+                                {% if is_granted('ROLE_UTILISATEUR') %}  
+                                  <th class="w-20">{{ 'table.action'|trans }}</th>
+                                  <th>{{ 'psmf.action.publier'|trans }}</th>
+                                {% endif %}
+                                </tr>
+                            </tr>
+                        </thead>  
+                        <thead id="filtreForm">
+                            <tr>                                
+                                <th>{{ 'psmf.title'|trans }}</th>
+                                <th>{{ 'psmf.client'|trans }}</th>
+                                <th>{{ 'psmf.nbCorrespondanceLocaleMissing'|trans }}</th>
+                                <th>{{ 'psmf.version_draft'|trans }}</th>
+                                <th>{{ 'psmf.document_draft'|trans }}</th> 
+                                {% if is_granted('ROLE_UTILISATEUR') %}  
+                                  <th class="w-20">{{ 'table.action'|trans }}</th>
+                                  <th>{{ 'psmf.action.publier'|trans }}</th>
+                                {% endif %}
+                            </tr>
+                        </thead>                             
+                        <tbody>  
+                        {% for psmf in psmfs %}
+                            <tr>
+                                <td><span data-toggle="tooltip" data-placement="top" title="{{ psmf.title }}">{% if psmf.isValid == false %}<del>{% endif %}{{ psmf.title|u.truncate(140, '...') }}{% if psmf.isValid == false %}</del>{% endif %}</span>
+                                </td>
+                                <td>{{ psmf.client }}</td>
+                                <td>
+                                    {% if psmf.lastVersion %}V{{ psmf.lastVersion.version + 1 }}{% else %}V1{% endif %}                                    
+                                </td>   
+                                <td>
+                                    {{ correspondances.correspondanceLocale_missing(psmf, variables) }}  
+                                </td>                             
+                                <td>
+                                    <a class="icon text-purple" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'pdf'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.document_draft'|trans }} (PDF), {% if psmf.lastVersion %}V{{ psmf.lastVersion.version + 1 }}{% else %}V1{% endif %}" target="_blank">
+                                        <i class="fas fa-lg fa-file-pdf"></i>
+                                    </a>
+                                    <a class="icon text-purple" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'word'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.document_draft'|trans }} (WORD), {% if psmf.lastVersion %}V{{ psmf.lastVersion.version + 1 }}{% else %}V1{% endif %}" target="_blank">
+                                        <i class="fas fa-lg fa-file-word"></i>
+                                    </a>
+                                </td> 
+                                {% if is_granted('ROLE_UTILISATEUR') %} 
+                                    <td> 
+                                        {% if psmf.isValid %}
+                                            <a class="icon text-purple"  href="{{ path('admin_psmf_disable', {'id': psmf.id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                        {% else %}
+                                            <a class="icon text-danger" href="{{ path('admin_psmf_disable', {'id': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                        {% endif %}                           
+                                        <a class="icon text-purple"  href="{{ path('admin_psmf_correspondance_locale3_show', {'psmf': psmf.id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.show'|trans }}" ><i class="fas fa-lg fa-eye"></i></a>
+                                        <a class="icon text-purple" href="{{ path('admin_psmf_correspondance_locale3_edit', {'psmf': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}"><i class="fas fa-lg fa-pencil-alt"></i></a>  
+                                        <a href="{{ path('admin_psmf_history', {'id': psmf.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>                                  
+                                    </td>
+                                    <td data-order="{{ psmf.id }}">
+                                        <a id="psmfPublisher{{ psmf.id }}" class="btn btn-sm d-none" href="{{ path('admin_published_document_new', {'psmf': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.action.monter_version'|trans }}">
+                                            {{ 'psmf.action.publier'|trans }}
+                                        </a>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}                   
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+            <p><a href="https://support.microsoft.com/en-us/office/edit-a-pdf-b2d1d729-6b79-499a-bcdb-233379c2f63a" target="_blank"><i class="fas fa-lg fa-question-circle text-purple"></i> {{ 'psmf.pdf_2_word'|trans }}</a></p>
+        </div> 
+    </div>
+</div>
+
+{% if is_granted('ROLE_UTILISATEUR') %} 
+<a href="{{ path('admin_psmf_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>    
+{% endif %}
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/datatables') }}
+    {{ encore_entry_script_tags('js/psmfIndex') }}    
+{% endblock %}

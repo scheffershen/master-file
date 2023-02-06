@@ -1,0 +1,50 @@
+<div class="table-responsive">
+    <table class="table" style="background-color: #FFFFFF">
+        <thead class="thead">
+            <tr>
+                <th>{{'label.title'|trans }}</th>
+                <th>{{'label.code'|trans }}</th>
+                <th>{{'label.sort'|trans }}</th>
+                <th>{{'label.revision'|trans }}</th>
+                <th>{{'label.createDate'|trans }}</th>
+                <th>{{'label.createBy'|trans }}</th>
+                <th>{{'label.updateDate'|trans }}</th>
+                <th>{{'label.updateBy'|trans }}</th>
+                {% if allowedit and allowDelete %}
+                    <th class="col-1">{{ 'table.action'|trans }}</th>
+                {% endif %} 
+            </tr>
+        </thead>
+        <tbody>
+            {% for lov in lovs %}
+                <tr>
+                    <td class="text-left">{{ lov.title }}</td>
+                    <td class="text-left">{{ lov.code}}</td>
+                    <td class="text-left">{{ lov.sort}}</td>
+                    <td class="text-left">{{ lov.revision}}</td>
+                    <td class="text-left">{{ lov.createDate|date('d-M-Y H:i')}}</td>
+                    <td class="text-left">{{ lov.createUser}}</td>
+                    <td class="text-left">{{ lov.updateDate|date('d-M-Y H:i')}}</td>
+                    <td class="text-left">{{ lov.updateUser}}</td>
+                    {% if allowedit and allowDelete %}
+                        <td class="text-left">
+                            {% if allowedit %}
+                                <a class="icon text-purple" href="{{ path('admin_lov_edit', {'entity': entity, 'id': lov.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                <i class="fas fa-lg fa-pencil-alt"></i>
+                                </a>
+                            {% endif %}
+
+                            {% if allowDelete %}
+                                {% if lov.isValid %}
+                                    <a class="icon text-purple"  href="{{ path('admin_lov_disable', {'entity': entity, 'id': lov.id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                {% else %}
+                                    <a class="icon text-danger" href="{{ path('admin_lov_disable', {'entity': entity, 'id': lov.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                {% endif %} 
+                            {% endif %} 
+                        </td>
+                    {% endif %}    
+                </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+</div>

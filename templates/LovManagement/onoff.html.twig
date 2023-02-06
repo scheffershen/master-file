@@ -1,0 +1,25 @@
+{% if entity == 'AnswerType' or entity == 'ValidationMode' or entity == 'PageType' or entity == 'TypeTest' or entity == 'ModuleType' %}
+    {% set allowCreate = false %}
+{% else %}
+    {% set allowCreate = true %}
+{% endif %}
+
+
+{% if allowCreate %}
+    {% if isValid == 1  %}
+        {% if nbUsed is defined and nbUsed > 0 %}
+            <span class="badge badge-info">
+                {{ nbUsed|default(0) }}
+            </span>
+            </a>
+        {% else %}
+            <a class="icon text-purple"  href="{{ path('admin_lov_disable', {'entity': entity, 'id': id}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'global.desactiver'|trans }}" ><i class="material-icons lms-material-icons lms-text-purple" data-toggle="tooltip" data-original-title="{{ 'global.actif' | trans }}">toggle_on</i></a> 
+        {% endif %}  
+    {% else %}
+        <a class="icon text-purple" href="{{ path('admin_lov_disable', {'entity': entity, 'id': id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'global.activer'|trans }}"><i class="material-icons lms-material-icons" data-toggle="tooltip" data-original-title="{{ 'global.inactif' | trans }}">toggle_off</i></a>   
+    {% endif %} 
+{% else  %}
+     <span class="badge badge-info">
+        {{ nbUsed|default(0) }}
+    </span>
+{% endif %}

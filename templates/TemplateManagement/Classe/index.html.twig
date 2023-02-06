@@ -1,0 +1,113 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'classes'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="text-purple"><i class="fas fa-spinner fa-spin"></i></div>
+</div>
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.configuration'|trans }} / {{ 'classe.list'|trans }}
+                        <a href="/docs/{{ app.request.locale }}/site/classement" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                        <a class="btn btn-sm btn-purple float-right mt-2" href="{{ path('admin_classe_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>     
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'classe.title'|trans }}</th>
+                                <th>{{ 'variable.balise'|trans }}</th>
+                                <th>{{ 'section.label'|trans }}</th>
+                                {#<th>{{ 'label.code'|trans }}</th>#}
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                            <tr>                                
+                                <th>{{ 'classe.title'|trans }}</th>
+                                <th>{{ 'variable.balise'|trans }}</th>
+                                <th>{{ 'section.label'|trans }}</th>
+                                {#<th>{{ 'label.code'|trans }}</th>#}
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>                        
+                        <tbody>
+                        {% for classe in classes %}
+                            <tr>
+                                <td>{% if classe.isValid == false %}<del>{% endif %}{{ classe.title }}{% if classe.isValid == false %}</del>{% endif %}</td>
+                                <td>
+                                    {% if classe.variables|length > 0 %}
+                                        <select>
+                                            {% for variable in classe.variables %}
+                                                <option>{{ variable.balise }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}    
+                                </td>
+                                <td>
+                                    {% if classe.sections|length > 0 %}
+                                        <select>
+                                            {% for section in classe.sections %}
+                                                <option>{{ section.title|u.truncate(60, '...') }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}    
+                                </td>                                
+                                {#<td>{{ classe.code }}</td>#}
+                                <td>
+                                    <span class="badge badge-pill badge-purple" data-toggle="tooltip" data-placement="top" title="{{ 'variable.balise'|trans }}">{{ classe.variables|length }}</span>
+                                    <a class="icon text-purple" href="{{ path('admin_classe_edit', {'id': classe.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                        <i class="fas fa-lg fa-pencil-alt"></i>
+                                    </a>
+                                    {% if classe.isValid == false %}
+                                        <a class="icon text-danger" href="{{ path('admin_classe_show', {'id': classe.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                            <i class="fas fa-lg fa-trash"></i>
+                                        </a>
+                                    {% endif %}                                    
+                                    {% if classe.isValid %}
+                                        <a class="icon text-purple"  href="{{ path('admin_classe_show', {'id': classe.id, 'action': 'disable'}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                    {% else %}
+                                        <a class="icon text-danger" href="{{ path('admin_classe_show', {'id': classe.id, 'action': 'enable'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                    {% endif %} 
+                                    <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Classe', id: classe.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+<a href="{{ path('admin_classe_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>     
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/preloader') }}  
+    {{ encore_entry_script_tags('js/datatables') }}     
+{% endblock %}

@@ -1,0 +1,36 @@
+qualios: Qualios
+
+qualio:
+    curl_error: curl_error
+    documents: Qualios    
+    reference: Reference
+    version: Version
+    title: Title
+    activityDate: Activity Date
+    createDate: Create Date
+    validityDate: Validity Date
+    natureOfChange: Nature Of Change
+    object: Object
+    simpleOrDynamic: Simple Or Dynamic
+    archiveDate: Archive Date
+    reviewDate: Review Date
+    replayDate: Replay Date
+    submitDate: Submit Date
+    signDelay: Sign Delay
+    lateSignAlert: Late Sign Alert
+    formationAccessibility: Formation Accessibility
+    actionWhenArchive: Action When Archive
+    archivePeriod: Archive Period
+    archivePeriodAlert: Archive Period Alert
+    reviewAlert: Review Alert
+    docRefQualifForm: Doc Ref Qualif Form
+    rappelQualifForm: Rappel Qualif Form
+    signByLevel: Sign By Level
+    nbLevel: Nb Level
+    docCode: DocCode
+    titleComposition: Title Composition
+    testMode: Test Mode
+    delayValidity: Delay Validity
+    delayAR: Delay AR
+    attachmentAsBody: Attachment As Body
+    lastUpdate: Latest update time

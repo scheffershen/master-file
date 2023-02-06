@@ -1,0 +1,187 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'sections'|trans }}{% endblock %}
+
+{% import "TemplateManagement/Section/widget/utils.html.twig" as utils %}
+
+{% block stylesheets %}
+<style>
+.cool-link {
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+}
+
+.cool-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    transition: width .3s;
+}
+
+.cool-link:hover::after {
+    width: 100%;
+    //transition: width .3s;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">                    
+                    <div class="page-title-box">
+                        <div class="page-title-right mt-2">                               
+                            {#<a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_template_show', {'format': 'html'}) }}"  data-toggle="tooltip" data-placement="top" title="HTML {{ 'action.preview'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-file-code"></i>
+                            </a>#}
+                            <a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_template_show', {'format': 'pdf'}) }}"  data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-file-pdf"></i>
+                            </a> 
+                            {#<a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_template_show', {'format': 'word'}) }}"  data-toggle="tooltip" data-placement="top" title="Word {{ 'action.preview'|trans }}" target="_blank">
+                                <i class="fas fa-file-word"></i>
+                            </a>#}
+                        </div>
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} / {{ 'templates'|trans }}
+                            &nbsp;&nbsp;
+                            <a href="{{ path('admin_template_history') }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>
+                            <a href="/docs/{{ app.request.locale }}/site/template/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="{{ path('admin_section_new') }}" class="btn waves-effect waves-light btn-danger">
+                                <i class="fas fa-lg fa-plus"></i> {{ 'section.add'|trans }} 
+                            </a>
+                            {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section'}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> 
+                            #}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>{{ 'section.position'|trans }}</th>
+                                <th>{{ 'section.title_name'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td>{{ header.title|titleParser|raw }}</td>                            
+                                <td>
+                                    <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ header.id }}" data-toggle="modal">
+                                                            <i class="fas fa-lg fa-eye"></i>
+                                                    </a>
+                                    {% if header.editable %}                
+                                    <a class="icon text-purple" href="{{ path('admin_section_edit', {'id': header.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                        <i class="fas fa-lg fa-pencil-alt"></i>
+                                    </a> 
+                                    {% endif %} 
+                                    {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section', id: header.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>#}                           
+                                </td>
+                            </tr>  
+                            <tr>
+                                <td></td>
+                                <td>{{ footer.title|titleParser|raw }}</td>
+                                <td>
+                                    <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ footer.id }}" data-toggle="modal">
+                                                            <i class="fas fa-lg fa-eye"></i>
+                                                    </a>
+                                    {% if footer.editable %}                
+                                        <a class="icon text-purple" href="{{ path('admin_section_edit', {'id': footer.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                            <i class="fas fa-lg fa-pencil-alt"></i>
+                                        </a>     
+                                    {% endif %}  
+                                    {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section', id: footer.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>#}                        
+                                </td>
+                            </tr>                         
+                        {% for section in sections %}
+                            {% if section.id > 2 %}
+                                <tr>
+                                    <td>{{ section.position }}</td>
+                                    <td><span data-toggle="tooltip" data-placement="top" title="{{ section.title }}">
+                                        {% if section.isValid %}
+                                            {#{{ section.position }}.&nbsp;&nbsp;#}{{ section.title|u.truncate(140, '...')|titleParser|raw }}
+                                        {% else %}
+                                            <del>{#{{ section.position }}.&nbsp;&nbsp;#}{{ section.title|u.truncate(140, '...')|titleParser|raw }}</del>
+                                        {% endif %}
+                                    </span>{# if section.isPageBreak %} <i class="fas fa-lg fa-pager text-purple" data-toggle="tooltip" data-original-title="{{ 'section.isPageBreak' | trans }}"></i>{% endif #}
+                                        {% if section.sections|length > 0 %}
+                                           <div class="ml-2">
+                                            {{ utils.li(section) }}
+                                           </div>
+                                        {% endif %}
+                                    </td>
+                                    <td>                                    
+                                        {% if section.allowSubSection %}                                
+                                        <a class="icon text-danger" href="{{ path('admin_section_new', {'parent': section.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'section.add_subsection'|trans }}">
+                                            <i class="fas fa-lg fa-plus"></i>
+                                        </a>  
+                                        {% endif %} 
+                                        {% if section.editable %}                                    
+                                        <a class="icon text-purple" href="{{ path('admin_section_edit', {'id': section.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                            <i class="fas fa-lg fa-pencil-alt"></i>
+                                        </a>
+                                        {% endif %}
+                                        <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ section.id }}" data-toggle="modal">
+                                                        <i class="fas fa-lg fa-eye"></i>
+                                                    </a>  
+                                        {#<a class="icon text-purple" href="{{ path('admin_template_section', {'id': section.id, 'format': 'pdf'}) }}"  data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}" target="_blank">
+                                            <i class="fas fa-lg fa-file-pdf"></i>
+                                        </a> #}                                              
+                                        {% if section.editable %}                                    
+                                            {% if section.isValid %}
+                                                <a class="icon text-purple"  href="{{ path('admin_section_show', {'id': section.id, 'action': 'disable'}) }}{# path('admin_section_disable', {'id': section.id}) #}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                            {% else %}
+                                                <a class="icon text-danger" href="{{ path('admin_section_show', {'id': section.id, 'action': 'enable'}) }}{# path('admin_section_disable', {'id': section.id}) #}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                            {% endif %}                                        
+                                            {% if section.isValid == false %}
+                                                <a class="icon text-danger" href="{{ path('admin_section_show', {'id': section.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                                    <i class="fas fa-lg fa-trash"></i>
+                                                </a>
+                                            {% endif %}
+                                            {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section', id: section.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>#}
+                                        {% endif %}                               
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}                    
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+{#<a href="{{ path('admin_section_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a> #}   
+
+<button class="btn waves-effect waves-light btn-purple floatUp" data-toggle="tooltip" data-original-title="{{ 'Top' | trans }}" >
+    <i class="fas fa-angle-up"></i>
+</button> 
+<button class="btn waves-effect waves-light btn-purple floatDown" data-toggle="tooltip" data-placement="right" data-original-title="{{ 'Bottom' | trans }}" >
+    <i class="fas fa-angle-down"></i>
+</button>
+
+{% if sections|length > 0 %}
+    {{ utils.modal(sections) }}
+{% endif %}
+
+{% endblock %}

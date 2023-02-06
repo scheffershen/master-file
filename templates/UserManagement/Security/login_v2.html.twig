@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ 'title.login'|trans }}</title>
+        <meta name="description" content=""/>
+
+        <!-- Disable tap highlight on IE -->
+        <meta name="msapplication-tap-highlight" content="no">
+
+        <!-- Web Application Manifest -->
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="PSMF">
+        <link rel="icon" sizes="192x153" href="{{ asset('images/icons/chrome-touch-icon-192x192.png') }}">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="PSMF">
+        <link rel="apple-touch-icon" href="{{ asset('images/icons/apple-touch-icon.png') }}">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="{{ asset('images/icons/icon-144x144.png') }}">
+        <meta name="msapplication-TileColor" content="#0069d9">
+
+        <!-- Color the status bar on mobile devices -->
+        <meta name="theme-color" content="#ffffff">        
+        {{ encore_entry_link_tags('css/app') }}
+        {{ encore_entry_link_tags('css/login-V2') }}
+</head>
+<!--<body class="authentication-bg authentication-bg-pattern d-flex align-items-center">-->
+<body class="authentication-bg-pattern">
+   <section class="login">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-12 col-lg-6 d-flex align-items-center vh-100">
+               <div class="container">
+                  <div class="circle d-flex justify-content-center ">
+                    <img src="{{ asset('images/PSMF.png') }}" alt="" />
+                  </div>
+                  <div class="row justify-content-center">
+                     <div class="col-10 col-lg-6 col-md-6 col-sm-10">
+                         <div class="card bg-transparent border-0">
+                             <div class="card-body pt-2">
+                                 {% if error %}
+                                     <div class="alert alert-dismissible alert-danger">
+
+                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                         </button>
+
+                                         {{ error.messageKey|trans(error.messageData, 'security') }}
+                                     </div>
+                                 {% endif %}
+
+                                 {{ include('partials/_flash_messages.html.twig') }}
+                                  <span class="text-white ">{{ 'welcome'|trans }}</span>
+
+                                 <form method="post" class="pt-2">
+                                     <div class="form-group mb-3">
+                                         <label for="emailaddress" class="text-white"></label>
+                                         <input class="form-control" type="text" value="{{ last_username }}" name="email" placeholder="{{ 'placeholder.enter_identifiant'|trans  }}" required autofocus>
+                                     </div>
+
+                                     <div class="form-group mb-3">
+                                         <label for="password" class="text-white">{{ 'label.password'|trans }}</label>
+                                         <input class="form-control" type="password" name="password" id="inputPassword"  placeholder="{{ 'placeholder.enter_password'|trans  }}"  required>
+                                     </div>
+
+                                     <div class="custom-control custom-checkbox mb-3">
+                                         <input type="checkbox" class="custom-control-input" id="remember_me" name="_remember_me" checked>
+                                         <label class="custom-control-label text-white" for="checkbox-signin"> {{ 'label.remember_me'|trans }}</label>
+                                     </div>
+                                     
+                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                     <div class="form-group mb-0 text-center col-6 offset-3 mt-5">
+                                         <button class="btn font-weight-bold text-uppercase waves-effect waves-light btn-light btn-block" type="submit" {% if maxLoginAttempt %}disabled="disabled"{% endif %}>{{ 'action.sign_in'|trans }}</button>
+                                     </div>
+
+                                 </form>
+
+                                 <div class="row mt-2">
+                                     <div class="col-12 text-center">
+                                         <p class="text-muted mb-0"><a href="{{ path('password_reset') }}" class=" text-white ml-1"> {{ 'action.forgot_password'|trans }}</a></p>
+                                     </div> <!-- end col -->
+                                 </div>
+                                 <!-- end row -->
+                             </div> <!-- end card-body -->
+                         </div>
+                     </div>
+                  </div>       
+               </div>    
+               <!--login form -->
+            </div>
+            <div class="col-12 col-lg-6">
+               <div id="carouselExampleIndicators" class="carousel slide login-image" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active" style="background: url('{{ asset('images/sliders/SliderV2-1.jpg') }}') no-repeat center;"></div>
+                    <div class="carousel-item" style="background: url('{{ asset('images/sliders/SliderV2-2.jpg')}}') no-repeat center;"></div>
+                    <div class="carousel-item" style="background: url('{{ asset('images/sliders/SliderV2-3.jpg')}}') no-repeat center;"></div>
+                    <div class="carousel-item" style="background: url('{{ asset('images/sliders/SliderV2-4.jpg')}}') no-repeat center;"></div>
+                  </div>
+                  <a class="carousel-control-prev d-none" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next d-none" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+            </div>
+         </div>
+      </div>
+   </section>
+{{ encore_entry_script_tags('js/login') }}
+</body>
+</html>

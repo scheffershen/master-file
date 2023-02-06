@@ -1,0 +1,46 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'lov.edit'|trans }}{% endblock %}
+
+{% block body %}
+
+    {% set allowCreate = false %}
+    {% set allowedit = false %}
+    {% set allowDelete = false %}
+    {% if entity == '_Obligation' %}
+        {% set allowedit = true %}
+        {% set allowCreate = true %}            
+    {% endif %}
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'lov.edit'|trans}}: {{ entity }}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->  
+            
+            <div class="row">
+                <div class="col-md-9">    
+                        <form action="{{ path('admin_lov_edit', {'entity': entity, 'id':value.id }) }}" method="post">
+                            {% include "LovManagement/form.html.twig" %} 
+                        </form> 
+                        <br/><br/>
+                        {% include "LovManagement/_list_lite.html.twig" %}   
+                </div>    
+                <div class="col-md-3"> 
+                    {% include "LovManagement/menu.html.twig" %} 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                       
+{% endblock %}

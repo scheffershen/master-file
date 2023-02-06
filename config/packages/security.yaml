@@ -1,0 +1,73 @@
+security:
+    encoders:
+        App\Entity\UserManagement\User:
+            algorithm: auto
+
+    role_hierarchy:
+        ROLE_USER: 
+            - ROLE_USER
+        ROLE_AUDIT: 
+            - ROLE_USER
+        ROLE_CONSULTANT:
+            - ROLE_USER
+        ROLE_SUPER_CONSULTANT:
+            - ROLE_CONSULTANT
+        ROLE_UTILISATEUR:
+            - ROLE_USER            
+        ROLE_ADMIN:
+            - ROLE_SUPER_CONSULTANT
+            - ROLE_UTILISATEUR
+            - ROLE_AUDIT
+        ROLE_SUPER_ADMIN:  
+            - ROLE_ADMIN
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\UserManagement\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            context: main_context
+            anonymous: true
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            form_login:
+                # The route name that the login form submits to
+                check_path: app_login
+                # The name of the route where the login form lives
+                # When the user tries to access a protected page, they are redirected here
+                login_path: app_login
+                # Secure the login form against CSRF
+                # Reference: https://symfony.com/doc/current/security/csrf_in_login_form.html                
+                csrf_token_generator: security.csrf.token_manager
+                # The page users are redirect to when there is no previous page stored in the
+                # session (for example when the users access directly to the login page).
+                default_target_path: home   
+                #remember_me: true
+            logout:
+                path: app_logout
+                target: /%locale%/
+                # where to redirect after logout
+                # target: app_any_route
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 31536000 # 1 days in seconds
+                path:     /
+                #always_remember_me: true
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:   
+        - { path: ^/%locale%/admin, role: ROLE_USER }
+        - { path: ^/%locale%/user, role: ROLE_USER}
+        - { path: ^/%locale%/api, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1, 192.168.0.1/24] }
+        - { path: ^/audit, roles: ROLE_AUDIT }
+        - { path: ^/media, roles: ROLE_USER } 

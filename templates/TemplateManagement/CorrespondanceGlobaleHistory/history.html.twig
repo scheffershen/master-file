@@ -1,0 +1,58 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmfHistory.label'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">   
+                <div class="col-lg-12"> 
+                    {% if pSMFVariableHistories|length == 0 %}
+                        <div class="card-body">  
+                            <div class="page-title-box">
+                                <h4 class="page-title">{{ 'variables'|trans }} / {{ 'correspondance.globale'|trans }} / {{ 'document.no_changed'|trans }}</h4>
+                            </div>                    
+                        </div>                        
+                    {% endif %}
+
+                    {% if pSMFVariableHistories|length > 0 %}
+                        <div class="card-body">
+                            <div class="page-title-box">
+                            <h4 class="page-title">{{ 'variables'|trans }} / {{ 'correspondance.globale'|trans }} / {{ 'psmfHistory.modification_variables_globale'|trans }}</h4>
+                        </div>                       
+                        {{ include('PSMFManagement/PSMFHistory/_variables.html.twig') }}
+                        </div>  
+                        <div class="card-body">
+                            <div class="d-flex">
+                                  <ul class="pagination ml-auto">
+                                      {% if pagination.page > 1 %}
+                                          <li class="page-item page-prev"><a class="page-link showSpinner" aria-label="Previous" href="{{ path(pagination.route,pagination.route_params|merge({'page': 1})) }}">&laquo;</a></li>
+                                      {% endif %}
+                                              {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+                                                {% if p == pagination.page %} 
+                                                   <li  class="page-item active"><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                                  {% else %}
+                                                   <li  class="page-item "><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                                {% endif %}
+                                              {% endfor %}
+                                      {% if pagination.page < pagination.pages_count %}
+                                          
+                                          <li class="page-item page-next"><a class="page-link showSpinner" aria-label="Next" href="{{ path(pagination.route, pagination.route_params|merge({ 'page': pagination.pages_count})) }}">&raquo;</a></li>
+                                      {% endif %}
+                                  </ul>  
+                            </div>      
+                        </div>     
+                    {% endif %} 
+
+
+    			</div>		
+    		</div>
+    	</div>
+
+    </div>    			
+</div>
+{% endblock %}

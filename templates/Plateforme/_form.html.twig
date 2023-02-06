@@ -1,0 +1,18 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{{ form_start(form) }}
+    {{ form_row(form.nom) }} 
+    {{ form_row(form.email) }} 
+    {% if plateforme.logoUri is not null %}
+        <div class="form-group">
+            <img src="{{ path('admin_private_upload', {'upload': plateforme.logoUri}) }}" class="img-fluid" id="preview" >
+        </div>  
+    {% endif %}
+    {{ form_row(form.logo) }}
+    {{ form_row(form.version) }} 
+    {{ form_row(form.poweredBy) }} 
+
+    <div class="row align-items-center justify-content-center">
+        <button type="submit" class="btn waves-effect waves-light btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,92 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmf.action.monter_version'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12"> 
+                    <div class="card-body">
+                        <div class="page-title-box">
+                            <h4 class="page-title">{{ 'documents'|trans }} {{ 'document.actifs'|trans }}: {{ publishedDocument.psmf.title }}
+                            &nbsp;&nbsp;
+                            {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-PSMFManagement-PublishedDocument', id: publishedDocument.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> #}
+                            </h4>
+                        </div>  
+                        <div class="table-responsive">      
+                            <table class="table table-bordered table-striped"> 
+                                <tbody>
+                                    <tr>
+                                        <td>{{ 'psmf.title'|trans }}</td>
+                                        <td>{{ publishedDocument.psmf.title }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ 'qualio.version'|trans }}</td>
+                                        <td>{{ publishedDocument.version }}</td>
+                                    </tr>   
+                                    <tr>
+                                        <td>{{ 'document.published_at'|trans }}</td>
+                                        <td>{{ publishedDocument.publicationDate|date('d-M-Y') }}</td>
+                                    </tr>    
+                                    <tr>
+                                        <td>{{ 'document.comentary'|trans }}</td>
+                                        <td>{{ publishedDocument.comentary }}</td>
+                                    </tr>       
+                                    <tr>
+                                        <td>{{ 'document.author'|trans }}</td>
+                                        <td>{{ publishedDocument.author.firstName }} {{ publishedDocument.author.lastName }}</td>
+                                    </tr> 
+                                    <tr>
+                                        <td>
+                                            {% if publishedDocument.pdfSigneUri is not null %}
+                                                {{ 'document.pdf'|trans }} ({{ 'document.status.signed'|trans }})
+                                            {% else %}    
+                                                {{ 'document.pdf'|trans }}
+                                            {% endif %}    
+                                        </td>
+                                        <td>
+                                        {% if publishedDocument.pdfSigneUri is not null %}
+                                            <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': 'pdfSign' }) }}" data-toggle="tooltip" data-placement="top" title="PDF {{ 'action.download'|trans }}" target="_blank">
+                                                {{ publishedDocument.pdfSigneUri|basename }}
+                                            </a>
+                                        {% else %}
+                                            <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': 'pdf' }) }}" data-toggle="tooltip" data-placement="top" title="PDF {{ 'action.download'|trans }}" target="_blank">
+                                                {{ publishedDocument.pdfUri|basename }}
+                                            </a>
+                                        {%  endif %}
+                                        </td>
+                                    </tr>  
+                                    {% if publishedDocument.pdfSigneComentary %}
+                                        <tr>
+                                            <td>{{ 'document.comentary'|trans }}</td>
+                                            <td>{{ publishedDocument.pdfSigneComentary }}</td>
+                                        </tr> 
+                                    {% endif %}    
+                                </tbody>                           
+                            </table> 
+                        </div>    
+                    </div>          
+                </div>    
+                <div class="col-lg-12"> 
+                        <div class="card-body">                    
+                            {{ include('PSMFManagement/PublishedDocument/_form_importer.html.twig') }}
+                        </div> 
+    			</div>		
+    		</div>
+    	</div>
+
+    </div>    			
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/importer') }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

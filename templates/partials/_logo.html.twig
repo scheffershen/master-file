@@ -1,0 +1,16 @@
+<a href="#" class="logo">
+    <span class="logo-lg">
+        {% if plateforme.logoUri|isImage == true %}
+            <img src="{{ path('admin_private_upload', {'upload': plateforme.logoUri}) }}"  height="48">
+        {% else %}
+            <img src="{{ asset("images/logo-light.png") }}" alt="logo" height="48"> 
+        {% endif %}  
+    </span>
+    <span class="logo-sm">
+        {% if plateforme.logoUri|isImage == true %}
+            <img src="{{ path('admin_private_upload', {'upload': plateforme.logoUri}) }}" height="24">
+        {% else %}
+            <img src="{{ asset("images/logo-sm.png") }}" alt="" height="24">
+        {% endif %}            
+    </span>
+</a>

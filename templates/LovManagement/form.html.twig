@@ -1,0 +1,18 @@
+
+{{ form_errors(form) }}
+
+<div class="form_group">
+        {{ form_label(form.title, 'lov.title'|trans) }}
+        {{ form_widget(form.title, { 'attr': {'class': 'form-control'} }) }}
+</div>    
+<div class="form_group">    
+        {{ form_label(form.sort, 'lov.sort'|trans) }}
+        {{ form_widget(form.sort, { 'attr': {'class': 'form-control', 'type': 'number'} }) }}
+    </div>    
+<div class="form_group mt-2">
+    <button type="submit" class="btn waves-effect waves-light btn-purple">
+             {{ 'label.submit'|trans }}
+    </button>
+</div>
+     
+{{ form_rest(form) }}

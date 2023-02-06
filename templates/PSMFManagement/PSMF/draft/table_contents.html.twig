@@ -1,0 +1,45 @@
+<table>
+    <tbody>                        
+    {% for section in sections %}
+        {% if section.id > 2 and section.position > 2%}
+            <tr>
+                <td>{{ section.title }}</td>
+            </tr>    
+            {% if section.sections|length > 0 %}
+                <tr>
+                    <td>
+                        <table>
+                            <tbody> 
+                                {% for children in section.sections %}
+                                    {% if children.isDeleted == false %}
+                                        <tr>
+                                            <td>&nbsp;&nbsp;{{ children.title }}</td>
+                                        </tr> 
+                                        {% if children.sections|length > 0 %}
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tbody> 
+                                                            {% for _children in children.sections %}
+                                                                {% if _children.isDeleted == false %}
+                                                                    <tr>
+                                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;{{ _children.title }}</td>
+                                                                    </tr>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table> 
+                                                </td> 
+                                            </tr>                                                      
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>       
+            {% endif %}
+        {% endif %}
+    {% endfor %}                    
+    </tbody>
+</table>

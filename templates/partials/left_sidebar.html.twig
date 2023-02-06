@@ -1,0 +1,174 @@
+<div class="left-side-menu">
+    <div class="slimscroll-menu">
+        {# Sidemenu #}
+        <div id="sidebar-menu">
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">{{ 'navigation' | upper|trans }}</li>
+                {% if is_granted('ROLE_UTILISATEUR') or is_granted('ROLE_CONSULTANT') %} 
+                    {# Documents #}
+                    <li class="{% if 'admin_published_document' in app.request.attributes.get('_route') %}mm-active{% endif %} ">
+                        <a href="javascript: void(0);" >
+                            <i class="fas fa-lg fa-database"></i>
+                            <span>{{ 'documents'|trans }} </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="{% if 'admin_published_document' in app.request.attributes.get('_route') %}true{% else %}false{% endif %}">
+                            {# Documents applicables #}
+                            <li class="{% if 'admin_published_document_actif' in app.request.attributes.get('_route') or 'admin_template' in app.request.attributes.get('_route') %}active{% endif %} ">
+                                <a href="{{ path('admin_published_document_actif') }}" >
+                                    <i class="fas fa-lg fa-file-signature"></i>
+                                    <span>{{ 'document.actifs'|trans }}</span>
+                                </a>
+                            </li> 
+                            {# Documents archives #}
+                            <li class="{% if 'admin_published_document_archive' in app.request.attributes.get('_route') or 'admin_template' in app.request.attributes.get('_route') %}active{% endif %} ">
+                                <a href="{{ path('admin_published_document_archive') }}" >
+                                    <i class="fas fa-lg fa-file-archive"></i>
+                                    <span>&nbsp;&nbsp;{{ 'document.archives'|trans }}</span>
+                                </a>
+                            </li>                                 
+                        </ul>    
+                    </li>                    
+                    {# PSMFs #}                     
+                    {% if is_granted('ROLE_UTILISATEUR') %} 
+                        <li class="{% if 'admin_psmf' in app.request.attributes.get('_route') %}active{% endif %}">
+                            <a href="{{ path('admin_psmf_index') }}" >
+                                <i class="fas fa-lg fa-briefcase"></i>
+                                <span> {{ 'psmfs'|trans }} </span>
+                            </a>
+                        </li>
+                    {% endif %}    
+                {% endif %} 
+                {% if is_granted('ROLE_ADMIN') %} 
+                    <li class="{% if 'admin_section' in app.request.attributes.get('_route') or 'admin_template' in app.request.attributes.get('_route') or 'admin_client' in app.request.attributes.get('_route') or 'admin_user' in app.request.attributes.get('_route') or 'admin_tracking' in app.request.attributes.get('_route') or 'admin_mail' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                        <a href="javascript: void(0);">
+                            <i class="fas fa-lg fa-tools"></i>
+                            <span> {{ 'nav.outil'|trans }}  </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="{% if 'admin_section' in app.request.attributes.get('_route') or 'admin_template' in app.request.attributes.get('_route') or 'admin_client' in app.request.attributes.get('_route') or 'admin_user' in app.request.attributes.get('_route') or 'admin_tracking' in app.request.attributes.get('_route') or 'admin_mail' in app.request.attributes.get('_route') %}true{% else %}false{% endif %}">
+                            {# templates #}
+                            <li class="{% if 'admin_section' in app.request.attributes.get('_route') or 'admin_template' in app.request.attributes.get('_route') %}active{% endif %} ">
+                                <a href="{{ path('admin_section_index') }}" >
+                                    <i class="fas fa-lg fa-file-alt"></i>
+                                    <span>&nbsp;&nbsp;{{ 'templates'|trans }} </span>
+                                </a>
+                            </li> 
+                            {# correspondances globales #}
+                            <li class="{% if 'admin_correspondance' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                <a href="{{ path('admin_correspondance_globale3_show') }}" class="">
+                                <i class="fas fa-lg fa-database"></i>
+                                    <span>&nbsp;&nbsp;{{ 'correspondance.globale'|trans }}</span>
+                                </a>
+                            </li>
+                            <li class="{% if 'admin_client' in app.request.attributes.get('_route') %}active{% endif %} ">
+                                <a href="{{ path('admin_client_index') }}" >
+                                    <i class="fas fa-lg fa-address-book"></i>
+                                    <span>&nbsp;&nbsp;{{ 'clients'|trans }} </span>
+                                </a>
+                            </li> 
+                            {# utilisateur #}
+                            <li class="{% if 'admin_user' in app.request.attributes.get('_route')  %}mm-active{% endif %}">
+                                <a href="{{ path('admin_users_index') }}">
+                                    <i class="fas fa-lg fa-users"></i>
+                                    <span>&nbsp;&nbsp;{{ 'users'|trans }} </span>
+                                </a>
+                            </li> 
+                        
+                            <li class="{% if 'admin_tracking' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                    <a href="{{ path('admin_tracking_connexion') }}" class="">
+                                        <i class="fas fa-lg fa-shield-alt"></i>
+                                        <span>&nbsp;&nbsp;{{ 'tracking.login'|trans }}</span>
+                                    </a>
+                                </li>
+                            {# mail #} 
+                            <li class="{% if 'admin_mail' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                    <a href="{{ path('admin_mail_log') }}" class="">
+                                        <i class="fas fa-lg fa-shield-alt"></i>
+                                        <span>&nbsp;&nbsp;{{ 'tracking.mail'|trans }}</span>
+                                    </a>
+                            </li>                                       
+                        </ul>
+                    </li>                                          
+                    {# Variables and classes and qualios#}
+                    <li class="{% if 'admin_variable' in app.request.attributes.get('_route') or 'admin_classe' in app.request.attributes.get('_route') or 'admin_qualios' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                        <a href="javascript: void(0);">
+                            <i class="fas fa-lg fa-sliders-h"></i>
+                            <span> {{ 'nav.configuration'|trans }}  </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="{% if 'admin_variable' in app.request.attributes.get('_route') or 'admin_classe' in app.request.attributes.get('_route')  %}true{% else %}false{% endif %}">
+                            {# variables #}
+                            <li class="{% if 'admin_variable' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                <a href="{{ path('admin_variable_index') }}" >
+                                    <i class="fas fa-lg fa-code"></i>
+                                    <span>&nbsp;&nbsp;{{ 'variables'|trans }}</span>
+                                </a>
+                            </li>
+                            {# classes #} 
+                            <li class="{% if 'admin_classe' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                <a href="{{ path('admin_classe_index') }}" >
+                                    <i class="fas fa-lg fa-sort-alpha-down"></i>
+                                    <span>&nbsp;&nbsp;{{ 'lov.classe'|trans }}</span>
+                                </a>
+                            </li>    
+                            {# qualios #} 
+                            <li class="{% if 'admin_qualios' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                                <a href="{{ path('admin_qualios_index') }}" >
+                                    <i class="fas fa-lg fa-database"></i>
+                                    <span>&nbsp;&nbsp;{{ 'qualios'|trans }}</span>
+                                </a>
+                            </li> 
+
+                        </ul>
+                    </li>  
+                   
+                    {# tracking #}
+                    {# <li class="{% if 'admin_tracking' in app.request.attributes.get('_route') or 'admin_mail' in app.request.attributes.get('_route') %}mm-active{% endif %}">
+                        <a href="javascript: void(0);" class="{% if 'admin_tracking' in app.request.attributes.get('_route') or 'admin_mail' in app.request.attributes.get('_route')  %}active{% endif %}">
+                            <i class="fas fa-lg fa-chart-line"></i>
+                            <span> {{ 'trackings'|trans }}  </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="nav-second-level" aria-expanded="{% if 'admin_tracking' in app.request.attributes.get('_route') or 'admin_mail' in app.request.attributes.get('_route') %}true{% else %}false{% endif %}">
+                            {# tracking 
+                                                                         
+                        </ul>
+                    </li> #}
+                    {# lov #}
+                    {% if 'admin_lov' in app.request.attributes.get('_route') %}
+                        <li>
+                              <a class="{% if 'admin_lov' in app.request.attributes.get('_route') %}active{% endif %} " href="{{ path('admin_lov_list') }}">
+                                <i class="fas fa-lg fa-cogs"></i> 
+                                <span>{{ 'lovs'|trans }}</span>
+                              </a>
+                        </li>
+                    {% endif %} 
+                    {# audits #}
+                    {% if 'admin_audit' in app.request.attributes.get('_route') %}
+                        <li class="{% if 'admin_audit' in app.request.attributes.get('_route')  %}mm-active{% endif %}">
+                          <a href="{{ path('admin_audit_list') }}" class="{% if 'admin_audit' in app.request.attributes.get('_route')  %}active{% endif %}">  
+                            <i class="fas fa-lg fa-code-branch"></i>
+                            <span>{{ 'audits'|trans }}</span>
+                          </a>
+                        </li>
+                    {% endif %}                
+                    <li>
+                          <a href="/docs/{{ app.request.locale }}/site/index.html" class="icon text-purple" target="_blank">  
+                            <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            <span>{{ 'helps'|trans }}
+                            </span>                    
+                          </a>
+                    </li>                    
+                {% endif %}
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

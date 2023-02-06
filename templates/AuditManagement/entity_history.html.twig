@@ -1,0 +1,58 @@
+{% extends 'admin_base.html.twig' %}
+
+{% import '@DHDoctrineAudit/Audit/helpers/bootstrap.html.twig' as bootstrap %}
+{% import '@DHDoctrineAudit/Audit/helpers/helper.html.twig' as helper %}
+{% import '@DHDoctrineAudit/Audit/helpers/pager.html.twig' as pager %}
+
+{% block title %}{{ 'audits'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title"><a href="{{ path('admin_audit_list') }}">{{ 'audits'|trans }}</a>
+                            / <a href="{{ path('admin_audit_show_entity_history', { 'entity': helper.namespaceToParam(entity) }) }}">{{ entity_name[3] }}</a>
+                            {% if id is not null %} 
+                            / <a href="{{ path('admin_audit_show_entity_history', { 'entity': helper.namespaceToParam(entity), 'id': id }) }}">{{ id }}</a>
+                            <a href="{{ path('admin_audit_export', { 'entity': helper.namespaceToParam(entity), 'id': id }) }}" data-toggle="tooltip" data-original-title="{{ 'action.download' | trans }}">
+                                <i class="fas fa-lg fa-download"></i></a>
+                            {% else %}
+                               <a href="{{ path('admin_audit_export', { 'entity': helper.namespaceToParam(entity) }) }}" data-toggle="tooltip" data-original-title="{{ 'action.download' | trans }}">
+                                <i class="fas fa-lg fa-download"></i></a>
+                            {% endif %}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            {#<h4 class="card-title float-left"><code>{{ entity }}{% if id is not null %}#{{ id }}{% endif %}</code> <em>{% trans %}audit.audit_details.most_recent{% endtrans %}</em></h4>#}
+
+                            <div class="timeline-centered">
+                            {% for entry in paginator.results %}
+                                {{ include('AuditManagement/entry.html.twig', {'entry': entry}) }}
+                            {% endfor %}
+                            </div>
+
+                            {{ pager.render(entity, id, paginator) }}
+                        </div>
+                    </div>
+                </div>
+            </div>  
+                      
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+
+{% endblock body %}

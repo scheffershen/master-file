@@ -1,0 +1,112 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmf.action.monter_version'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-6"> 
+                    <div class="card-body">
+                        <div class="page-title-box">
+                            <h4 class="page-title">{{ 'document.history'|trans }}</h4>
+                        </div>  
+                        <div class="table-responsive">      
+                            <table class="table table-bordered table-striped">
+                                <thead class="">
+                                    <tr>
+                                        <th>{{ 'document.version'|trans }}</th>
+                                        <th>{{ 'document.published_at'|trans }}</th>
+                                        <th>{{ 'document.comentary'|trans }}</th>
+                                        <th>{{ 'document.author'|trans }}</th>
+                                        <th>{{ 'document.detail'|trans }}</th>
+                                        <th>{{ 'document.download'|trans }}</th>
+                                        <th>{{ 'document.statut'|trans }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for publishedDocument in publishedDocuments %}
+                                    <tr>
+                                        <td>{{ publishedDocument.version }}</td>
+                                        <td>{{ publishedDocument.publicationDate|date('d-M-Y H:i') }}</td>
+                                        <td><span data-toggle="tooltip" data-placement="top" title="{{ publishedDocument.comentary }}">{{ publishedDocument.comentary|u.truncate(80, '...') }}</span></td>
+                                        <td>{{ publishedDocument.author }}</td>
+                                        <td>
+                                            <a class="icon text-purple" href="{{ path('admin_psmf_history_archive', {'psmf': psmf.id, 'publishedDocument': publishedDocument.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'audits'|trans }}" target="_blank">
+                                                <i class="fas fa-lg fa-eye"></i>
+                                            </a>
+                                        </td>
+                                        <td> 
+                                            <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': 'pdf' }) }}" data-toggle="tooltip" data-placement="top" title="PDF" target="_blank">
+                                                    <i class="fas fa-lg fa-download"></i>
+                                                </a> 
+                                            {#<a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': 'html' }) }}" data-toggle="tooltip" data-placement="top" title="HTML" target="_blank">
+                                                    <i class="fas fa-lg fa-download"></i>
+                                                </a>#}
+                                            {#<a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': 'word' }) }}" data-toggle="tooltip" data-placement="top" title="WORD" target="_blank">
+                                                    <i class="fas fa-lg fa-download"></i>
+                                                </a> #}
+                                        </td>
+                                        <td>{% if loop.first %}
+                                                {{ 'document.publie'|trans }}
+                                            {% else %}
+                                                {{ 'document.archive'|trans }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table> 
+                        </div>    
+                    </div>          
+                </div>    
+                <div class="col-lg-6"> 
+                    {% if pSMFVariableHistories|length > 0 or pSMFSectionHistories|length > 0 %}
+                        <div class="card-body">  
+                            <div class="page-title-box">
+                                <h4 class="page-title">{{ 'document.new_version'|trans }}</h4>
+                            </div>                    
+                            {{ include('PSMFManagement/PublishedDocument/_form.html.twig') }}
+                        </div> 
+                    {% else %} 
+                        <div class="card-body">  
+                            <div class="page-title-box">
+                                <h4 class="page-title">{{ 'document.no_changed'|trans }}</h4>
+                            </div>                    
+                        </div>                        
+                    {% endif %}
+                    
+                    {% if pSMFVariableHistories|length > 0  %}
+                        <div class="card-body">
+                            <div class="page-title-box">
+                                <h4 class="page-title">{{ 'psmfHistory.modification_variables'|trans }}</h4>
+                            </div>                       
+                            {{ include('PSMFManagement/PSMFHistory/_variables.html.twig') }}  
+                        </div>     
+                    {% endif %}
+
+                    {% if pSMFVariableHistories|length > 0 %}
+                        <div class="card-body">
+                            <div class="page-title-box">
+                                <h4 class="page-title">{{ 'psmfHistory.modification_section'|trans }}</h4>
+                            </div>                       
+                            {{ include('PSMFManagement/PSMFHistory/_sections.html.twig') }} 
+                        </div>      
+                    {% endif %}  
+    			</div>		
+    		</div>
+    	</div>
+
+    </div>    			
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

@@ -1,0 +1,33 @@
+lov:
+    civility: Civilité
+    country: Pays
+    gender: Genre
+    typeVariable: Type de balise
+    scope: Périmètre 
+    classe: Classe
+    rattachement: Rattachement
+    workRole: Missions PV
+    obligation: Obligatoire
+    activiteUM: Activité UM
+    pays: Local QPPV Pays
+    localQPPV: Local QPPV UM
+    basePV: BASE PV
+    qualiosType: Qualios Type
+    qualiosStatus: Qualios Status      
+    status: Document Status 
+    sort: Ordre
+    description: Description
+    keywords: Mots clefs
+    add: "Ajouter une valeurs à la liste : "
+    edit: "Editer une valeurs à la liste : "
+    title: Titre
+    create: Création
+    update: Modification
+    revision: Révision
+    flash:
+        created: "Une lov a été créée."
+        updated: "Lov a été mise à jour."
+        enable: "Lov activée."
+        disable: "Lov désactivée."
+
+lovs: Liste des valeurs

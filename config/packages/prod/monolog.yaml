@@ -1,0 +1,40 @@
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: critical
+            handler:      grouped
+        grouped:
+            type:               group
+            members:            [streamed, swift]
+        streamed:
+            type:               stream
+            path:               "%kernel.logs_dir%/%kernel.environment%.log"
+            level:              CRITICAL
+        swift:
+            type:               swift_mailer
+            from_email:         'info@127.0.0.1'
+            to_email:           'yi.shen@127.0.0.1'
+            subject:            'An Error Occurred! %%message%%'
+            level:              CRITICAL
+            formatter:          monolog.formatter.html
+            content_type:       text/html
+        login:
+            type:               stream
+            path:               "%kernel.logs_dir%/auth.log"
+            level:              CRITICAL
+            channels:           security
+        # main:
+        #     type: fingers_crossed
+        #     action_level: error
+        #     handler: nested
+        #     excluded_http_codes: [404, 405]
+        #     buffer_size: 50 # How many messages should be saved? Prevent memory leaks
+        # nested:
+        #     type: stream
+        #     path: "%kernel.logs_dir%/%kernel.environment%.log"
+        #     level: debug
+        # console:
+        #     type: console
+        #     process_psr_3_messages: false
+        #     channels: ["!event", "!doctrine"]

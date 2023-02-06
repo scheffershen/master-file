@@ -1,0 +1,70 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>{{ 'variable.label'|trans }}</th>
+            <td>{{ variable.label }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'variable.balise'|trans }}</th>
+            <td>{{ variable.balise }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'lov.typeVariable'|trans }}</th>
+            <td>{{ variable.type }}</td>
+        </tr>                            
+        <tr>
+            <th>{{ 'lov.scope'|trans }}</th>
+            <td>{{ variable.scope }}</td>
+        </tr>                            
+        <tr>
+            <th>{{ 'lov.classe'|trans }}</th>
+            <td>
+                {% if variable.classes|length > 0 %}
+                    <select>
+                        {% for classe in variable.classes %}
+                            <option>{{ classe.title }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}   
+            </td>
+        </tr>                                                       
+        <tr>
+            <th>{{ 'label.userHelp'|trans }}</th>
+            <td>{{ variable.userHelp|raw }}</td>
+        </tr>
+        {% if variable.description %}
+	       <tr>
+	            <th>{{ 'label.description'|trans }}</th>
+	            <td>{{ variable.description|raw}}</td>
+	        </tr>
+	    {% endif %}                                
+    </tbody>
+</table>
+
+<div class="card-box">
+    <div class="card-body">
+        {{ form_start(form)  }}
+        {{ form_errors(form) }}
+            {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE')  %}
+        	    {% if correspondance is defined and correspondance is not null and correspondance.valueLocal is not null %}
+        			{% if correspondance.valueLocal|isImage == true %}
+                        <div class="form-group">
+        				    <img class="img-fluid" src="{{ path('admin_private_upload', {'upload': correspondance.valueLocal}) }}" id="preview" >
+        			    </div>	
+                    {% endif %}    
+        	    {% endif %}
+        	    {{ form_row(form.upload) }}  
+            {% else %}
+            	{{ form_row(form.valueLocal) }} 
+            {% endif %}    	
+            {# form_row(form.reason) #} 
+            <div class="form-group">
+                <button type="submit" class="btn waves-effect waves-light btn-purple">
+                <i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>

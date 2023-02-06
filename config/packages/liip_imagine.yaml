@@ -1,0 +1,93 @@
+liip_imagine:
+    # valid drivers options include "gd" or "gmagick" or "imagick"
+    driver: "gd"
+    # configure resolvers
+    resolvers:
+        # setup the default resolver
+        default:
+            # use the default web path
+            web_path:
+                # use %kernel.project_dir%/web for Symfony prior to 4.0.0
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "media/cache"
+                
+    # define your filter sets under this option
+    filter_sets:
+        
+        # use the default cache configuration
+        cache : ~                     
+        squared_thumbnail_80_45:
+
+            # set your image quality defaults
+            quality: 75
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [78, 43]
+                    mode:          outbound
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [78, 43]
+                    position: center
+                    color:    '#fff'
+
+        squared_thumbnail_151_85: # x1.78
+
+            # set your image quality defaults
+            quality: 75
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [149, 83]
+                    mode:          outbound
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [149, 83]
+                    position: center
+                    color:    '#fff'
+
+        squared_thumbnail_258_145:
+
+            # set your image quality defaults
+            quality: 75
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [256, 143]
+                    mode:          outbound
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [256, 143]
+                    position: center
+                    color:    '#fff'
+
+        squared_thumbnail_600_337:
+
+            # set your image quality defaults
+            quality: 75
+
+            # setup the filter steps to apply for this transformation
+            filters:
+
+                # scale and square the image to the given dimensions
+                thumbnail:
+                    size:          [598, 335]
+                    mode:          outbound
+
+                # create border by placing image on larger black background
+                background:
+                    size:     [598, 335]
+                    position: center
+                    color:    '#fff'

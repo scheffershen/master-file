@@ -1,0 +1,73 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'documents'|trans }} {{ 'document.archives'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'documents'|trans }} {{ 'document.archives'|trans }}
+                        {% if is_granted('ROLE_UTILISATEUR') %}
+                            &nbsp;&nbsp;
+                            <a href="/docs/{{ app.request.locale }}/site/documents/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.help'|trans }}" target="_blank">
+                                    <i class="fas fa-lg fa-question-circle text-purple"></i>
+                                </a>
+                        {% endif %}    
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                {% for psmf in psmfs %}    
+                    {% if psmf.publishedDocuments|length > 0 %}
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-5 d-flex align-items-stretch">                         
+                            <div class="card"> 
+                                <img class="card-img-top img-fluid" src="{{ path('admin_private_upload', {'upload': psmf.client.logoUri, 'format': 'large'}) }}" alt="{{ psmf.client.name }}">
+                                <div class="card-body bg-light">                              
+                                    <h6 class="card-title">
+                                        <span data-toggle="tooltip" data-placement="top" title="{{ psmf.title }}">{% if psmf.isValid == false %}<del>{% endif %}{{ psmf.title|u.truncate(140, '...') }}{% if psmf.isValid == false %}</del>{% endif %}</span>, {{ psmf.client }}
+                                    </h6>
+                                </div> 
+                                <div class="card-body bg-light">   
+                                    <ul class="list-group list-group-flush">
+                                        {% for publishedDocument in psmf.publishedDocuments %} 
+                                            {% if publishedDocument.status.code == constant('App\\Entity\\LovManagement\\Status::ARCHIVE') %}
+                                                <li class="list-group-item">
+                                                    {% if publishedDocument.pdfSigneUri %}
+                                                        <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': constant('App\\Entity\\PSMFManagement\\PSMF::PDF_SIGNE') }) }}" data-toggle="tooltip" data-placement="top" title="PDF {{ 'action.download'|trans }}" target="_blank">
+                                                            <i class="fas fa-lg fa-download"></i>
+                                                        </a>
+                                                    {% else %}    
+                                                        <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id, 'format': constant('App\\Entity\\PSMFManagement\\PSMF::PDF') }) }}" data-toggle="tooltip" data-placement="top" title="PDF {{ 'action.download'|trans }}" target="_blank">
+                                                            <i class="fas fa-lg fa-download"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                    {{ 'document.version'|trans}} {{ publishedDocument.version }}, {{ 'document.published_at'|trans}} {{ publishedDocument.publicationDate|date('d-M-Y H:i') }} 
+                                                    {% if is_granted('ROLE_UTILISATEUR') or is_granted('ROLE_CONSULTANT') %}
+                                                        , {{ publishedDocument.author.firstName }} {{ publishedDocument.author.lastName }} 
+                                                    {% endif %}
+                                                </li>
+                                            {% endif %}            
+                                        {% endfor %} 
+                                    </ul>   
+                                </div>         
+                            </div>
+                        </div>    
+                    {% endif %}
+                {% endfor %}        
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

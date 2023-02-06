@@ -1,0 +1,33 @@
+lov:
+    civility: Civility
+    country: Country
+    gender: Gender 
+    typeVariable: Type of variable
+    scope: Scope 
+    classe: Class
+    rattachement: Rattachement
+    workRole: Work Role
+    obligation: Mandatory
+    activiteUM: UM Activity
+    pays: Local QPPV country
+    localQPPV: Local QPPV country by UM
+    basePV: PV Base Data
+    qualiosType: Qualios Type
+    qualiosStatus: Qualios Status            
+    status: Document Status 
+    sort: Sort
+    description: Description
+    keywords: Key words
+    add: "Add a value to the list:"
+    edit: "Edit a value to the list:"
+    title: Title
+    create: Creation
+    update: Edit
+    revision: Révision
+    flash:
+        created: "A lov has been created."
+        updated: "Lov has been updated."
+        enable: "Lov enabled."
+        disable: "Lov disabled."
+
+lovs: List of values

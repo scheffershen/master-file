@@ -1,0 +1,43 @@
+{% import '@DHDoctrineAudit/Audit/helpers/bootstrap.html.twig' as bootstrap %}
+{% import '@DHDoctrineAudit/Audit/helpers/helper.html.twig' as helper %}
+{% import '@DHDoctrineAudit/Audit/helpers/pager.html.twig' as pager %}
+
+<table>
+    <tbody>
+    {% for entry in audits.results %}
+        <tr>
+            <td>{{ entity_name[3] }}</td>
+            <td>{{ entry.type }}</td>
+            <td>{{ entry.created_at|date('H:i:s') }} {{ entry.created_at|date('l d F Y') }}</td>
+            {% set diffs = entry.diffs|json_decode(true) %}
+            {% for key, values in diffs %}
+                    <td><code>Parameter= {{ key }}</code></td>
+                    <td>
+                        {% trans %}audit.audit_details.old_value{% endtrans %}=
+                        {% if values.old is defined %}
+                            {% if values.old is null %}
+                                {{ bootstrap.badge('null', 'secondary') }}
+                            {% else %}
+                                {{ bootstrap.text(helper.dump(values.old), 'danger') }}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% trans %}audit.audit_details.new_value{% endtrans %}
+                        {% if values.new is defined %}=
+                            {% if values.new is null %}
+                                {{ bootstrap.badge('null', 'secondary') }}
+                            {% else %}
+                                {% if values.old is null %}
+                                    {{ bootstrap.text(helper.dump(values.new), 'primary') }}
+                                {% else %}
+                                    {{ bootstrap.text(helper.dump(values.new), 'success') }}
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

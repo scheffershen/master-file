@@ -1,0 +1,59 @@
+{% macro activitesUM_help() %}	
+	<a class="icon text-purple" href="javascript:void();" alt="{{ 'label.help'|trans }}" title="{{ 'label.help'|trans }}" data-target="#activitesUM" data-toggle="modal">
+        <i class="fas fa-lg fa-question-circle text-purple"></i>
+    </a>
+    <div class="modal fade" id="activitesUM" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Balises Systèmes Logiques</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;
+                    </button>
+                </div>
+                <div class="modal-body">
+		            <table class="table">
+		                <tbody>
+		                    <tr>
+		                        <th>EU QPPV BACKUP</th><td><span style="color:red">_if_UM_EU_QPPV_BACKUP_</span> et <span style="color:red">_if_OTHER_EU_QPPV_BACKUP_</span></td>
+		                    </tr>
+		                    <tr>
+		                        <th>CALL MANAGEMENT WORKING HOURS</th><td><span style="color:red">_if_UM_CALL_MANAGEMENT_WORKING_HOURS_</span> et <span style="color:red">_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>CALL MANAGEMENT NON WORKING HOURS</th><td><span style="color:red">_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_</span> et <span style="color:red">_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>CASE MANAGEMENT</th><td><span style="color:red">_if_UM_CASE_MANAGEMENT_</span> et <span style="color:red">_if_OTHER_CALL_CASE_MANAGEMENT_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>ICSR SUBMISSION</th><td><span style="color:red">_if_UM_ICSR SUBMISSION_</span> et <span style="color:red">_if_OTHER_ICSR SUBMISSION_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>LITERATURE MONITORING</th><td><span style="color:red">_if_UM_LITERATURE_MONITORING_</span> et <span style="color:red">_if_OTHER_LITERATURE_MONITORING_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>SIGNAL MANAGEMENT</th><td><span style="color:red">_if_UM_SIGNAL_MANAGEMENT_</span> et <span style="color:red">_if_OTHER_SIGNAL_MANAGEMENT_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>PSUR MANAGEMENT</th><td><span style="color:red">_if_UM_PSUR_MANAGEMENT_</span> et <span style="color:red">_if_OTHER_PSUR_MANAGEMENT_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>RMP MANAGEMENT</th><td><span style="color:red">_if_UM_RMP_MANAGEMENT_</span> et <span style="color:red">_if_OTHER_RMP_MANAGEMENT_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>VARIATION MANAGEMENT</th><td><span style="color:red">_if_UM_VARIATION_MANAGEMENT_</span> et <span style="color:red">_if_OTHER_VARIATION_MANAGEMENT_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>RESPONSES TO THE AUTHORITIES</th><td><span style="color:red">_if_UM_RESPONSES_TO_THE_AUTHORITIES_</span> et <span style="color:red">_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_</span></td> 
+		                    </tr>
+		                    <tr>                        
+		                        <th>COMMUNICATION OF SAFETY CONCERNS</th><td><span style="color:red">_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_</span> et <span style="color:red">_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_</span></td>   
+		                    </tr>                       
+		                </tbody>
+		            </table>                      
+                </div>
+            </div>
+        </div>    
+    </div> 
+{% endmacro %}

@@ -1,0 +1,56 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'plateforme.apropos'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'plateforme.apropos'|trans }}
+                        </h4>
+                    </div>
+                </div>
+            </div>  
+               
+            <!-- end page title -->   
+            <div class="row">
+                <div class="col-12">  
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>{{ 'plateforme.nom'|trans }}</th>
+                                    <td>{{ plateforme.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.version'|trans }}</th>
+                                    <td>{{ plateforme.version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.logo'|trans }}</th>
+                                    <td>
+                                        {% if plateforme.logoUri|isImage == true %}
+                                            <img src="{{ path('admin_private_upload', {'upload': plateforme.logoUri}) }}" class="img-fluid"  >
+                                        {% endif %}
+                                    </td>
+                                </tr>                                                                             <tr>
+                                    <th>{{ 'plateforme.poweredBy'|trans }}</th>
+                                    <td>{{ plateforme.poweredBy }}</td>
+                                </tr>               
+                            </tbody>
+                        </table>
+                </div>      
+            </div>
+
+        </div>
+
+    </div>              
+</div>
+{% endblock %}  
+

@@ -1,0 +1,102 @@
+variables: Balises
+variable:
+    list: Liste
+    variable: Balise    
+    label: Nom
+    balise: Balise  
+    add: "Ajouter une balise"
+    edit: "Éditer une balise"
+    disable: Désactiver une balise
+    enable: Activer une balise    
+    create: Créer une balise
+    update: Modifier une balise
+    delete: Supprimer une balise
+    in_used: "Cette balise est en cours d'utilisation"
+    revision: Révision
+    flash:
+        created: "Une balise a été créée."
+        updated: "La balise a été mise à jour."
+        enabled: "La balise a été activée."
+        disabled: "La balise a été desactivée."
+        deleted: La balise a été suprimée.
+
+correspondances: Valeur
+correspondance:
+    globale: Données communes
+    locale: Valeurs locales
+    label: Valeur
+    valueLocal: Valeur
+    valueLocalImage: Image
+    nb_correspondance: Nombre de valeurs associées
+    nb_psmf: Projets clients associés
+    nb_section: Nombre de sections associées     
+    all: Toutes les sections
+    add: "Ajouter une valeur"
+    edit: "Éditer une valeur"
+    create: Créer une valeur
+    update: Modifier une valeur
+    delete: Supprimer une valeur
+    revision: Révision
+    flash:
+        created: "La valeur a été créée."
+        updated: "La valeur a été modifiée."
+
+classes: Classes
+classe:
+    list: Classe
+    label: Classe
+    title: Nom de la classe
+    add: "Ajouter une classe"
+    edit: "Éditer une classe"
+    create: Créer une classe
+    update: Modifier une classe
+    disable: Désactiver une classe
+    enable: Activer une classe      
+    delete: Supprimer une classe
+    in_used: "Cette classe est en cours d'utilisation"
+    nb_varaible: Nombre de valeurs
+    flash:
+        created: "Une classe a été créée."
+        updated: "La classe a été mise à jour."
+        enabled: "La classe a été activée."
+        disabled: "La classe a été desactivée."
+        deleted: La classe a été suprimée.
+
+templates: Modèle
+
+sections: Section du modéle
+section:
+    list: Section
+    title_name: Titre de la section
+    label: Section
+    add: "Ajouter une section"
+    add_subsection: "Ajouter une sous-section"
+    edit: "Éditer une section du modèle"
+    create: Créer une section dans le modèle
+    update: Modifier une section du modèle
+    delete: Supprimer une section du modèle
+    disable: Désactiver une section du modèle
+    enable: Activer une section du modèle
+    title: "Titre de la section (Balise : SYS_PART_TITRE)"
+    position: Position dans la section
+    isValid: Section active
+    isAnnexe: Annexe ?
+    allowSubSection: Autoriser les sous-sections
+    isPageBreak: Saut de page
+    isMajeur: Enregistrement tracé
+    isMineur: Enregistrement non tracé    
+    filtre: "Section filtre:"
+    parent: Inclus dans la section
+    contenu: Contenu de la section
+    reason: Motif des modifications (Apparait dans l'annexe du PSMF)
+    last: Dernières modifications
+    flash:
+        created: "Une section a été créée."
+        updated: "La section a été mise à jour."
+        enable: "La section a été activée."
+        disable: "Section a été désactivée."
+        deleted: "Section a été supprimée."
+nav:
+    outil: Outils
+    configuration: Configuration
+

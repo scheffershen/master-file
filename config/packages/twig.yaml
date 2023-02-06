@@ -1,0 +1,9 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals: 
+        site_help: '%env(SITE_HELP)%'
+    #   app_name: "Automatisation PSMF CORE"
+
+services:
+    Twig\Extension\StringLoaderExtension:
+        tags: ['twig.extension']

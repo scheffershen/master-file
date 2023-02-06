@@ -1,0 +1,9 @@
+<html>
+<body>
+	<table style="background-image: url({{ app.request.scheme ~'://' ~ app.request.httpHost ~ '/images/pdf-draft-background.png' }})"><tr><td>
+	    {% autoescape %}
+	        {{ contenu|raw }} 
+	    {% endautoescape %}
+    </td></tr></table>	      
+</body>
+</html>

@@ -1,0 +1,1456 @@
+{% import "PSMFManagement/PSMF/widget/help.html.twig" as help %}
+
+<tr>
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_PSMF_TITRE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_PSMF_TITRE'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_TITRE'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_FIRSTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.firstname }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIRSTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_LASTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_LASTNAME'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.lastname }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_LASTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_RESP_FUNCTION'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.workFunction|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_RESP_FUNCTION'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_HE_SHE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_HE_SHE'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.euQPPV.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}he{% else %}she{% endif %}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HE_SHE'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_HIM_HER'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_HIM_HER'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.euQPPV.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}him{% else %}her{% endif %}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_HIM_HER'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_MAIL'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_MAIL'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.email }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MAIL'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_MOBILE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_MOBILE'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.mobile|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_MOBILE'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_FIX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_FIX'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.fixe|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FIX'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_FAX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_FAX'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.fax|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_FAX'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_CV'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_CV'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('obligation') }}</td>
+    <td valign="top">{{ url('admin_public_upload', {'upload': psmf.euQPPV.cvUri }) }} </td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_CV'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_COMPANY'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_COMPANY'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.workName|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_COMPANY'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_EUQPPV_ADRESS'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_EUQPPV_ADRESS'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.euQPPV.adresse|default("") }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_EUQPPV_ADRESS'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CLIENT_NAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_CLIENT_NAME'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_NAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CLIENT_ADRESS'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_CLIENT_ADRESS'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.client.adress }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_ADRESS'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CLIENT_LOGO'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_CLIENT_LOGO'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('obligation') }}</td>
+    <td valign="top">{{ url('admin_public_upload', {'upload': psmf.client.logoUri }) }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CLIENT_LOGO'|variable('isValid') }}</td>
+</tr>
+
+{% if psmf.deputyEUQPPV %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.firstname }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIRSTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.firstname }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_LASTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.workFunction|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FUNCTION'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.deputyEUQPPV.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}he{% else %}she{% endif %}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HE_SHE'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.deputyEUQPPV.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}him{% else %}her{% endif %}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_HIM_HER'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_MAIL'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.email }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MAIL'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.mobile|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_MOBILE'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_FIX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.fixe|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FIX'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_FAX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.fax|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_FAX'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_CV'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('obligation') }}</td>
+    <td valign="top">{{ url('admin_public_upload', {'upload': psmf.deputyEUQPPV.cvUri }) }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_CV'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.workName|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_COMPANY'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('balise') }}</span></td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.deputyEUQPPV.adresse|default("") }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_DEPUTY_EUQPPV_ADRESS'|variable('isValid') }}</td>
+</tr>
+{% endif %}   
+
+{% if psmf.euqppvEntity.code == "um" %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_um_euqppv_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_um_euqppv_ ... _endif_</span></td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('obligation') }}</td>
+    <td valign="top"></td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_um_euqppv_'|variable('isValid') }}</td>
+</tr>    
+{% elseif psmf.euqppvEntity.code == "presta" %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_presta_euqppv_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_presta_euqppv_ ... _endif_</span></td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('obligation') }}</td>
+    <td valign="top"></td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_presta_euqppv_'|variable('isValid') }}</td>
+</tr>
+{% elseif psmf.euqppvEntity.code == "client" %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_client_euqppv_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_client_euqppv_ ... _endif_</span></td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('obligation') }}</td>
+    <td valign="top"></td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_client_euqppv_'|variable('isValid') }}</td>
+</tr>
+{% endif %}
+
+{% if psmf.eudravigNum %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_PSMF_EUDRA_NUMBER'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_PSMF_EUDRA_NUMBER ... _endif_</span></td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.eudravigNum }}</td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_PSMF_EUDRA_NUMBER'|variable('isValid') }}</td>
+</tr>
+{% endif %}  
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_FIRSTNAME</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.firstname }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIRSTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_LASTNAME</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.lastname }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_LASTNAME'|variable('isValid') }}</td>
+</tr>
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_FUNCTION</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.workFunction|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FUNCTION'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_HE_SHE</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.contactPvClient.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}he{% else %}she{% endif %}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HE_SHE'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_HIM_HER</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('obligation') }}</td>
+    <td valign="top">{% if psmf.contactPvClient.gender.code == constant('App\\Entity\\LovManagement\\Gender::HOMME') %}him{% else %}her{% endif %}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_HIM_HER'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_MAIL</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.email }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MAIL'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_MOBILE</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.mobile|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_MOBILE'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_FIX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_FIX</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.fixe|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FIX'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_FAX'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_FAX</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.fax|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_FAX'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_CV'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_CV</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('obligation') }}</td>
+    <td valign="top">{{ url('admin_public_upload', {'upload': psmf.contactPvClient.cvUri }) }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_CV'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_COMPANY</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.workName|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_COMPANY'|variable('isValid') }}</td>
+</tr>
+
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('label') }}</td>
+    <td valign="top"><span style="color:red">SYS_CONTACT_PV_CLIENT_ADRESS</span></td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('type') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('scope') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('description') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.contactPvClient.adresse|default("") }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('userHelp') }}</td>
+    <td valign="top">{{ 'SYS_CONTACT_PV_CLIENT_ADRESS'|variable('isValid') }}</td>
+</tr>
+
+{% if psmf.activitesUM|length > 0 %}
+    {% if psmf.hasActiviteUM("EU_QPPV_BACKUP") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_EU_QPPV_BACKUP_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_EU_QPPV_BACKUP_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("EU_QPPV_BACKUP")  }}</td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_EU_QPPV_BACKUP_'|variable('isValid') }}</td>
+</tr>        
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_EU_QPPV_BACKUP_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_EU_QPPV_BACKUP_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("EU_QPPV_BACKUP")  }}</td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_EU_QPPV_BACKUP_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %}
+
+    {% if psmf.hasActiviteUM("CALL_MANAGEMENT_WORKING_HOURS") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_CALL_MANAGEMENT_WORKING_HOURS_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CALL_MANAGEMENT_WORKING_HOURS")  }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_WORKING_HOURS_'|variable('isValid') }}</td>
+</tr>        
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CALL_MANAGEMENT_WORKING_HOURS")  }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %}    
+
+    {% if psmf.hasActiviteUM("CALL_MANAGEMENT_NON_WORKING_HOURS") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CALL_MANAGEMENT_NON_WORKING_HOURS")  }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CALL_MANAGEMENT_NON_WORKING_HOURS")  }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %}  
+
+    {% if psmf.hasActiviteUM("CASE_MANAGEMENT") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_CASE_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_CASE_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CASE_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_CASE_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_CASE_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_CASE_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("CASE_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_CASE_MANAGEMENT_'|variable('isValid') }}</td>
+</tr> 
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("ICSR_SUBMISSION") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_ICSR_SUBMISSION_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_ICSR_SUBMISSION_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("ICSR_SUBMISSION")  }}</td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_ICSR_SUBMISSION_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_ICSR_SUBMISSION_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_ICSR_SUBMISSION_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("ICSR_SUBMISSION")  }}</td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_ICSR_SUBMISSION_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("LITERATURE_MONITORING") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_LITERATURE_MONITORING_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_LITERATURE_MONITORING_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("LITERATURE_MONITORING")  }}</td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_LITERATURE_MONITORING_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_LITERATURE_MONITORING_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_LITERATURE_MONITORING_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("LITERATURE_MONITORING")  }}</td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_LITERATURE_MONITORING_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("SIGNAL_MANAGEMENT") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_SIGNAL_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_SIGNAL_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("SIGNAL_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_SIGNAL_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_SIGNAL_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("SIGNAL_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_SIGNAL_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>          
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("PSUR_MANAGEMENT") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_PSUR_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_PSUR_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("PSUR_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_PSUR_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>          
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_PSUR_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_PSUR_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("PSUR_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_PSUR_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("RMP_MANAGEMENT") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_RMP_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_RMP_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("RMP_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_RMP_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_RMP_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_RMP_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("RMP_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_RMP_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>  
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("VARIATION_MANAGEMENT") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_VARIATION_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_VARIATION_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("VARIATION_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_VARIATION_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_VARIATION_MANAGEMENT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_VARIATION_MANAGEMENT_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("VARIATION_MANAGEMENT")  }}</td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_VARIATION_MANAGEMENT_'|variable('isValid') }}</td>
+</tr>          
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("RESPONSES_TO_THE_AUTHORITIES") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_RESPONSES_TO_THE_AUTHORITIES_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("RESPONSES_TO_THE_AUTHORITIES")  }}</td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_RESPONSES_TO_THE_AUTHORITIES_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("RESPONSES_TO_THE_AUTHORITIES")  }}</td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %} 
+
+    {% if psmf.hasActiviteUM("COMMUNICATION_OF_SAFETY_CONCERNS") %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_ _endif_</span></td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("COMMUNICATION_OF_SAFETY_CONCERNS")  }}</td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('isValid') }}</td>
+</tr>         
+    {% else %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('label') }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_ _endif_</span></td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.getActiviteUM("COMMUNICATION_OF_SAFETY_CONCERNS")  }}</td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_'|variable('isValid') }}</td>
+</tr>         
+    {% endif %}  
+{% endif %} 
+
+{% if psmf.localQPPVPays|length > 0 %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>    
+    <td valign="top">Logique</td>
+    <td valign="top">{{ 'psmf.localQPPVOther'|trans }}</td>
+    <td valign="top">
+        {% for pays in psmf.localQPPVPays %} 
+            <span style="color:green;font-style:italic;">_if_LOCAL_QPPV_{{ pays }}_OTHER_ ... _endif_</span>      
+        {% endfor %}
+    </td>    
+    <td valign="top">Autre</td>
+    <td valign="top">Système</td>
+    <td valign="top"></td>
+    <td valign="top">Valeur de remplacement facultative</td>
+    <td>{% for pays in psmf.localQPPVPays %}
+            {{ pays }}<br/>    
+        {% endfor %}
+    </td>    
+    <td valign="top"></td>
+    <td valign="top"></td>
+</tr>   
+{% endif %}    
+
+{% if psmf.localQPPVUM|length > 0 %}
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>    
+    <td valign="top">Logique</td>
+    <td valign="top">{{ 'psmf.localQPPVUM'|trans }}</td>
+    <td valign="top">
+            {% for localQPPVUM in psmf.localQPPVUM %}  
+                <span style="color:green;font-style:italic;">_if_LOCAL_QPPV_{{ localQPPVUM }}_UM_ ... _endif_</span>     
+            {% endfor %}            
+    </td>
+    <td valign="top">Autre</td>
+    <td valign="top">Système</td>
+    <td valign="top"></td>
+    <td valign="top">Valeur de remplacement facultative</td>
+    <td valign="top">            
+            {% for localQPPVUM in psmf.localQPPVUM %}
+                {{ localQPPVUM }}<br/>    
+            {% endfor %}            
+    </td>    
+    <td valign="top"></td>
+    <td valign="top"></td>
+</tr>
+{% endif %}   
+
+{% if psmf.basePV is not null  %}      
+<tr>            
+    <td valign="top">{{ psmf.client.name }}</td>
+    <td valign="top">{{ psmf.title }}</td>
+    <td valign="top">{% set classes = '_if_PV_DATABASE_EVEREPORT_'|variable('classes') %}
+        {% for classe in classes %}
+            {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+        {% endfor %}
+    </td>
+    <td valign="top">{{ 'psmf.basePV'|trans }}</td>
+    <td valign="top"><span style="color:green;font-style:italic;">_if_PV_DATABASE_EVEREPORT_ _endif_</span></td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('type') }}</td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('scope') }}</td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('description') }}</td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('obligation') }}</td>
+    <td valign="top">{{ psmf.basePV }}</td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('userHelp') }}</td>
+    <td valign="top">{{ '_if_PV_DATABASE_EVEREPORT_'|variable('isValid') }}</td>
+</tr>
+{% endif %}        
+
+{% if psmf.hasOtherPVProviders is not null %}
+    {% if psmf.hasOtherPVProviders == true %}
+    <tr>
+        <td valign="top">{{ psmf.client.name }}</td>
+        <td valign="top">{{ psmf.title }}</td>
+        <td valign="top">{% set classes = '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('classes') %}
+            {% for classe in classes %}
+                {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+            {% endfor %}
+        </td>
+        <td valign="top">{{ 'psmf.hasOtherPVProviders'|trans }}</td>
+        <td valign="top"><span style="color:green;font-style:italic;">_if_UM_NOT_ONLY_PV_PROVIDER_ _endif_</span></td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('type') }}</td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('scope') }}</td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('description') }}</td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('obligation') }}</td>
+        <td valign="top">{{ psmf.hasOtherPVProviders?'yes':'no' }}</td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('userHelp') }}</td>
+        <td valign="top">{{ '_if_UM_NOT_ONLY_PV_PROVIDER_'|variable('isValid') }}</td>    
+    </tr>
+   {% endif %}
+   
+    {% if psmf.hasOtherPVProviders == false %}
+    <tr>
+        <td valign="top">{{ psmf.client.name }}</td>
+        <td valign="top">{{ psmf.title }}</td>
+        <td valign="top">{% set classes = '_if_UM_ONLY_PV_PROVIDER_'|variable('classes') %}
+            {% for classe in classes %}
+                {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+            {% endfor %}
+        </td>
+        <td valign="top">{{ 'psmf.hasOtherPVProviders'|trans }}</td>
+        <td valign="top"><span style="color:green;font-style:italic;">_if_UM_ONLY_PV_PROVIDER_ _endif_</span></td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('type') }}</td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('scope') }}</td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('description') }}</td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('obligation') }}</td>
+        <td valign="top">{{ psmf.hasOtherPVProviders?'yes':'no' }}</td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('userHelp') }}</td>
+        <td valign="top">{{ '_if_UM_ONLY_PV_PROVIDER_'|variable('isValid') }}</td> 
+    </tr>                      
+    {% endif %}
+
+
+{% endif %}    
+
+{% if psmf.isOldClientBbac is not null %} 
+    <tr>
+        {% if psmf.isOldClientBbac is not null and psmf.isOldClientBbac == true %}
+            <td valign="top">{{ psmf.client.name }}</td>
+            <td valign="top">{{ psmf.title }}</td>
+            <td valign="top">{% set classes = '_if_CLINET_BBAC_'|variable('classes') %}
+                {% for classe in classes %}
+                    {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+                {% endfor %}
+            </td>
+            <td valign="top">{{ 'psmf.isOldClientBbac'|trans }}</td>
+            <td valign="top"><span style="color:green;font-style:italic;">_if_CLINET_BBAC_ _endif_</span></td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('type') }}</td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('scope') }}</td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('description') }}</td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('obligation') }}</td>
+            <td valign="top">{% if psmf.isOldClientBbac is not null  %}{{ psmf.isOldClientBbac?'yes':'no' }}{% endif %} </td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('userHelp') }}</td>
+            <td valign="top">{{ '_if_CLINET_BBAC_'|variable('isValid') }}</td>    
+        {% endif %}
+        
+        {% if psmf.hasOtherPVProviders is not null and psmf.isOldClientBbac == false %}
+            <td valign="top">{{ psmf.client.name }}</td>
+            <td valign="top">{{ psmf.title }}</td>
+            <td valign="top">{% set classes = '_if_NOT_CLINET_BBAC_'|variable('classes') %}
+                {% for classe in classes %}
+                    {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+                {% endfor %}
+            </td>
+            <td valign="top">{{ 'psmf.isOldClientBbac'|trans }}</td>
+            <td valign="top"><span style="color:green;font-style:italic;">_if_NOT_CLINET_BBAC_ _endif_</span></td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('type') }}</td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('scope') }}</td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('description') }}</td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('obligation') }}</td>
+            <td valign="top">{% if psmf.isOldClientBbac is not null  %}{{ psmf.isOldClientBbac?'yes':'no' }}{% endif %} </td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('userHelp') }}</td>
+            <td valign="top">{{ '_if_NOT_CLINET_BBAC_'|variable('isValid') }}</td>              
+        
+        {% endif %}
+    </tr> 
+{% endif %}

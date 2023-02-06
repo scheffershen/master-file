@@ -1,0 +1,79 @@
+<meta charset="UTF-8" />
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'qualio.reference'|trans }}</th>
+            <th>{{ 'qualio.version'|trans }}</th>
+            <th>{{ 'qualio.title'|trans }}</th>
+            <th>{{ 'qualio.activityDate'|trans }}</th>
+            <th>{{ 'qualio.createDate'|trans }}</th>
+            <th>{{ 'qualio.validityDate'|trans }}</th>
+            <th>{{ 'qualio.natureOfChange'|trans }}</th>
+            <th>{{ 'qualio.object'|trans }}</th>
+            <th>{{ 'qualio.simpleOrDynamic'|trans }}</th>
+            <th>{{ 'qualio.archiveDate'|trans }}</th>
+            <th>{{ 'qualio.reviewDate'|trans }}</th>
+            <th>{{ 'qualio.replayDate'|trans }}</th>
+            <th>{{ 'qualio.submitDate'|trans }}</th>
+            <th>{{ 'qualio.signDelay'|trans }}</th>
+            <th>{{ 'qualio.lateSignAlert'|trans }}</th>
+            <th>{{ 'qualio.formationAccessibility'|trans }}</th>
+            <th>{{ 'qualio.actionWhenArchive'|trans }}</th>
+            <th>{{ 'qualio.archivePeriod'|trans }}</th>
+            <th>{{ 'qualio.archivePeriodAlert'|trans }}</th>
+            <th>{{ 'qualio.reviewAlert'|trans }}</th>
+            <th>{{ 'qualio.docRefQualifForm'|trans }}</th>
+            <th>{{ 'qualio.rappelQualifForm'|trans }}</th>
+            <th>{{ 'qualio.signByLevel'|trans }}</th>
+            <th>{{ 'qualio.nbLevel'|trans }}</th>
+            <th>{{ 'qualio.docCode'|trans }}</th>
+            <th>{{ 'qualio.titleComposition'|trans }}</th>
+            <th>{{ 'qualio.testMode'|trans }}</th>
+            <th>{{ 'qualio.delayValidity'|trans }}</th>
+            <th>{{ 'qualio.delayAR'|trans }}</th>
+            <th>{{ 'qualio.attachmentAsBody'|trans }}</th>
+            <th>{{ 'lov.qualiosType'|trans }}</th>
+            <th>{{ 'lov.qualiosStatus'|trans }}</th>
+            <th>{{ "variable.balise" | trans  }}</th>
+        </tr>   
+    </thead>    
+    <tbody>
+       {% for document in documents %}
+        <tr>
+            <td valign="top">{{ document.reference }}</td>
+            <td valign="top">{{ document.version }}</td>
+            <td valign="top">{{ document.title }}</td>
+            <td valign="top">{{ document.activityDate ? document.activityDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.createDate ? document.createDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.validityDate ? document.validityDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.natureOfChange }}</td>
+            <td valign="top">{{ document.object }}</td>
+            <td valign="top">{{ document.simpleOrDynamic ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.archiveDate ? document.archiveDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.reviewDate ? document.reviewDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.replayDate }}</td>
+            <td valign="top">{{ document.submitDate ? document.submitDate|date('Y-m-d') : '' }}</td>
+            <td valign="top">{{ document.signDelay }}</td>
+            <td valign="top">{{ document.lateSignAlert ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.formationAccessibility ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.actionWhenArchive }}</td>
+            <td valign="top">{{ document.archivePeriod }}</td>
+            <td valign="top">{{ document.archivePeriodAlert ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.reviewAlert ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.docRefQualifForm }}</td>
+            <td valign="top">{{ document.rappelQualifForm ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.signByLevel }}</td>
+            <td valign="top">{{ document.nbLevel }}</td>
+            <td valign="top">{{ document.docCode }}</td>
+            <td valign="top">{{ document.titleComposition }}</td>
+            <td valign="top">{{ document.testMode }}</td>
+            <td valign="top">{{ document.delayValidity ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.delayAR ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.attachmentAsBody ? 'Yes' : 'No' }}</td>
+            <td valign="top">{{ document.type }}</td>
+            <td valign="top">{{ document.status }}</td>
+            <td valign="top">QUALIOS_{{ document.reference }}_XXXX</td>
+        </tr> 
+       {% endfor %}
+    </tbody>
+</table>

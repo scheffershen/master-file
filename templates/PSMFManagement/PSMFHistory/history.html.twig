@@ -1,0 +1,70 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'psmfHistory.label'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ psmf.title }} {{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}  / {{ 'psmfHistory.label'|trans }} <a class="btn btn-sm btn-purple" href="{{ path('admin_psmf_history_download', {'id': psmf.id }) }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a></h4></h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    {{ include('PSMFManagement/PSMF/_detail.html.twig') }} 
+                </div>
+            </div> 
+                       
+            {% if pSMFVariableHistories|length == 0 or pSMFSectionHistories|length == 0 %}
+            <div class="row">
+                <div class="col-12">                    
+                    <div class="card-body">  
+                        <div class="page-title-box">
+                            <h4 class="page-title">{{ 'document.no_changed'|trans }}</h4>
+                        </div>                    
+                    </div>  
+                </div>
+            </div>                              
+            {% endif %}
+            
+            {% if pSMFVariableHistories|length > 0  %}
+            <div class="row">
+                <div class="col-12">                      
+                    <div class="card-body">
+                        <div class="page-title-box">
+                            <h4 class="page-title">{{ 'psmfHistory.modification_variables'|trans }}</h4>
+                        </div>                       
+                        {{ include('PSMFManagement/PSMFHistory/_variables.html.twig') }}  
+                    </div>  
+                </div>
+            </div>                          
+            {% endif %}
+
+            {% if pSMFSectionHistories|length > 0 %}
+            <div class="row">
+                <div class="col-12">                      
+                    <div class="card-body">
+                        <div class="page-title-box">
+                            <h4 class="page-title">{{ 'psmfHistory.modification_section'|trans }}</h4>
+                        </div>                       
+                        {{ include('PSMFManagement/PSMFHistory/_sections.html.twig') }} 
+                    </div> 
+                </div>
+            </div>                            
+            {% endif %}  
+        </div> 
+    </div>
+</div> 
+{% endblock %}

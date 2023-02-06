@@ -1,0 +1,206 @@
+psmf: PSMF
+bonjour: Bonjour
+profile: Profile
+dashboard: Tableau de bord
+no_items_found: Aucun élément trouvé
+view_details: Voir les détails
+users: Utilisateurs
+helps: "Guide d'utilisation"
+admins: Administrateurs
+chefProjets: Chef de projet 
+managers: Managers 
+welcome: Bienvenue ! Veuillez vous connecter ici
+
+menu:
+  account: Compte
+  admin: Administrateur
+  back: Retour
+  edit_profile: Editer le profil
+  homepage: "Page d'accueil"
+  faq: FAQ
+  login: "S'identifier"
+  logout: Se déconnecter
+  lov: 
+    title: LOVs
+  audit: 
+    title: Pistes d'audit
+
+message:
+  created: Créé avec succès
+  updated: Mis à jour avec succés
+  deleted: Supprimé avec succès
+  uploaded: Téléchargé avec succès
+  token_expired: Désolé, votre jeton a expiré. Veuillez réessayer.
+  was_sent: Votre message a bien été envoyé. Merci.
+  password_has_been_reset: Le mot de passe a été changé avec succès. Vous pouvez maintenant vous connecter avec un nouveau mot de passe.
+  emailed_reset_link: Un e-mail a été envoyé. Il contient un lien sur lequel il vous faudra cliquer pour réinitialiser votre mot de passe. Ce lien est actif 30 mintutes. Si vous ne recevez pas un email, vérifiez votre dossier spam.
+  password_request_non_expired: Vous devez attendre 2h entre chaque demande.
+  denied: Accès refusé
+  user_not_found: Username or email could not be found.
+  user_is_disenabled: Your account is disabled. 
+  error404: Oups ! Il semble que la page que vous cherchez soit introuvable.
+  connexion_perdue: "Connexion perdue avec l'application. Attention : vos données n'ont pas été enregistrées et seront perdues si vous fermez cette page. Veuillez valider de nouveau quand la connexion sera rétablie."
+   
+action:
+  search: Chercher
+  save: Sauvegarder les modifications
+  add: Ajouter
+  edit: Éditer
+  delete: Supprimer
+  audit: Pistes d'audit
+  sign_in: Se connecter
+  sign_out: Déconnexion
+  forgot_password: Mot de passe oublié?
+  change_password: changez votre mot de passe  
+  send_reset_link: Envoyer le lien de réinitialisation du mot de passe
+  submit: Soumettre
+  continue: Continuer
+  enable: Activer
+  disable: Desactiver
+  download: Télécharger
+  show: Detail
+  preview: Preview  
+  backToSearch: Retourner à la recherche
+  back: Retour 
+  copier: Copier l'aide
+  go_back: Retour à la page d'accueil.
+  afficher: Afficher
+  cache: Cacher
+
+state:
+  enable: Actif
+  disable: Désactivé
+  delete: Suprimé
+
+table: 
+  username: Identifiant
+  email: Email
+  group: Groupe
+  action: Action
+
+confirmation:
+  delete_user: Voulez-vous vraiment supprimer cet utilisateur?
+  delete_item: Êtes-vous sûr de bien vouloir supprimer cet élément?
+  delete_service: Voulez-vous vraiment supprimer ce service?
+  delete_organisation: Voulez-vous vraiment supprimer cette organisation?
+  delete_photo: Etes-vous sûr de vouloir supprimer cette photo?
+  delete_dppsi: Voulez-vous vraiment supprimer ce dppsi?
+  delete_dppsi_fichier: Voulez-vous vraiment supprimer ce dppsi fichier?
+
+title:
+  login: Connexion sécurisée
+  reset_password: Réinitialiser le mot de passe
+  set_new_pass: Définissez un nouveau mot de passe
+  settings: Réglages
+
+label:
+  submit: Valider
+  remember_me: Rester connecté
+  roles: 
+    admin: Admin
+    manager: Manager
+    chefDeProjet: Chef de projet
+    user: Utilisateur
+  fullname: Nom complet
+  firstname: Prénom
+  lastname: Nom
+  username: Identifiant
+  mobile: Téléphone portable
+  fixe: Téléphone fixe
+  fax: Fax  
+  email: Email
+  adresse: Adresse postale
+  city: Ville
+  zipCode: Code postale
+  sexe: Sexe
+  isValid: Valable  
+  password: Mot de passe
+  new_password: nouveau mot de passe
+  confirm_password: Confirmer le nouveau mot de passe
+  name: Nom
+  logo: Logo 
+  title: Titre
+  sort: ordre
+  description: Description
+  fichiers: Fichiers joints
+  create_chefProjet: Créer un chef de projet
+  create_manager: Créer un manager
+  create_admin: Créer un administrateur
+  create_user: Create user
+  save_and_create_new: Enregistrez et créez de nouveaux
+  sort_by: Trier par
+  revision: Révision
+  createDate: Date de création
+  updateDate: Date de MAJ
+  createBy: Création par
+  updateBy: MAJ par
+  specimen: Specimen
+  en_cours: En cours
+  termine: Terminé
+  help: Aide
+  user_help: "Guide d'utilisateur"  
+  html_help: "Aide de l'editeur HTML"
+  userHelp: Aide au remplissage
+  obligatoire: obligatoire  
+  obligation: Obligatoire
+  code: Code
+  oui: "Yes"
+  non: "No"
+  systeme: Système
+  globale: Globale
+  locale: Locale
+  reason: Motif
+
+languages: Langues
+language: 
+  label: Langue
+  code: Code
+  french: Français
+  english: Anglais
+
+placeholder:
+  enter_identifiant: Entrer votre identifiant
+  enter_password: Entrer votre mot de passe
+  enter_email: Enter your email
+
+processing: "Veillez patienter un instant..."
+
+trackings: Suivi
+tracking:  
+  label: Suivi
+  login: Suivi des connexions
+  login_failed: Échec de la connexion
+  mail: Suivi des emails
+  url: Url
+  ip: IP
+  user: Utilisateur
+  session: Session
+  created: Date
+  event: "Evénement" 
+  userNotfound: "Utilisateur inexistant dans la base" 
+
+mailLog:
+    action_list: Liste des mails envoyés automatiquement
+    date: "Date de l'envoi"
+    from: De
+    to: à
+    cc: CC
+    subject: Sujet
+    body: Body
+
+email:
+  new_message: Nouveau message de votre site Web
+  new_log: "Log d'import des utilisateurs"
+  new_user: Votre compte a été crée
+  produit_missing: Produit manquant
+
+resetting:
+  email:
+    subject: Réinitialiser le mot de passe
+    message: |
+        "Bonjour %username%!
+        <br><br>Pour réinitialiser votre mot de passe - veuillez visiter <a href='%confirmationUrl%' target='_blank'>%confirmationUrl%</a>
+        <br><br>Cordialement, l'équipe."
+
+form:
+  required: champs requis

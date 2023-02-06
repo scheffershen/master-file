@@ -1,0 +1,36 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondance.edit'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'variables'|trans }} / {{ 'correspondance.edit'|trans }}</h4>
+                    </div>
+                </div>
+            </div>       
+            <!-- end page title -->   
+         	<div class="row">
+			    <div class="col-12">         		
+    				{{ include('TemplateManagement/Correspondance/_form.html.twig') }}
+    			</div>		
+    		</div>
+    	</div>
+
+    </div>    			
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    {{ encore_entry_script_tags('js/correspondance') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+	
+{{ form_start(form) }}
+    {{ form_row(form.comentary) }}
+    <div class="form-group">
+        <button type="submit" class="btn waves-effect waves-light btn-purple">
+        <i class="fas fa-save"></i>&nbsp; {{ button_label|default('Publier') }}</button>
+    </div>
+{{ form_end(form) }}

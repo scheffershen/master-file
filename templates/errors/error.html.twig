@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'title.errors'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="alert alert-dismissible alert-danger">
+
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+	
+	<h1>Error {{ code }}</h1>
+    
+    {{ description }}
+</div>
+{% endblock %}

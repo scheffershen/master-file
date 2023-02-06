@@ -1,0 +1,124 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'qualios'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="text-purple"><i class="fas fa-spinner fa-spin"></i></div>
+</div>
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.configuration'|trans }} / {{ 'qualios'|trans }}
+                            &nbsp;
+                            <small>[{{ 'qualio.lastUpdate'|trans }}: {{ plateforme.qualiosLastUpdate|date('d-M-Y H:i:s') }}]</small>
+                            &nbsp;
+                            <a href="/docs/{{ app.request.locale }}/site/qualios" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                            <a class="btn btn-sm btn-purple float-right mt-2" href="{{ path('admin_qualios_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'qualio.reference'|trans }}</th>
+                                <th>{{ 'qualio.version'|trans }}</th>
+                                <th>{{ 'qualio.title'|trans }}</th>
+                                <th>{{ 'Type'|trans }}</th>
+                                <th>{{ 'Status'|trans }}</th>
+                                {#<th>{{ 'qualio.activityDate'|trans }}</th>
+                                <th>{{ 'qualio.createDate'|trans }}</th>#}
+                                <th>{{ 'qualio.validityDate'|trans }}</th>
+                                {#<th>{{ 'qualio.archiveDate'|trans }}</th>
+                                <th>{{ 'qualio.reviewDate'|trans }}</th>
+                                <th>{{ 'qualio.submitDate'|trans }}</th>#}
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                            <tr>
+                                <th>{{ 'qualio.reference'|trans }}</th>
+                                <th>{{ 'qualio.version'|trans }}</th>
+                                <th>{{ 'qualio.title'|trans }}</th>
+                                <th>{{ 'Type'|trans }}</th>
+                                <th>{{ 'Status'|trans }}</th>                                
+                                {#<th>{{ 'qualio.activityDate'|trans }}</th>
+                                <th>{{ 'qualio.createDate'|trans }}</th>#}
+                                <th>{{ 'qualio.validityDate'|trans }}</th>
+                                {#<th>{{ 'qualio.archiveDate'|trans }}</th>
+                                <th>{{ 'qualio.reviewDate'|trans }}</th>
+                                <th>{{ 'qualio.submitDate'|trans }}</th>#}
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>                                                   
+                        <tbody>
+                            {% for document in documents %}
+                                <tr>
+                                    <td>{{ document.reference }}</td>
+                                    <td><span data-toggle="tooltip" data-placement="top" title="QUALIOS_{{ document.reference }}_VERSION">{{ document.version }}</span></td>
+                                    <td><span data-toggle="tooltip" data-placement="top" title="QUALIOS_{{ document.reference }}_TITLE">{{ document.title }}</span></td>
+                                    <td><span data-toggle="tooltip" data-placement="top" title="QUALIOS_{{ document.reference }}_TYPE">{{ document.type }}</span></td>
+                                    <td><span data-toggle="tooltip" data-placement="top" title="QUALIOS_{{ document.reference }}_STATUS">{{ document.status }}</span></td>
+                                    {#<td>{{ document.activityDate ? document.activityDate|date('Y-m-d') : '' }}</td>
+                                    <td>{{ document.createDate ? document.createDate|date('Y-m-d') : '' }}</td>#}
+                                    <td><span data-toggle="tooltip" data-placement="top" title="QUALIOS_{{ document.reference }}_VALIDITYDATE">{{ document.validityDate ? document.validityDate|date('Y-m-d') : '' }}</span></td>
+                                    {#<td>{{ document.archiveDate ? document.archiveDate|date('Y-m-d') : '' }}</td>
+                                    <td>{{ document.reviewDate ? document.reviewDate|date('Y-m-d') : '' }}</td>
+                                    <td>{{ document.submitDate ? document.submitDate|date('Y-m-d') : '' }}</td>#}
+                                    <td>
+                                        <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#document{{ document.id }}" data-toggle="modal">
+                                                <i class="fas fa-lg fa-eye"></i>
+                                        </a>
+                                        <div class="modal fade" id="document{{ document.id }}" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">{{ document.title }}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{ include('QualiosManagement/Document/_detail.html.twig') }}                       
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                        </div>  
+                                    </td>
+                                </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="32">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+        </div>
+    </div> 
+</div>
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/preloader') }}
+    {{ encore_entry_script_tags('js/datatables') }}
+{% endblock %}

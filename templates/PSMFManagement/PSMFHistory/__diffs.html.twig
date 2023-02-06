@@ -1,0 +1,36 @@
+{# dump(pSMFHistory.diffs) #}
+{% for key, values in pSMFHistory.diffs %}
+    <tr>
+        <td><code>{{ key }}</code></td>
+        <td>
+            {% if values.old is defined %}
+                {% if values.old|length == 0 %}
+                    <span class="badge badge-secondary p-1 pl-2 pr-2">null</span>
+                {% else %}
+                    {% if values.old|isImage == true %}
+                        <img src="{{ url('admin_public_upload', {'upload': values.old}) }}" class="img-fluid">
+                    {% else %}    
+                        {% autoescape %}
+                            {{  values.old |raw }} 
+                        {% endautoescape %}                     
+                    {% endif %}                    
+                {% endif %}
+            {% endif %}
+        </td>
+        <td>
+            {% if values.new is defined %}
+                {% if values.new|length == 0 %}
+                    <span class="badge badge-secondary p-1 pl-2 pr-2">null</span>
+                {% else %}
+                    {% if values.new|isImage == true %}
+                        <img src="{{ url('admin_public_upload', {'upload': values.new}) }}" class="img-fluid">
+                    {% else %}                     
+                        {% autoescape %}
+                            {{  values.new |raw }} 
+                        {% endautoescape %} 
+                    {% endif %}                        
+                {% endif %}
+            {% endif %}
+        </td> 
+    </tr>     
+{% endfor %}

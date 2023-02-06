@@ -1,0 +1,190 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}
+    {% if action == 'delete' %}{{ 'variable.delete' | trans }}
+    {% elseif action == 'disable' %}{{ 'variable.disable' | trans }}
+    {% elseif action == 'enable' %}{{ 'variable.enable' | trans }}
+    {% else %}{{ variable.label }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">  
+                            {{ 'nav.configuration'|trans }} /                           
+                            {% if action == 'delete' %}
+                                {{ 'variables'|trans }} / {{ 'variable.delete' | trans }}
+                            {% elseif action == 'disable' %}
+                                {{ 'variables'|trans }} / {{ 'variable.disable' | trans }}
+                            {% elseif action == 'enable' %}
+                                {{ 'variables'|trans }} / {{ 'variable.enable' | trans }}
+                            {% else %}
+                                {{ 'variables'|trans }}: {{ variable.balise }}    
+                            {% endif %}                            
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+            <div class="row">
+                <div class="col-12">  
+                    {{ include('partials/_flash_messages.html.twig') }}
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>{{ 'variable.label'|trans }}</th>
+                                <td>{{ variable.label }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'variable.balise'|trans }}</th>
+                                <td>{{ variable.balise }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'lov.typeVariable'|trans }}</th>
+                                <td>{{ variable.type }}</td>
+                            </tr>                            
+                            <tr>
+                                <th>{{ 'lov.scope'|trans }}</th>
+                                <td>{{ variable.scope }}</td>
+                            </tr> 
+                            <tr>
+                                <th>{{ 'label.obligation'|trans }}</th>
+                                <td><span class="text-danger">{{ variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') ?'oui':'non' }}</span></td>
+                            </tr>     
+                            {% if variable.classes|length > 0 %}                           
+                            <tr>
+                                <th>{{ 'lov.classe'|trans }}</th>
+                                <td><ul>
+                                        {% for classe in variable.classes %}
+                                            <li>{{ classe.title }}</li>
+                                        {% endfor %}
+                                    </ul>     
+                                </td>
+                            </tr>  
+                            {% endif %}                                                      
+                            {% if variable.correspondances|length > 0 %}
+                                <tr>
+                                    <th class="text-danger">{{ 'correspondance.nb_correspondance'|trans }} </th>
+                                    <td><span class="text-danger">{{ variable.correspondances|length }} </span>
+                                        <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#variable-correspondances" data-toggle="modal">
+                                            <i class="fas fa-lg fa-eye"></i>
+                                        </a>    
+
+                                        <div class="modal fade" id="variable-correspondances" role="dialog">
+                                            <div class="modal-dialog modal-lg">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">{{ variable.balise }}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table-bordered table-striped" width="100%">
+                                                            <tr><th>{{ 'psmf.label'|trans }}</th><th>{{ 'correspondance.locale'|trans }}</th></tr>
+                                                            {% for correspondanceLocale in variable.correspondances %}
+                                                                <tr>
+                                                                    <td>{{ correspondanceLocale.psmf.title }}</td>
+                                                                    <td>
+                                                                         {% if correspondanceLocale.valueLocal|isImage == true %}
+                                                                                <img src="{{ asset('images/image-coming-soon.jpg') }}" data-src="{{ path('admin_private_upload', {'upload': correspondanceLocale.valueLocal}) }}" class="img-fluid lazy">
+                                                                        {% else %}
+                                                                            {% autoescape %}
+                                                                                 {{ correspondanceLocale.valueLocal|raw }} 
+                                                                            {% endautoescape %}
+                                                                        {% endif %} 
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}                       
+                                                        </table>    
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                        </div>  
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if variable.pSMFs|length > 0 %}
+                                <tr class="text-danger">
+                                    <th>{{ 'correspondance.nb_psmf'|trans }} </th>
+                                    <td>
+                                        <ul>
+                                            {% for pSMF in variable.pSMFs %}
+                                                {% if pSMF %}
+                                                    <li>{{ pSMF.title }}</li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {% endif %}                            
+                            <tr>
+                                <th>{{ 'label.userHelp'|trans }}</th>
+                                <td>
+                                    {% autoescape %}
+                                        {{ variable.userHelp|raw }}
+                                    {% endautoescape %}       
+                                </td>
+                            </tr>
+                            {#<tr>
+                                <th>{{ 'label.description'|trans }}</th>
+                                <td>{{ variable.description|raw}}</td>
+                            </tr> #}                            
+                        </tbody>
+                    </table>
+
+                    <div class="form-group">
+                        {% if action == 'delete' %}
+                            <form method="post" action="{{ path('admin_variable_delete', {'id': variable.id}) }}">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card-box">
+                                            {#{{ form_row(form.reason) }}  #}
+                                        </div>
+                                    </div>
+                                </div>  
+                                {{ form_widget(form._token) }}
+                                <button type="submit"  class="btn waves-effect waves-light btn-danger mt-2">{{ 'action.delete'|trans }}</button>        
+                            </form>
+                        {% elseif ( action == 'disable' and variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::FACULTATIVE') ) or action == 'enable' %}
+                            <form method="post" action="{{ path('admin_variable_disable_or_enable', {'id': variable.id}) }}" >
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card-box">
+                                            {#{{ form_row(form.reason) }}  #} 
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"  class="btn waves-effect waves-light btn-danger mt-2">
+                                    {% if action == 'disable' %}{{ 'action.disable' | trans }}
+                                    {% elseif action == 'enable' %}{{ 'action.enable' | trans }}
+                                    {% endif %}
+                                </button>                                 
+                                {{ form_widget(form._token) }}
+                            </form>
+                        {% else %}                          
+                            {#<a href="{{ path('admin_variable_edit', {'id': variable.id}) }}" class="btn waves-effect waves-light btn-purple mt-2">{{ 'action.edit'|trans }}
+                            </a> #}
+                        {% endif %}  
+                    </div>
+                </div>      
+            </div>
+        </div>
+
+    </div>              
+</div>
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

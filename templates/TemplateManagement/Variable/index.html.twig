@@ -1,0 +1,141 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'variables'|trans }}{% endblock %}
+
+{% block body %}
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="text-purple"><i class="fas fa-spinner fa-spin"></i></div>
+</div>
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.configuration'|trans }} / {{ 'variables'|trans }}
+                        <a href="/docs/{{ app.request.locale }}/site/variables/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.user_help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                        <a class="btn btn-sm btn-purple float-right mt-2" href="{{ path('admin_variable_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>    
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>   
+                                <th>{{ 'lov.classe'|trans }}</th>      
+                                <th>{{ 'variable.balise'|trans }}</th>
+                                <th>{{ 'variable.label'|trans }}</th>
+                                <th>{{ 'lov.typeVariable'|trans }}</th>
+                                <th>{{ 'lov.scope'|trans }}</th>
+                                <th>{{ 'label.obligation'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                            <tr> 
+                                <th>{{ 'lov.classe'|trans }}</th>  
+                                <th>{{ 'variable.balise'|trans }}</th>                             
+                                <th>{{ 'variable.label'|trans }}</th>                                
+                                <th>{{ 'lov.typeVariable'|trans }}</th>
+                                <th>{{ 'lov.scope'|trans }}</th>
+                                <th>{{ 'label.obligation'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>                        
+                        <tbody>
+                        {% for variable in variables %}
+                            <tr>
+                                <td>
+                                    {% if variable.classes|length > 0 %}
+                                        <select>
+                                            {% for classe in variable.classes %}
+                                                <option>{{ classe.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% endif %}          
+                                </td>
+                                <td>
+                                    {% if variable.isValid == false %}<del>{% endif %}
+                                    {% if variable.description %}
+                                        <span data-toggle="tooltip" data-placement="top" title="{{ variable.description }}">{{ variable.balise }}</span>
+                                    {% else %}
+                                        {{ variable.balise }}
+                                    {% endif %}
+                                    {% if variable.isValid == false %}</del>{% endif %}
+                                </td>
+                                <td>{{ variable.label }}</td>
+                                <td>{{ variable.type }}</td>
+                                <td>{{ variable.scope }}</td>
+                                <td>{{ variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') ?'<span class="text-danger">oui</span>':'non' }}</td>
+                                <td>
+                                    <a class="icon text-purple" href="{{ path('admin_variable_edit', {'id': variable.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                        <i class="fas fa-lg fa-pencil-alt"></i>
+                                    </a>
+                                    {% if variable.isValid == false %}
+                                        <a class="icon text-danger" href="{{ path('admin_variable_show', {'id': variable.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                            <i class="fas fa-lg fa-trash"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if variable.isValid %}
+                                        {% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::FACULTATIVE') %}
+                                            <a class="icon text-purple"  href="{{ path('admin_variable_show', {'id': variable.id, 'action': 'disable'}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" >
+                                                <i class="fas fa-lg fa-toggle-on"></i>
+                                            </a>  
+                                        {% else %}  
+                                            <i class="fas fa-lg fa-toggle-on text-light"></i>  
+                                        {% endif %}
+                                    {% else %}
+                                        <a class="icon text-danger" href="{{ path('admin_variable_show', {'id': variable.id, 'action': 'enable'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}">
+                                            <i class="fas fa-lg fa-toggle-off"></i>
+                                        </a>   
+                                    {% endif %}
+                                    <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Variable', id: variable.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> 
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+            <br><br>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'label.help'|trans }}</h4>
+                    </div>
+                    {{ include('TemplateManagement/Variable/_help.html.twig') }}
+                </div>    
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+<a href="{{ path('admin_variable_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>    
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/preloader') }}
+    {{ encore_entry_script_tags('js/datatables') }}   
+{% endblock %}

@@ -1,0 +1,87 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+{{ form_errors(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}  
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.isEnable) }}
+    {{ form_row(form.roles) }} 
+    {{ form_row(form.clients) }}
+    {{ form_row(form.mailAlerte) }}
+    {{ form_row(form.pvUser) }} 
+    <div class="pvUser">
+        <h5 class="page-title">{{ 'user.data_pv'|trans }}</h5>
+        <hr class="page-title" />
+        {% if button_label == 'Update' %}
+            {% if user.cvUri|isImage == true %}
+                <div class="form-group">
+                    <img class="img-fluid" src="{{ path('admin_private_upload', {'upload': user.cvUri}) }}"  id="preview" >
+                </div> 
+            {% else %}
+                <div class="form-group">
+                    <img src="{{ asset('images/no_image.png') }}" id="preview" class="img-fluid"/>
+                </div>
+            {% endif %}  
+            <div class="form_group mt-2">
+                    {{ form_label(form.cv, 'user.cv'|trans, {'label_attr': {'class': 'required'}}) }}
+                    {{ form_widget(form.cv) }}
+            </div>                        
+        {% else %} 
+            <div class="form-group">
+                <img src="{{ asset('images/no_image.png') }}" id="preview" class="img-fluid"/>
+            </div>                   
+            <div class="form_group mt-2">
+                    {{ form_label(form.cv, 'user.cv'|trans, {'label_attr': {'class': 'required'}}) }}
+                    {{ form_widget(form.cv) }}
+            </div> 
+        {% endif %}
+        <div class="form_group mt-2">
+            {{ form_label(form.gender, 'lov.gender'|trans, {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.gender) }}
+        </div>         
+        <div class="form_group mt-2">
+            {{ form_label(form.workRoles, 'lov.workRole'|trans, {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.workRoles) }} 
+        </div>         
+        <div class="form_group">
+            {{ form_label(form.workFunction, 'user.workFunction'|trans, {'label_attr': {'class': 'required'}}) }}
+            {{ form_widget(form.workFunction) }} 
+        </div>         
+        <div class="form_group mt-2">
+            {{ form_label(form.mobile) }}         
+            {{ form_widget(form.mobile) }}
+        </div>         
+        <div class="form_group mt-2">
+            {{ form_label(form.fixe, 'label.fixe'|trans, {'label_attr': {'class': 'required'}}) }}         
+            {{ form_widget(form.fixe) }}
+        </div>         
+        <div class="form_group mt-2">
+            {{ form_label(form.fax, 'label.fax'|trans, {'label_attr': {'class': 'required'}}) }}       
+            {{ form_widget(form.fax) }}
+        </div>         
+        <div class="form_group mt-2"> 
+            {{ form_label(form.workAttachment, 'lov.rattachement'|trans, {'label_attr': {'class': 'required'}}) }}        
+            {{ form_widget(form.workAttachment) }}
+        </div>         
+        <div class="form_group mt-2"> 
+            {{ form_label(form.adresse, 'label.adresse'|trans, {'label_attr': {'class': 'required'}}) }}        
+            {{ form_widget(form.adresse) }}
+        </div>         
+        <div class="form_group mt-2">
+            {{ form_label(form.workName, 'user.workName'|trans, {'label_attr': {'class': 'required'}}) }}       
+            {{ form_widget(form.workName) }}  
+        </div>                  
+    </div>    
+    {#{{ form_row(form.reason) }}   #} 
+<div class="form-group mt-3">
+    <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+</div>
+
+{{ form_end(form) }}
+
+<span class="text-danger">*</span> {{ 'form.required'|trans }}
+<input type="hidden" id="app_request_method" value="{{  app.request.method }}">

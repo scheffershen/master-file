@@ -1,0 +1,61 @@
+{% extends 'admin_base.html.twig' %}
+
+{% import '@DHDoctrineAudit/Audit/helpers/bootstrap.html.twig' as bootstrap %}
+{% import '@DHDoctrineAudit/Audit/helpers/helper.html.twig' as helper %}
+
+{% block title %}{{ 'audits'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'audits'|trans }}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->     
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class="thead">
+                                    <th>{% trans %}audit.table_headers.entity{% endtrans %}</th>
+                                    {#<th>{% trans %}audit.table_headers.table{% endtrans %}</th>#}
+                                    <th>{% trans %}audit.table_headers.activity{% endtrans %}</th>
+                                    <th></th>
+                                    </thead>
+                                    <tbody>
+                                    {% for entity, table in audited %}
+                                        <tr>
+                                            <td><code>{{ entity|escape}}</code></td>
+                                            {#<td>{{ table|escape }}</td>#}
+                                            <td>{{ bootstrap.badge(reader.getAuditsCount(entity) ~ ' operations') }}</td>
+                                            <td>
+                                                <a href="{{ path('admin_audit_show_entity_history', {'entity': helper.namespaceToParam(entity)}) }}">{% trans %}audit.audit_details.view_audit{% endtrans %}</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>  
+                      
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+
+{% endblock %}

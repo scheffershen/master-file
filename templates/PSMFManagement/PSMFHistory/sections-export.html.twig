@@ -1,0 +1,25 @@
+{% if pSMFSectionHistories|length > 0 %}  
+<p>{{ 'psmfHistory.change_um'|trans}}</p>
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>{{ 'document.version'|trans }}</th>
+            <th>{{ 'psmfHistory.date'|trans }}</th>
+            <th>{{ 'psmfHistory.author'|trans }}</th>
+            <th>{{ 'psmfHistory.change'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pSMFHistory in pSMFSectionHistories %}
+            {% if pSMFHistory.reason|length > 0 %}
+                <tr>
+                    <td>{{ version }}</td>
+                    <td>{{ pSMFHistory.createDate|date('d-M-Y H:i') }}</td>
+                    <td>{{ pSMFHistory.createUser }}</td>
+                    <td>{{ pSMFHistory.reason|noUnderscore }}</td>
+                </tr>
+            {% endif %}    
+        {% endfor %}
+    </tbody>
+</table>  
+{% endif %}

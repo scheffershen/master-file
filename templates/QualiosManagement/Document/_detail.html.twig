@@ -1,0 +1,164 @@
+<table class="table">
+    <tbody>
+        <tr>
+            <th>{{ 'qualio.reference'|trans }}</th>
+            <td>{{ document.reference }}</td>
+            <th>{{ "variable.balise" | trans  }}</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.version'|trans }}</th>
+            <td>{{ document.version }}</td>
+            <th>QUALIOS_{{ document.reference }}_VERSION</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.title'|trans }}</th>
+            <td>{{ document.title }}</td>
+            <th>QUALIOS_{{ document.reference }}_TITLE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.activityDate'|trans }}</th>
+            <td>{{ document.activityDate ? document.activityDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_ACTIVITYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.createDate'|trans }}</th>
+            <td>{{ document.createDate ? document.createDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_CREATEDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.validityDate'|trans }}</th>
+            <td>{{ document.validityDate ? document.validityDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_VALIDITYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.natureOfChange'|trans }}</th>
+            <td>{{ document.natureOfChange }}</td>
+            <th>QUALIOS_{{ document.reference }}_NATUREOFCHANGE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.object'|trans }}</th>
+            <td>{{ document.object }}</td>
+            <th>QUALIOS_{{ document.reference }}_OBJECT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.simpleOrDynamic'|trans }}</th>
+            <td>{{ document.simpleOrDynamic ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_SIMPLEORDYNAMIC</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archiveDate'|trans }}</th>
+            <td>{{ document.archiveDate ? document.archiveDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_ARCHIVEDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.reviewDate'|trans }}</th>
+            <td>{{ document.reviewDate ? document.reviewDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_REVIEWDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.replayDate'|trans }}</th>
+            <td>{{ document.replayDate }}</td>
+            <th>QUALIOS_{{ document.reference }}_REPLAYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.submitDate'|trans }}</th>
+            <td>{{ document.submitDate ? document.submitDate|date('d-M-Y') : '' }}</td>
+            <th>QUALIOS_{{ document.reference }}_SUBMITDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.signDelay'|trans }}</th>
+            <td>{{ document.signDelay }}</td>
+            <th>QUALIOS_{{ document.reference }}_SIGNDELAY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.lateSignAlert'|trans }}</th>
+            <td>{{ document.lateSignAlert ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_LATESIGNALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.formationAccessibility'|trans }}</th>
+            <td>{{ document.formationAccessibility ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_FORMATIONACCESSIBILITY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.actionWhenArchive'|trans }}</th>
+            <td>{{ document.actionWhenArchive }}</td>
+            <th>QUALIOS_{{ document.reference }}_ACTIONWHENARCHIVE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archivePeriod'|trans }}</th>
+            <td>{{ document.archivePeriod }}</td>
+            <th>QUALIOS_{{ document.reference }}_ARCHIVEPERIOD</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archivePeriodAlert'|trans }}</th>
+            <td>{{ document.archivePeriodAlert ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_ARCHIVEPERIODALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.reviewAlert'|trans }}</th>
+            <td>{{ document.reviewAlert ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_REVIEWALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.docRefQualifForm'|trans }}</th>
+            <td>{{ document.docRefQualifForm }}</td>
+            <th>QUALIOS_{{ document.reference }}_DOCREFQUALIFORM</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.rappelQualifForm'|trans }}</th>
+            <td>{{ document.rappelQualifForm ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_RAPPELQUALIFORM</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.signByLevel'|trans }}</th>
+            <td>{{ document.signByLevel }}</td>
+            <th>QUALIOS_{{ document.reference }}_SIGNBYLEVEL</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.nbLevel'|trans }}</th>
+            <td>{{ document.nbLevel }}</td>
+            <th>QUALIOS_{{ document.reference }}_NBLEVEL</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.docCode'|trans }}</th>
+            <td>{{ document.docCode }}</td>
+            <th>QUALIOS_{{ document.reference }}_DOCCODE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.titleComposition'|trans }}</th>
+            <td>{{ document.titleComposition }}</td>
+            <th>QUALIOS_{{ document.reference }}_TITLECOMPOSITION</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.testMode'|trans }}</th>
+            <td>{{ document.testMode }}</td>
+            <th>QUALIOS_{{ document.reference }}_TESTMODE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.delayValidity'|trans }}</th>
+            <td>{{ document.delayValidity ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_DELAYVALIDITY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.delayAR'|trans }}</th>
+            <td>{{ document.delayAR ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_DELAYAR</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.attachmentAsBody'|trans }}</th>
+            <td>{{ document.attachmentAsBody ? 'Yes' : 'No' }}</td>
+            <th>QUALIOS_{{ document.reference }}_ATTACHMENTASBODY</th>
+        </tr>
+        <tr>
+            <th>{{ 'lov.qualiosType'|trans }}</th>
+            <td>{{ document.type }}</td>
+            <th>QUALIOS_{{ document.reference }}_TYPE</th>
+        </tr> 
+        <tr>
+            <th>{{ 'lov.qualiosStatus'|trans }}</th>
+            <td>{{ document.status }}</td>
+            <th>QUALIOS_{{ document.reference }}_STATUS</th>
+        </tr>                
+    </tbody>
+</table>

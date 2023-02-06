@@ -1,0 +1,87 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondances'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">                       
+                        <h4 class="page-title">
+                            {{ psmf.title }} 
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    {{ include('partials/_flash_messages.html.twig') }}
+                    {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE') %}
+                        {% form_theme form 'bootstrap_4_layout.html.twig' %}      
+                            {{ form_start(form, {'multipart': true })  }}
+                            {{ form_errors(form) }}
+                            <div class="card mt-4">
+                                <div class="card-header">
+                                        {{ 'psmf.localeImageDelete'|trans }}: {{ variable.label~' ('~variable.balise~')' }} {% if variable.description %}
+                                                <i class="fas fa-lg fa-question-circle text-purple" data-toggle="tooltip" data-placement="top" title="{{ variable.description }}" ></i>
+                                            {% endif %} 
+                                </div>
+                                <div class="card-body"> 
+                                    <fieldset class="form-group bg-light p-3">
+        							    {% if correspondance.valueLocal is not null %}
+        						            {% if correspondance.valueLocal|isImage == true %}
+        						    			<img src="{{ path('admin_private_upload', {'upload': correspondance.valueLocal}) }}" class="img-fluid" id="preview{{ variable.id }}">
+        						            {% endif %}    
+        							    {% endif %}
+                                        <div class="form_group mb-4 d-none"> 
+                                            {% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                                                {{ form_label(form.upload, variable.label~' ('~variable.balise~')', {'label_attr': {'class': 'required'}} ) }} 
+                                            {% else %}
+    		                                    {{ form_label(form.upload, variable.label~' ('~variable.balise~')') }}
+                                            {% endif %}
+                                            <small class="form-text text-muted">
+                                            {% if variable.description %}
+                                                <i class="fas fa-lg fa-question-circle text-purple" data-toggle="tooltip" data-placement="top" title="{{ variable.description }}" ></i>
+                                            {% endif %}    
+                                            </small> 
+                                        	<div class="row">
+    						    				<div class="col-8">                                        
+    		    							        {{ form_widget(form.upload, { 'attr': {'data-id': variable.id} }) }}
+    		    							    </div>
+    		    							    <div class="col-4">
+    		    							    	{{ variable.userHelp|raw }}
+    		    							    </div>
+    		    							</div>
+                                        </div>
+                                    </fieldset> 
+                                    {{ form_row(form.reason) }} 
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn waves-effect waves-light btn-danger">{{ 'action.delete'|trans }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {{ form_end(form) }} 
+                    {% endif %}                          
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+    {{ encore_entry_script_tags('js/validator') }}
+{% endblock %}

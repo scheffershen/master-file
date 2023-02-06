@@ -1,0 +1,452 @@
+{#<div class="slimscroll-menu p-3">#}
+<div class="page-title-box">
+    <h4 class="page-title">{{ 'variables'|trans }}</h4>  
+</div>
+
+<div id="accordion">
+
+    {# system variable #}
+    <h6 class="page-title">{{ 'label.systeme'|trans }}</h6>    
+    {% for classe in classesSysteme %}
+        <div class="card">
+            <div class="card-header" id="heading{{ classe.id }}">
+                <i class="fas fa-code"></i> 
+                <a class="text-dark" data-toggle="collapse" href="#collapse{{ classe.id }}" aria-expanded="false">
+                    {{ classe.title }}
+                </a>
+            </div>
+
+            <div id="collapse{{ classe.id }}" class="collapse pl-2" aria-labelledby="heading{{ classe.id }}" data-parent="#accordion">
+                <ul class="list-unstyled pl-2">
+                    {% if classe.title == "Logique" %}
+                        <li class="mt-3">
+                            {#<select class="chosen">                                     
+                                {% for variable in classe.variables %}
+                                    <option>{{ variable.balise }}</option>
+                                {% endfor %}
+                            </select>#}
+                            <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#logiqueVariables" data-toggle="modal">
+                                <i class="fas fa-lg fa-eye"></i>
+                            </a>
+                        </li>
+                    {% else %}    
+                        {% for variable in classe.variables %}
+                            <li>
+                                <small class="text-muted" data-toggle="modal" data-target="#variable{{ variable.id }}" title="{{ variable.label }}" style="cursor: pointer;">{{ variable.balise }}</small>
+                            </li>
+                        {% endfor %}
+                    {% endif %}    
+                </ul>
+            </div>  
+        </div>
+    {% endfor %}  
+
+    {# globale variable #}
+    <h6 class="page-title mt-3">{{ 'label.globale'|trans }}</h6>
+	{% for classe in classesGlobale %}
+	    <div class="card">
+	        <div class="card-header" id="heading{{ classe.id }}">
+	            <i class="fas fa-code"></i> 
+	            <a class="text-dark" data-toggle="collapse" href="#collapse{{ classe.id }}" aria-expanded="false">
+                    {{ classe.title }}
+                </a>
+	        </div>
+
+	        <div id="collapse{{ classe.id }}" class="collapse pl-2" aria-labelledby="heading{{ classe.id }}" data-parent="#accordion">
+			    <ul class="list-unstyled pl-2">
+					{% for variable in classe.variables %}
+						<li>
+							<small class="text-muted" data-toggle="modal" data-target="#variable{{ variable.id }}" title="{{ variable.label }}" style="cursor: pointer;">{{ variable.balise }}</small>
+						</li>
+					{% endfor %}
+				</ul>
+	        </div>	
+	    </div>
+    {% endfor %}
+
+    {# locale variable #}
+    {% if classes %}
+        <h6 class="page-title mt-3">{{ 'label.locale'|trans }}</h6>
+		{% for classe in classes %}
+		    <div class="card">
+		        <div class="card-header" id="heading{{ classe.id }}">
+		            <i class="fas fa-code"></i> 
+		            <a class="text-dark" data-toggle="collapse" href="#collapse{{ classe.id }}" aria-expanded="false">
+	                    {{ classe.title }}
+	                </a>
+		        </div>
+
+		        <div id="collapse{{ classe.id }}" class="collapse pl-2" aria-labelledby="heading{{ classe.id }}" data-parent="#accordion">
+				    <ul class="list-unstyled pl-2">
+						{% for variable in classe.variables %}
+							<li>
+								<small class="text-muted" data-toggle="modal" data-target="#variable{{ variable.id }}" title="{{ variable.label }}" style="cursor: pointer;">{{ variable.balise }}</small>
+							</li>
+						{% endfor %}
+					</ul>
+		        </div>	
+		    </div>
+	    {% endfor %}	
+	{% endif %}  
+
+    {# qualios variable #}
+    <h6 class="page-title mt-3">{{ 'qualios'|trans }}</h6>
+    <div class="card">
+        <div class="card-header" id="heading-qualios">
+            <i class="fas fa-code"></i> 
+            <a class="text-dark" data-toggle="collapse" href="#collapse-qualios" aria-expanded="false">
+                {{ 'qualios'|trans }}
+            </a>
+        </div>
+
+        <div id="collapse-qualios" class="collapse pl-2" aria-labelledby="heading-qualios" data-parent="#accordion">
+            <ul class="list-unstyled pl-2">
+                <li><small class="text-muted">QUALIOS_[ref]_TITLE</small></li>
+                <li><small class="text-muted">QUALIOS_[ref]_VERSION</small></li>
+                <li><small class="text-muted">QUALIOS_[ref]_ACTIVITYDATE</small></li>
+                <li><small class="text-muted">QUALIOS_[ref]_STATUS</small></li>
+                <li><small class="text-muted" data-toggle="modal" data-target="#qualios" title="{{ 'qualios'|trans }}" style="cursor: pointer;">...</small></li>
+            </ul>
+        </div>  
+    </div>
+
+</div>
+{#</div>#}
+
+<div class="modal fade" id="qualios" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'qualios'|trans }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+    <tbody>
+        <tr>
+            <th>{{ 'qualio.reference'|trans }}</th>
+            <th>{{ "variable.balise" | trans  }}</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.version'|trans }}</th>
+            <th>QUALIOS_[ref]_VERSION</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.title'|trans }}</th>
+            <th>QUALIOS_[ref]_TITLE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.activityDate'|trans }}</th>
+            <th>QUALIOS_[ref]_ACTIVITYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.createDate'|trans }}</th>
+            <th>QUALIOS_[ref]_CREATEDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.validityDate'|trans }}</th>
+            <th>QUALIOS_[ref]_VALIDITYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.natureOfChange'|trans }}</th>
+            <th>QUALIOS_[ref]_NATUREOFCHANGE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.object'|trans }}</th>
+            <th>QUALIOS_[ref]_OBJECT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.simpleOrDynamic'|trans }}</th>
+            <th>QUALIOS_[ref]_SIMPLEORDYNAMIC</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archiveDate'|trans }}</th>
+            <th>QUALIOS_[ref]_ARCHIVEDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.reviewDate'|trans }}</th>
+            <th>QUALIOS_[ref]_REVIEWDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.replayDate'|trans }}</th>
+            <th>QUALIOS_[ref]_REPLAYDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.submitDate'|trans }}</th>
+            <th>QUALIOS_[ref]_SUBMITDATE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.signDelay'|trans }}</th>
+            <th>QUALIOS_[ref]_SIGNDELAY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.lateSignAlert'|trans }}</th>
+            <th>QUALIOS_[ref]_LATESIGNALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.formationAccessibility'|trans }}</th>
+            <th>QUALIOS_[ref]_FORMATIONACCESSIBILITY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.actionWhenArchive'|trans }}</th>
+            <th>QUALIOS_[ref]_ACTIONWHENARCHIVE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archivePeriod'|trans }}</th>
+            <th>QUALIOS_[ref]_ARCHIVEPERIOD</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.archivePeriodAlert'|trans }}</th>
+            <th>QUALIOS_[ref]_ARCHIVEPERIODALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.reviewAlert'|trans }}</th>
+            <th>QUALIOS_[ref]_REVIEWALERT</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.docRefQualifForm'|trans }}</th>
+            <th>QUALIOS_[ref]_DOCREFQUALIFORM</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.rappelQualifForm'|trans }}</th>
+            <th>QUALIOS_[ref]_RAPPELQUALIFORM</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.signByLevel'|trans }}</th>
+            <th>QUALIOS_[ref]_SIGNBYLEVEL</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.nbLevel'|trans }}</th>
+            <th>QUALIOS_[ref]_NBLEVEL</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.docCode'|trans }}</th>
+            <th>QUALIOS_[ref]_DOCCODE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.titleComposition'|trans }}</th>
+            <th>QUALIOS_[ref]_TITLECOMPOSITION</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.testMode'|trans }}</th>
+            <th>QUALIOS_[ref]_TESTMODE</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.delayValidity'|trans }}</th>
+            <th>QUALIOS_[ref]_DELAYVALIDITY</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.delayAR'|trans }}</th>
+            <th>QUALIOS_[ref]_DELAYAR</th>
+        </tr>
+        <tr>
+            <th>{{ 'qualio.attachmentAsBody'|trans }}</th>
+            <th>QUALIOS_[ref]_ATTACHMENTASBODY</th>
+        </tr>
+        <tr>
+            <th>{{ 'lov.qualiosType'|trans }}</th>
+            <th>QUALIOS_[ref]_TYPE</th>
+        </tr> 
+        <tr>
+            <th>{{ 'lov.qualiosStatus'|trans }}</th>
+            <th>QUALIOS_[ref]_STATUS</th>
+        </tr>                
+    </tbody>
+</table>                    
+            </div>
+        </div>
+    </div>    
+</div>
+
+{% for classe in classesSysteme %}
+	{% for variable in classe.variables %}
+<div class="modal fade" id="variable{{ variable.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ variable.label }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>{{ 'variable.balise'|trans }}</th>
+                            <td>{{ variable.balise }}</td>
+                        </tr>   
+                        {% if variable.description %}                     
+                        <tr>
+                            <th>{{ 'label.description'|trans }}</th>
+                            <td>{{ variable.description }}</td>
+                        </tr>  
+				        <tr>
+				            <th>{{ 'lov.typeVariable'|trans }}</th>
+				            <td>{{ variable.type }}</td>
+				        </tr>                            
+				        <tr>
+				            <th>{{ 'lov.scope'|trans }}</th>
+				            <td>{{ variable.scope }}</td>
+				        </tr>                          
+                        {% endif %} 
+                        {% if variable.userHelp %}                     
+                        <tr>
+                            <th>{{ 'label.userHelp'|trans }}</th>
+                            <td>
+                                {% autoescape %}
+                                    {{  variable.userHelp|raw }} 
+                                {% endautoescape %}                                
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>                        
+            </div>
+        </div>
+    </div>    
+</div>
+    {% endfor %}
+{% endfor %}
+
+{% for classe in classesGlobale %}
+    {% for variable in classe.variables %}
+<div class="modal fade" id="variable{{ variable.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ variable.label }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>{{ 'variable.balise'|trans }}</th>
+                            <td>{{ variable.balise }}</td>
+                        </tr>   
+                        {% if variable.description %}                     
+                        <tr>
+                            <th>{{ 'label.description'|trans }}</th>
+                            <td>{{ variable.description }}</td>
+                        </tr>  
+                        <tr>
+                            <th>{{ 'lov.typeVariable'|trans }}</th>
+                            <td>{{ variable.type }}</td>
+                        </tr>                            
+                        <tr>
+                            <th>{{ 'lov.scope'|trans }}</th>
+                            <td>{{ variable.scope }}</td>
+                        </tr>                          
+                        {% endif %} 
+                        {% if variable.userHelp %}                     
+                        <tr>
+                            <th>{{ 'label.userHelp'|trans }}</th>
+                            <td>
+                                {% autoescape %}
+                                    {{  variable.userHelp|raw }} 
+                                {% endautoescape %}                                
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>                        
+            </div>
+        </div>
+    </div>    
+</div>
+    {% endfor %}
+{% endfor %}
+
+{% for classe in classes %}
+	{% for variable in classe.variables %}
+<div class="modal fade" id="variable{{ variable.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ variable.label }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>{{ 'variable.balise'|trans }}</th>
+                            <td>{{ variable.balise }}</td>
+                        </tr>   
+                        {% if variable.description %}                     
+                        <tr>
+                            <th>{{ 'label.description'|trans }}</th>
+                            <td>{{ variable.description }}</td>
+                        </tr>   
+                        {% endif %} 
+				        <tr>
+				            <th>{{ 'lov.typeVariable'|trans }}</th>
+				            <td>{{ variable.type }}</td>
+				        </tr>                            
+				        <tr>
+				            <th>{{ 'lov.scope'|trans }}</th>
+				            <td>{{ variable.scope }}</td>
+				        </tr>                          
+                        {% if variable.userHelp %}                     
+                        <tr>
+                            <th>{{ 'label.userHelp'|trans }}</th>
+                            <td>
+                                {% autoescape %}
+                                    {{  variable.userHelp|raw }} 
+                                {% endautoescape %}                                
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>                        
+            </div>
+        </div>
+    </div>    
+</div>
+    {% endfor %}
+{% endfor %}
+
+<div class="modal fade" id="logiqueVariables" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Logique</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                 {% for classe in classesSysteme %}  
+                    {% if classe.title == "Logique" %}        
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="tablefiltre">
+                                <thead class="">
+                                    <tr>
+                                        <th>{{ 'variables'|trans }}</th>   
+                                    </tr>
+                                </thead>
+                                <thead id="filtreForm">
+                                    <tr>
+                                        <th>{{ 'variables'|trans }}</th>   
+                                    </tr>
+                                </thead>
+                                <tbody>                           
+                                    {% for variable in classe.variables %}
+                                        <tr><td>{{ variable.balise }}</td></tr>
+                                    {% endfor %}   
+                                </tbody>
+                           </table>
+                        </div>                               
+                    {% endif %}     
+                 {% endfor %}                    
+            </div>
+        </div>
+    </div>    
+</div> 

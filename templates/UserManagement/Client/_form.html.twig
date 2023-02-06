@@ -1,0 +1,29 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form)  }}
+{{ form_errors(form) }}
+    {{ form_label(form.name,'label.name'|trans) }} 
+    {{ form_widget(form.name) }}
+    {{ form_label(form.adress,'label.adresse'|trans) }} 
+    {{ form_widget(form.adress) }}
+    {% if client is defined and client is not null and client.logoUri is not null %}
+		<div class="form-group mt-2">
+            <img src="{{ path('admin_private_upload', {'upload': client.logoUri, 'format': 'large'}) }}" class="img-fluid" id="preview" >
+		</div>	
+    {% endif %}
+    {{ form_row(form.logo) }}   
+
+    {% if 'admin_client_edit' in app.request.attributes.get('_route') %}
+        {{ form_row(form.isMajeur) }}
+    {% endif %}
+
+    <div id="reasonDiv">   
+        {{ form_row(form.reason) }}
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+    </div>    
+{{ form_end(form) }}

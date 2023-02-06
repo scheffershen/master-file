@@ -1,0 +1,23 @@
+<table>
+    <thead>
+      <tr>
+          <th>{{ "mailLog.date" | trans  }}</th>
+          <th>{{ "mailLog.from" | trans  }}</th>
+          <th>{{ "mailLog.to" | trans  }}</th>
+          <th>{{ "mailLog.subject" | trans  }}</th>
+          <th>{{ "mailLog.body" | trans  }}</th>
+      </tr>
+   </thead>
+   <tbody> 
+     {% for loggedMessage in loggedMessages %}
+        <tr>                                              
+            <td>{{ loggedMessage.date|date('d-M-Y H:i')}}</td>
+            <td>{% for key,data in loggedMessage.from %}{{key}}; {% endfor %}</td>
+            <td>{% for key,data in loggedMessage.to %}{{key}}; {% endfor %}</td>
+            <td>{{ loggedMessage.subject}}</td>
+            <td>{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('admin_mail_log_message', {'id': loggedMessage.id }) }}</td>
+        </tr>
+     {% endfor %}
+   </tbody>
+</table>
+                 

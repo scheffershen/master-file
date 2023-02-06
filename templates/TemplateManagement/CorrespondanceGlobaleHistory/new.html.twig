@@ -1,0 +1,146 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondances'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} / {{ 'correspondance.globale'|trans }}
+                        &nbsp;&nbsp;
+                        {{ correspondances.correspondanceGlobale_missing_text(variables)}} 
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    {{ include('partials/_flash_messages.html.twig') }}
+
+                    {% form_theme form 'bootstrap_4_layout.html.twig' %}      
+                        {{ form_start(form, {'multipart': true })  }}
+				        {% for correspondance in form.correspondances %}
+						    {% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE') and correspondance.vars.data.variable.isValid %}
+                                <fieldset class="form-group bg-light p-3" id="field{{ correspondance.vars.data.variable.id }}">
+    							    {% if correspondance.vars.data.valueLocal is not null %}
+    						            {% if correspondance.vars.data.valueLocal|isImage == true %}
+    						    			<img src="{{ path('admin_private_upload', {'upload': correspondance.vars.data.valueLocal}) }}" class="img-fluid" id="preview{{ correspondance.vars.data.variable.id }}">
+    						            {% endif %}    
+    							    {% endif %}
+                                    <div class="form_group mb-4">    
+                                        {{ form_label(correspondance.upload, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')') }}
+    							        <small class="form-text text-muted">
+                                        {% if correspondance.vars.data.variable.classes|length > 0 %}
+                                            {{ correspondances.correspondanceLocale_section(correspondance.vars.data.variable.classes, correspondance.vars.data.variable.balise) }}
+                                        {% endif %}
+                                        {% if correspondance.vars.data.variable.description %}({{ correspondance.vars.data.variable.description }}){% endif %}    
+                                        </small> 
+                                        <div class="row">
+                                            <div class="col-8">                              
+                                                {{ form_widget(correspondance.upload, { 'attr': {'data-id': correspondance.vars.data.variable.id} }) }}
+                                            </div>
+                                            <div class="col-4">
+                                                {{ correspondance.vars.data.variable.userHelp|raw }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset> 
+						    {% elseif correspondance.vars.data.variable.isValid %}
+                                <div class="form_group mb-4 bg-light p-3">    
+                                    {{ form_label(correspondance.valueLocal, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')') }}
+                                    {% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG')  %}
+                                        {#<a href="/docs/{{ app.request.locale }}/site/editeur_html" class="btn btn-sm btn-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.html_help'|trans }}" target="_blank">
+                                            <i class="fas fa-lg fa-question-circle text-purple"></i>
+                                        </a>#}
+                                    {% endif %}
+                                    <small class="form-text text-muted">
+                                        {% if correspondance.vars.data.variable.classes|length > 0 %}
+                                            {{ correspondances.correspondanceLocale_section(correspondance.vars.data.variable.classes, correspondance.vars.data.variable.balise) }}
+                                        {% endif %}                                        
+                                        {% if correspondance.vars.data.variable.description %}({{ correspondance.vars.data.variable.description }}){% endif %}    
+                                    </small>
+                                    <div class="row">
+                                        <div class="{% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG')  %}col-7{% else %}col-8{% endif %}">
+                                            {{ form_widget(correspondance.valueLocal, { 'attr': {'data-id': correspondance.vars.data.variable.id} }) }}
+                                        </div>
+                                        {% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG')  %}
+                                        <div class="col-1">
+                                            <button data-id="{{ loop.index0 }}" type="button" class="btn btn-purple waves-effect waves-light btnCopier" data-toggle="tooltip" data-placement="top" title="{{ 'action.copier'|trans }}">&lt;&lt;</button>
+                                        </div>    
+                                        {% endif %}
+                                        <div class="col-4" id="help{{ loop.index0 }}">
+                                            {{ correspondance.vars.data.variable.userHelp|raw }} 
+                                        </div>    
+                                    </div>
+                                </div>  
+						    {% endif %} 
+				        {% endfor %}
+
+                        {{ form_row(form.isMajeur) }}
+
+                        <div id="reasonDiv">   
+                            {{ form_row(form.reason) }}
+                        </div>
+                        
+                        <div class="form-group pt-2">
+                            <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+                        </div>
+                    {{ form_end(form) }}                           
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    {{ encore_entry_script_tags('js/globale') }}
+<script type="text/javascript">
+  var CKEDITOR_BASEPATH = "/libs/ckeditor/";
+</script>
+<script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
+<script>
+$(() => {
+    let editors = [];
+    $('.btnCopier').each(function(index) {
+            if (CKEDITOR.instances['correspondance_globale_history_correspondances_'+$(this).data('id')+'_valueLocal']) { 
+                CKEDITOR.instances['correspondance_globale_history_correspondances_'+$(this).data('id')+'_valueLocal'].destroy(true); 
+                delete CKEDITOR.instances['correspondance_globale_history_correspondances_'+$(this).data('id')+'_valueLocal'];
+            }
+            editors[$(this).data('id')] = CKEDITOR.replace('correspondance_globale_history_correspondances_'+$(this).data('id')+'_valueLocal', {
+                toolbar: [
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike'] },
+                    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },    
+                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
+                    { name: 'insert', items: ['Table', 'HorizontalRule'] },
+                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Undo', 'Redo' ] },
+                    '/',
+                    { name: 'styles', items: [ 'Styles', 'Format', 'FontSize' ] },
+                    { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+                    { name: 'others', items: [ '-' ] },
+                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] }
+                ]
+            });
+
+    }); 
+
+    $('.btnCopier').on('click', function() {
+      editors[$(this).data('id')].setData($('#help'+$(this).data('id')).html().trimStart());
+    }); 
+
+});
+</script>
+ 
+{% endblock %}

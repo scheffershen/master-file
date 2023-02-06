@@ -1,0 +1,80 @@
+dt:
+  columns: 
+    fullName: Nom complet
+    firstName: Prénom
+    lastName: Nom de famille
+    email: Email
+    sexe: Sexe
+    dateNaissance: Date naissance
+    mobile: Téléphone portable
+    adresse: Adresse postale
+    city: Ville
+    zipCode: Code postale
+    country: Pays
+    organisation: Organisation 
+    reference: Reference
+    rpps: RPPS
+    actions: Actions
+
+clients: Clients
+client:
+    list: Liste de clients
+    label: Client
+    add: "Ajouter un client"
+    edit: "Editer un client"
+    create: Créer un client
+    update: Modifier un client
+    disable: Désactiver un client
+    enable: Activer un client      
+    delete: Supprimer un client
+    revision: Révision
+    last: Dernières modifications
+    flash:
+        created: "Un client a été créé."
+        updated: "Le client a été mis à jour."
+        enable: "Le client a été activé."
+        disable: "Le client a été désactivé."
+        deleted: "Le client a été supprimé"
+
+user:
+    list: Utilisateurs
+    role: Profil
+    client: Clients
+    mailAlerte: "Si coché, l’utilisateur recevra hebdomadairement les e-mails listant les  modifications du modèle et de ses projets clients." 
+    cv: CV (Image)
+    pvUser: Permettre l'utilisation des informations de cet l'utilisateur dans les PSMF en complétant la fiche
+    workFunction: Fonction
+    workName: "Nom d'entreprise"
+    data_pv: "Données liées à l’activité de PV "
+    isEnable: Compte actif  
+    last: Dernières modifications
+    last_login: Dernière connexion
+    rest_time: Reste du temps    
+    disable: Désactiver un utilisateur
+    enable: Activer un utilisateur  
+    delete: Supprimer un utilisateur    
+    create: Ajouter un nouvel utilisateur
+    edit: "Modifier l'utilisateur"
+    flash:
+        created: "Un utilisateur a été créé."
+        updated: "L'utilisateur a été mis à jour."
+        deleted: "L'utilisateur a été supprimé avec succès"
+        enable: "Utilisateur activé."
+        disable: "Utilisateur désactivé."
+    error:
+        missing_role: Selectionner au moins un rôles
+        missing_client: Selectionner au moins un client
+        missing_workRole: Selectionner au moins un rôle de travail
+
+plateforme:
+    label: Le compte de la plateforme
+    configurations: Configurations
+    nom: Nom
+    email: E-mail
+    version: Version
+    logo: Logo    
+    poweredBy: Powered by
+    apropos: A propos
+    edit: Editer
+    flash:
+        updated: "Platform account has been updated."     

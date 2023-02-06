@@ -1,0 +1,64 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'users'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">
+                            {{ 'nav.outil'|trans }} / {{ 'user.list'|trans }}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <div class="table-responsive" id="users">
+                        <div class="spinner-border text-danger" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="{{ path('admin_user_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>        
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}
+<script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+<script>
+$(function() {
+    $(document).ajaxStart(function() { $(".spinner").show(); });
+    $(document).ajaxStop(function() { $(".spinner").hide(); });  
+      
+    $('#users').initDataTables({{ datatable_settings(datatable) }}, {
+        searching: true,
+        dom:'<"html5buttons"B>lTfgitp',
+    }).then(function(dt) {
+        // dt contains the initialized instance of DataTables
+        dt.on('draw', function() {
+            //alert('Redrawing table');
+        })
+        //$('[data-toggle="tooltip"]').tooltip();
+    });         
+});
+</script>
+{% endblock %}    

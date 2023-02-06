@@ -1,0 +1,30 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form)  }}
+{{ form_errors(form) }}
+    {{ form_label(form.label,'variable.label'|trans) }} 
+    {{ form_widget(form.label) }}
+    {{ form_row(form.balise) }}  
+    {{ form_row(form.description) }}  
+    {{ form_row(form.type) }}
+    {{ form_row(form.obligation) }}
+    {{ form_row(form.scope) }}
+    {{ form_row(form.classes) }}
+    {# form_row(form.isAnnexe) #}
+    <div class="form-group">
+        {{ form_label(form.userHelp) }}
+        <a href="javascript:void();" class="btn btn-sm btn-secondary btnPdfPreview" type="button" data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}">
+            <i class="fas fa-lg fa-file-pdf"></i>
+        </a>&nbsp;
+        <a href="/docs/{{ app.request.locale }}/site/editeur_html/index.html" class="btn btn-sm btn-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.html_help'|trans }}" target="_blank">
+            <i class="fas fa-lg fa-question-circle text-purple"></i>
+        </a>
+        {{ form_widget(form.userHelp) }}
+    </div>             
+    {#{{ form_row(form.reason) }}#}  
+    <div class="form-group">
+        <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+    </div>
+{{ form_end(form) }}

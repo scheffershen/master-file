@@ -1,0 +1,57 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 10pt;
+        }
+        p {
+            margin: 0;
+        }
+        td, th {
+            padding: 2px;
+        }
+        td {
+            vertical-align: top;
+        }
+        table thead th {
+            background-color: #ececec;
+            border: 0.1mm solid #000000;
+            font-weight: bold;
+            font-size: 10pt;
+            text-align: left;
+        }
+    </style>
+</head>
+<body style="background: transparent url({{ background }}) repeat fixed right top; background-color:#ccffff;">
+<!--mpdf
+<htmlpageheader name="myheader">
+<table style="font-size: 9pt; padding-top: 3mm; width: 100%">
+<tr>
+    <td style='text-align: center; width: 100%'>{% autoescape %}{{ header|raw }}{% endautoescape %}</td>
+</tr>
+</table>
+</htmlpageheader>
+<sethtmlpageheader name="myheader" value="on" />
+<sethtmlpagefooter name="myfooter" value="on" />
+mpdf--> 
+<!--mpdf
+<htmlpagefooter name="myfooter">
+<table style="font-size: 9pt; padding-top: 3mm; width: 100%">
+<tr>
+    <td style='text-align: right;  width: 20%'>&nbsp;</td>
+    <td style='text-align: center; width: 60%'>{% autoescape %}{{ footer|raw }}{% endautoescape %}</td>
+    <td style='text-align: right;  width: 20%'>Page {PAGENO}/{nbpg}</td>
+</tr>
+</table>
+</htmlpagefooter>
+<sethtmlpagefooter name="myfooter" value="on" />
+mpdf-->     
+{% for page in pages %}
+    {% autoescape %}
+        {{ page|raw }} 
+    {% endautoescape %}                                   
+    {% if loop.last != true %}<pagebreak>{% endif %}            
+{% endfor %}
+</body>
+</html>

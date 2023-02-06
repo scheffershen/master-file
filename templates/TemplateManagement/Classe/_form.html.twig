@@ -1,0 +1,17 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form)  }}
+{{ form_errors(form) }}
+    {# {{ form_row(form.title ) }} #}
+    {{ form_label(form.title,'classe.title'|trans) }} 
+    {{ form_widget(form.title) }}
+
+    {# form_row(form.code) #} 
+    {{ form_row(form.sections) }}  
+    {{ form_row(form.variables) }}   
+    <div class="form-group">
+        <button type="submit" class="btn waves-effect waves-light btn-purple"> <i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+    </div>
+{{ form_end(form) }}

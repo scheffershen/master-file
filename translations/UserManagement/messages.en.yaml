@@ -1,0 +1,80 @@
+dt:
+  columns: 
+    fullName: Full name
+    firstName: First name
+    lastName: Last name
+    email: Email
+    sexe: Sexe
+    dateNaissance: Date naissance
+    mobile: Téléphone portable
+    adresse: Adresse
+    city: Ville
+    zipCode: Code postale
+    country: Pays 
+    organisation: Organisation
+    reference: Reference 
+    rpps: RPPS  
+    actions: Actions  
+
+clients: Clients
+client:
+    list: List of clients
+    label: Client
+    add: "Add a client"
+    edit: "Edit a client"
+    create: Creation
+    update: Edit
+    delete: Delete a client
+    disable: Disable a client
+    enable: Enable a client     
+    revision: Revision
+    last: Latest changes
+    flash:
+        created: "A client has been created."
+        updated: "Client has been updated."
+        enable: "Client enabled."
+        disable: "Client disabled."
+        deleted: "Client has been deleted"
+
+user:
+    list: User list
+    role: Roles
+    mailAlerte: If checked the user will receive weekly e-mails of psmf modification history from his clients.     
+    cv: CV (Image)
+    pvUser: "PV user (Allow the usage of this user's information in the PSMF document)"
+    client: Clients
+    workFunction: Function
+    workName: Company name 
+    isEnable: Account activated
+    last: Latest changes
+    last_login: Dernière connexion
+    rest_time: Rest of time
+    data_pv: Personal data related to PV activity
+    delete: Delete a user
+    disable: Disable a user
+    enable: Enable a user      
+    create: Add a user
+    edit: Edit user
+    flash:
+        created: "A user has been created."
+        updated: "User has been updated."
+        deleted: "User has been successfully deleted"
+        enable: "User enabled."
+        disable: "User disabled."
+    error:
+        missing_role: Select at least one role
+        missing_client: Select at least one client
+        missing_workRole: Select at least one work role
+
+plateforme:
+    label: Platform account
+    configurations: Configurations    
+    nom: Name
+    email: E-mail
+    version: Version
+    logo: Logo    
+    poweredBy: Powered by
+    apropos: About
+    edit: Edit
+    flash:
+        updated: "Platform account has been updated."  

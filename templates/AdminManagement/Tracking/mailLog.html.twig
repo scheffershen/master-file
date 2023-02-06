@@ -1,0 +1,105 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'mailLog.action_list' | trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} / {{ 'tracking.mail'|trans }}
+                          &nbsp;&nbsp;<a class="btn btn-sm btn-purple" href="{{ path('admin_mail_log_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+
+            <!-- Contenu -->
+            <div class="card border-0">
+              <div class="card-body">
+                  <div class="table-responsive" id="users_list">
+                        <table class="table table-bordered table-striped">
+                          <thead class="">
+                            <tr>
+                                <th>{{ "mailLog.date" | trans  }}</th>
+                                <th>{{ "mailLog.from" | trans  }}</th>
+                                <th>{{ "mailLog.to" | trans  }}</th>
+                                {#<th>{{ "mailLog.cc" | trans  }}</th>#}
+                                <th>{{ "mailLog.subject" | trans  }}</th>
+                            </tr>
+                         </thead>
+                         <tbody> 
+                           {% for loggedMessage in loggedMessages %}
+                              <tr>                                              
+                                  <td>{{ loggedMessage.date|date('d-M-Y H:i')}}</td>
+                                  <td>{% for key,data in loggedMessage.from %}{{key}}; {% endfor %}</td>
+                                  <td>{% for key,data in loggedMessage.to %}{{key}}; {% endfor %}</td>
+                                  {#<td>{% for key,data in loggedMessage.cc %}{{key}}; {% endfor %}</td>#}
+                                  <td> 
+                                    {#<a role="button" class="lms-button col-12" data-target="#loggedMessage-{{ loggedMessage.id }}" data-toggle="modal" >{{ loggedMessage.subject| u.truncate(40)|raw }}</a>#}
+                                    <a href="{{ path('admin_mail_log_message', {'id': loggedMessage.id })}}" class="btn btn-sm btn-secondary col-12" target="_blank">{{ loggedMessage.subject| u.truncate(40)|raw }}</a>
+                                  </td>
+                              </tr>
+                           {% endfor %}
+                         </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="d-flex">
+                        <ul class="pagination ml-auto">
+                            {% if pagination.page > 1 %}
+                                <li class="page-item page-prev"><a class="page-link showSpinner" aria-label="Previous" href="{{ path(pagination.route,pagination.route_params|merge({'page': 1})) }}">&laquo;</a></li>
+                            {% endif %}
+                                    {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+                                      {% if p == pagination.page %} 
+                                         <li  class="page-item active"><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                        {% else %}
+                                         <li  class="page-item "><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                      {% endif %}
+                                        
+
+                                    {% endfor %}
+                            {% if pagination.page < pagination.pages_count %}
+                                
+                                <li class="page-item page-next"><a class="page-link showSpinner" aria-label="Next" href="{{ path(pagination.route, pagination.route_params|merge({ 'page': pagination.pages_count})) }}">&raquo;</a></li>
+                            {% endif %}
+                        </ul>  
+                  </div>      
+              </div>  
+            </div>
+        </div>
+    </div>
+</div>    
+
+{#
+{% for loggedMessage in loggedMessages %}
+    <div class="modal fade" id="loggedMessage-{{ loggedMessage.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{loggedMessage.subject}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                    {% autoescape %}
+                     {{ loggedMessage.body|raw }}
+                    {% endautoescape %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{'close'|trans}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %} 
+#}
+{% endblock %}
+  

@@ -1,0 +1,26 @@
+{% for publishedDocumentImportHistorie in psmf.lastVersion.publishedDocumentImportHistories %}
+    {%  if psmf.lastVersion.version == publishedDocumentImportHistorie.version %} 
+        <table class="table-bordered table-striped col-12"> 
+            <tbody> 
+                <tr class="d-flex">
+                    <td class="col-3">{{ 'document.published_at'|trans }}</td>
+                    <td class="col-9">{{ publishedDocumentImportHistorie.importDate|date('d-M-Y H:i:s') }}</td>
+                </tr>        
+                <tr class="d-flex">
+                    <td class="col-3">{{ 'document.author'|trans }}</td>
+                    <td class="col-9">{{ publishedDocumentImportHistorie.auteur.firstName }} {{ publishedDocumentImportHistorie.auteur.lastName }}</td>
+                </tr> 
+                <tr class="d-flex">
+                    <td class="col-3">{{ 'document.pdf'|trans }}</td>
+                    <td class="col-9">{{ publishedDocumentImportHistorie.uri }}
+                    </td>
+                </tr>  
+                <tr class="d-flex">
+                    <td class="col-3">{{ 'document.comentary'|trans }}</td>
+                    <td class="col-9">{{ publishedDocumentImportHistorie.commentaire }}</td>
+                </tr> 
+            </tbody>
+        </table> 
+        <hr/>
+    {% endif %}  
+{% endfor %}

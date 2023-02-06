@@ -1,0 +1,65 @@
+{% import "TemplateManagement/Section/widget/utils.html.twig" as utils %}
+
+<div class="left-side-menu">
+    <div class="slimscroll-menu">
+        {# Sidemenu #}
+        <div id="sidebar-menu">
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">{{ 'navigation' | upper|trans }}</li>
+
+                <li>
+                    <a href="{{ path('admin_section_index') }}" class="show-loading bg-purple text-white rounded-left">
+                        <i class="fas fa-angle-left"></i> 
+                        <span> {{ 'action.back'|trans }} </span>
+                    </a>    
+                </li>          
+
+                {# header #}
+                <li class="{% if section is not null and section.id == header.id %}mm-active{% endif %}">
+                    <a href="{{ path('admin_section_edit', {'id': header.id }) }}" class="{% if section is not null and section.id == header.id %}active{% endif %}">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>{{ header.title }} </span>
+                    </a>
+                </li>
+                {# footer #}
+                <li class="{% if section is not null and section.id == footer.id %}mm-active{% endif %}">
+                    <a href="{{ path('admin_section_edit', {'id': footer.id }) }}" class="{% if section is not null and section.id == footer.id %}active{% endif %}">
+                        <i class="fas fa-pen-fancy"></i>
+                        <span>{{ footer.title }} </span>
+                    </a>
+                </li>
+                {# sections #}
+                {% for _section in sections %}
+                    {% if _section.id > 2 %}
+                        <li class="{% if section is not null and section.id == _section.id %}mm-active{% endif %}">
+                            {% if _section.editable %} 
+                                <a href="{{ path('admin_section_edit', {'id': _section.id }) }}" class="{% if section is not null and section.id == _section.id %}active{% endif %}">
+                            {% else %}
+                                <a href="{{ path('admin_section_show', {'id': _section.id }) }}" class="{% if section is not null and section.id == _section.id %}active{% endif %}">
+                            {% endif %}
+                                <i class="fas fa-pen-fancy"></i>
+                                <span data-toggle="tooltip" data-placement="top" title="{#{{ _section.position }}. #}{{ _section.title }}">
+                                    {% if _section.isValid %}
+                                        {{ _section.title|u.truncate(20, '...') }} 
+                                    {% else %}
+                                        <del>{{ _section.title|u.truncate(20, '...') }}</del>
+                                    {% endif %}
+                                </span>
+                            </a>
+                        </li>
+                        {% if _section.sections|length > 0 %}
+                            {{ utils.sidebar_li(_section, section) }}
+                        {% endif %}                                                   
+                    {% endif %}               
+                {% endfor %}
+            </ul>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>

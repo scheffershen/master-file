@@ -1,0 +1,104 @@
+{% extends 'mail_base.html.twig' %}
+
+{% block body %}
+
+<table class="main" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #ffffff; border-radius: 3px;">
+
+  <!-- START MAIN CONTENT AREA -->
+  <tr>
+    <td class="wrapper" style="font-family: sans-serif; font-size: 12px; vertical-align: top; box-sizing: border-box; padding: 20px;">
+      <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+        <tr>
+          <td style="font-family: sans-serif; font-size: 12px; vertical-align: top;">
+
+            <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>{{ 'psmfHistory.entity'|trans }}</th>
+                        <th>{{ 'psmfHistory.commentaire'|trans }}</th>
+                        <th>{{ 'psmfHistory.action'|trans }}</th>
+                        <th>{{ 'psmfHistory.date'|trans }}</th>
+                        <th>{{ 'psmfHistory.author'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{% if pSMFHistory.section %}
+                        		{{ pSMFHistory.section }}
+                        	{% elseif pSMFHistory.variable %}
+                        		{{ pSMFHistory.variable.balise }}
+            				{% elseif pSMFHistory.client %}
+            					{{ pSMFHistory.client }}
+                            {% elseif pSMFHistory.pvuser %}
+                            	{{ pSMFHistory.pvuser }}          		
+                        	{% endif %}
+                        </td>
+                        <td>{{ pSMFHistory.reason }}</td>
+                        <td>{{ pSMFHistory.action }}</td>   
+                        <td>{{ pSMFHistory.createDate|date('d-M-Y H:i')}}</td>
+                        <td>{{ pSMFHistory.createUser }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p></p>
+
+            {% if pSMFHistory.action == "add" or pSMFHistory.action == "edit" or pSMFHistory.action == "delete"%}
+                {% if pSMFHistory.diffs %}
+                    <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+                        <thead> 
+                            <tr>
+                                <th>{{ 'psmfHistory.key'|trans }}</th>
+                                <th>{{ 'psmfHistory.value.old'|trans }}</th>
+                                <th>{{ 'psmfHistory.value.new'|trans }}</th>
+                            </tr>
+                        </thead>                    
+                        <tbody>
+                        {% for key, values in pSMFHistory.diffs %}
+                            <tr>
+                                <td><code>{{ key }}</code></td>
+                                <td>
+                                    {% if values.old is defined %}
+                                        {% if values.old|length == 0 %}
+                                            <span class="badge badge-secondary p-1 pl-2 pr-2">null</span>
+                                        {% else %}
+                                            {% if values.old|isImage == true %}
+                                                <img src="{{ url('admin_public_upload', {'upload': values.old}) }}" class="img-fluid">
+                                            {% else %}    
+                                                {% autoescape %}
+                                                    {{  values.old |raw }} 
+                                                {% endautoescape %}                     
+                                            {% endif %}                    
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if values.new is defined %}
+                                        {% if values.new|length == 0 %}
+                                            <span class="badge badge-secondary p-1 pl-2 pr-2">null</span>
+                                        {% else %}
+                                            {% if values.new|isImage == true %}
+                                                <img src="{{ url('admin_public_upload', {'upload': values.new}) }}" class="img-fluid">
+                                            {% else %}                     
+                                                {% autoescape %}
+                                                    {{  values.new |raw }} 
+                                                {% endautoescape %} 
+                                            {% endif %}                        
+                                        {% endif %}
+                                    {% endif %}
+                                </td> 
+                            </tr>     
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+<!-- END MAIN CONTENT AREA -->
+</table>
+{% endblock %}  

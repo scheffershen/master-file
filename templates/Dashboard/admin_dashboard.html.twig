@@ -1,0 +1,349 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'dashboard'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'dashboard'|trans }}</h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row mb-3">
+                <div class="col-xl-4">
+
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title">{{ 'documents'|trans }}</h4>
+                            <p class="text-muted">{{ 'document.last'|trans }}</p>
+                            <div class="mb-3 mt-4">
+                                <ul class="list-unstyled p-2">
+                                    {% for publishedDocument in documents %} 
+                                        <li>
+                                            <span data-toggle="tooltip" data-placement="top" title="{{ publishedDocument.psmf.title }}">{{ publishedDocument.psmf.title|u.truncate(140, '...') }}</span>, {{ publishedDocument.psmf.client }}, v{{ publishedDocument.version }}, {{ 'document.published_at'|trans}} {{ publishedDocument.publicationDate|date('d-M-Y H:i') }}
+                                            <a class="icon text-purple float-right" href="{{ path('admin_published_document_download', {'publishedDocument': publishedDocument.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.download'|trans }}" target="_blank"><i class="fas fa-lg fa-download"></i>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>    
+
+                </div> <!-- end col -->
+
+                <div class="col-xl-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title mb-3">{{ 'psmfs'|trans }}</h4>
+                            <p class="text-muted">{{ 'psmf.last'|trans }}</p>
+                            <div class="row">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="">
+                                        <tr>
+                                            <th>{{ 'psmf.title'|trans }}</th>
+                                            <th>{{ 'psmf.client'|trans }}</th>
+                                            <th>{{ 'psmf.version_active'|trans }}</th>
+                                            <th>{{ 'psmf.document_active'|trans }}</th>
+                                            <th>{{ 'psmf.draft'|trans }}</th>
+                                            <th class="col-1">{{ 'table.action'|trans }}</th>
+                                        </tr>
+                                    </thead>       
+                                    <tbody>  
+                                    {% for psmf in psmfs %}
+                                        <tr>
+                                            <td><span data-toggle="tooltip" data-placement="top" title="{{ psmf.title }}">{% if psmf.isValid == false %}<del>{% endif %}{{ psmf.title|u.truncate(140, '...') }}{% if psmf.isValid == false %}</del>{% endif %}</span>
+                                            </td>
+                                            <td>{{ psmf.client }}</td>
+                                            <td>
+                                                {% if psmf.lastVersion %}
+                                                    {{ psmf.lastVersion.version + 1 }}
+                                                {% else %}
+                                                    1
+                                                {% endif %}                                    
+                                            </td>
+                                            <td>
+                                                {% if psmf.lastVersion %}
+                                                    <a class="icon text-purple" href="{{ path('admin_published_document_download', {'publishedDocument': psmf.lastVersion.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.document_active'|trans }}" target="_blank">
+                                                        <i class="fas fa-lg fa-download"></i>
+                                                    </a>   
+                                                {% endif %} 
+                                            </td>
+                                            <td>
+                                                <a class="icon text-purple" href="{{ path('admin_psmf_draft2', {'psmf': psmf.id, 'format': 'word'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.draft_word'|trans }}" target="_blank">
+                                                    <i class="fas fa-file-word"></i>
+                                                </a>
+                                                <a class="icon text-purple" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'pdf'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.draft_pdf'|trans }}" target="_blank">
+                                                    <i class="fas fa-lg fa-file-pdf"></i>
+                                                </a>
+                                                <a class="icon text-purple" href="{{ path('admin_psmf_draft', {'psmf': psmf.id, 'format': 'html'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.draft_html'|trans }}" target="_blank">    
+                                                    <i class="fas fa-lg fa-file-code"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                {{ correspondances.correspondanceLocale_missing(psmf, variables)}}
+                                                <a class="icon text-purple" href="{{ path('admin_psmf_correspondance_locale3_edit', {'psmf': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'correspondance.locale'|trans }}" target="_blank"><i class="fas fa-lg fa-pencil-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}                   
+                                    </tbody>
+                                </table>
+                            </div>            
+                        </div> <!-- end card-box-->
+                    </div>    
+                </div> <!-- end col -->
+
+            </div>
+            <!-- end row -->
+            
+            <div class="row mb-3">
+                <div class="col-xl-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title">{{ 'templates'|trans }}</h4>
+                            <p class="text-muted">{{ 'section.last'|trans }}</p>
+                            <div class="row"> 
+                                <table class="table table-bordered table-striped">
+                                    <thead class="">
+                                        <tr>
+                                            <th>{{ 'section.label'|trans }}</th>
+                                            <th class="col-1">{{ 'table.action'|trans }}</th>
+                                        </tr>
+                                    </thead>
+                                    {% for section in sections %}
+                                        <tr>
+                                            <td>
+                                                <span data-toggle="tooltip" data-placement="top" title="{{ section.title }}">{#{{ section.position }}.&nbsp;&nbsp;#}{{ section.title|u.truncate(140, '...') }}
+                                                </span>
+                                            </td>
+                                            <td>      
+                                                <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ section.id }}" data-toggle="modal">
+                                                        <i class="fas fa-lg fa-eye"></i>
+                                                    </a>   
+                                                <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section', id: section.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>              
+                                            </td>
+                                        </tr>
+                                    {% endfor %}                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title">{{ 'variables'|trans }}</h4>
+                            <p class="text-muted"></p>
+                            <div class="row text-center">
+                                <div class="col-sm-4 mb-3">
+                                    <h3 class="font-weight-light">{{ systemes }}</h3>
+                                    <p class="text-muted text-overflow">{{ 'label.systeme'|trans }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <h3 class="font-weight-light">{{ globales }}</h3>
+                                    <p class="text-muted text-overflow">{{ 'label.globale'|trans }}</p>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <h3 class="font-weight-light">{{ locales }}</h3>
+                                    <p class="text-muted text-overflow">{{ 'label.locale'|trans }}</p>
+                                </div>                               
+                            </div>
+                        </div>    
+                    </div>    
+                </div>
+                    
+            </div>        
+
+            <div class="row mb-3">
+                <div class="col-xl-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title">{{ 'clients'|trans }}</h4>
+                            <p class="text-muted">{{ 'client.last'|trans }}</p> 
+                            {% for client in clients %}                   
+                                <div class="media mb-3">
+                                    {% if client.logoUri|isImage == true %}
+                                        <img class="mr-3 rounded-circle avatar-sm bx-shadow-lg" src="{{ path('admin_private_upload', {'upload': client.logoUri}) }}" alt="{{ client.name }}" height="80">
+                                    {% else %}
+                                        <img class="mr-3 rounded-circle bx-shadow-lg" src="/images/users/avatar-4.jpg" alt="Generic placeholder image" height="80">
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ client.name }}</h5>
+                                        {{ client.adress }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>    
+                    </div>
+                </div>
+                
+                <div class="col-xl-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h4 class="header-title">{{ 'users'|trans }}</h4>
+                            <p class="text-muted">{{ 'user.last'|trans }}</p>
+                            <div class="row">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="">
+                                        <tr>
+                                            <th>{{ 'label.firstname'|trans }}</th>
+                                            <th>{{ 'label.lastname'|trans }}</th>
+                                            <th>{{ 'client.label'|trans }}</th>
+                                            <th>{{ 'user.pvUser'|trans }}</th>
+                                            <th class="col-1">{{ 'table.action'|trans }}</th>
+                                        </tr>
+                                    </thead>                       
+                                    <tbody>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.firstName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                            <td>{% if user.isEnable == false %}<del>{% endif %}{{ user.lastName }}{% if user.isEnable == false %}</del>{% endif %}</td>
+                                            <td>
+                                                {% if user.clients|length > 0 %}
+                                                    <select class="form-control">
+                                                        {% for client in user.clients %}
+                                                            <option>{{ client }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                {% endif %}    
+                                            </td>  
+                                            <td>{{ user.pvUser?'oui':'non' }}</td>       
+                                            <td>
+                                                <span class="badge badge-pill badge-purple" data-toggle="tooltip" data-placement="top" title="{{ 'publishedDocuments'|trans }}">{{ user.publishedDocuments|length }}</span>
+                                                 <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#user{{ user.id }}" data-toggle="modal">
+                                                                    <i class="fas fa-lg fa-eye"></i>
+                                                            </a>                                
+                                                <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-UserManagement-User', id: user.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a> 
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>    
+                    </div>                
+                </div>
+            </div>        
+
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+  
+{% for section in sections %}
+<div class="modal fade" id="section{{ section.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ section.title }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody>
+                        {% if section.position %}
+                        <tr>
+                            <th>{{ 'section.position'|trans }}</th>
+                            <td>{{ section.position }}</td>
+                        </tr>                        
+                        {% endif %}
+                        <tr>
+                            <th>{{ 'section.parent'|trans }}</th>
+                            <td>{{ section.parent|default('Global') }}</td>
+                        </tr>                        
+                        <tr>
+                            <th>{{ 'section.isValid'|trans }}</th>
+                            <td>{{ section.isValid?'yes':'no' }}</td>
+                        </tr>                        
+                        <tr>
+                            <th>{{ 'section.contenu'|trans }}</th>
+                            <td>
+                                {% autoescape %}
+                                    {{  section.contenu|raw }} 
+                                {% endautoescape %}                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                        
+            </div>
+        </div>
+    </div>    
+</div>
+    {% if section.sections|length > 0 %}
+        {% for children in section.sections %}
+            <div class="modal fade" id="section{{ children.id }}" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ children.title }}</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th>{{ 'section.position'|trans }}</th>
+                                        <td>{{ children.position }}</td>
+                                    </tr>                        
+                                    <tr>
+                                        <th>{{ 'section.parent'|trans }}</th>
+                                        <td>{{ children.parent|default('Global') }}</td>
+                                    </tr>                        
+                                    <tr>
+                                        <th>{{ 'section.isValid'|trans }}</th>
+                                        <td>{{ children.isValid?'yes':'no' }}</td>
+                                    </tr>                        
+                                    <tr>
+                                        <th>{{ 'section.contenu'|trans }}</th>
+                                        <td>
+                                {% autoescape %}
+                                    {{  children.contenu|raw }} 
+                                {% endautoescape %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>                            
+                        </div>
+                    </div>
+                </div>                 
+            </div>            
+        {% endfor %}   
+    {% endif %}    
+{% endfor %}
+
+{% for user in users %}
+<div class="modal fade" id="user{{ user.id }}" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ user.username }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ include('UserManagement/User/_detail.html.twig') }}                       
+            </div>
+        </div>
+    </div>    
+</div> 
+{% endfor %}
+
+{% endblock %}  

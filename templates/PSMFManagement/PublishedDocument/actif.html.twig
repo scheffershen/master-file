@@ -1,0 +1,154 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'documents'|trans }} {{ 'document.archives'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'documents'|trans }} {{ 'document.actifs'|trans }}
+                        {% if is_granted('ROLE_UTILISATEUR') %}
+                            &nbsp;&nbsp;
+                            <a href="/docs/{{ app.request.locale }}/site/documents/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                        {% endif %}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->      
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'psmf.title'|trans }}</th>
+                                <th>{{ 'psmf.client'|trans }}</th>
+                                <th>{{ 'psmf.version_active'|trans }}</th>
+                                <th>{{ 'document.status.published'|trans}}</th>
+                                <th>{{ 'document.status.downloaded'|trans}}</th>
+                                <th>{{ 'document.status.applicable'|trans}}</th>
+                            </tr>
+                        </thead>  
+                        <thead id="filtreForm">
+                            <tr>                                
+                                <th>{{ 'psmf.title'|trans }}</th>
+                                <th>{{ 'psmf.client'|trans }}</th>
+                                <th>{{ 'psmf.version_active'|trans }}</th>
+                                <th>{{ 'document.status.published'|trans}}</th>
+                                <th>{{ 'document.status.downloaded'|trans}}</th>
+                                <th>{{ 'document.status.applicable'|trans}}</th>
+                            </tr>
+                        </thead>                             
+                        <tbody>  
+                        {% for psmf in psmfs %}
+                            {% if psmf.lastVersion %}
+                                <tr>
+                                    <td>
+                                        <span data-toggle="tooltip" data-placement="top" title="{{ psmf.title }}">{% if psmf.isValid == false %}<del>{% endif %}{{ psmf.title|u.truncate(140, '...') }}{% if psmf.isValid == false %}</del>{% endif %}</span>
+                                    </td>
+                                    <td>{{ psmf.client }}</td>
+                                    <td>
+                                        V{{ psmf.lastVersion.version }}
+                                    </td>
+                                    <td>
+                                        <!-- Published -->
+                                        {% if psmf.lastVersion.pdfDownloadDate %}
+                                            <a class="icon text-warning" href="{{ path('admin_published_document_download', {'publishedDocument': psmf.lastVersion.id, 'format': constant('App\\Entity\\PSMFManagement\\PSMF::PDF')  }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.status.published'|trans }} (PDF), V{{ psmf.lastVersion.version }}"  target="_blank">
+                                                <i class="fas fa-lg fa-file-pdf text-secondery"></i>
+                                            </a>
+                                            {{ psmf.lastVersion.publicationDate|date('d-M-Y') }}
+                                        {% else %}
+                                            <i class="fas fa-lg fa-file-pdf text-warning"></i>
+                                            <a class="icon text-warning" href="{{ path('admin_published_document_download', {'publishedDocument': psmf.lastVersion.id, 'format': constant('App\\Entity\\PSMFManagement\\PSMF::PDF')  }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.status.published'|trans }} (PDF), V{{ psmf.lastVersion.version }}"  target="_blank">
+                                                <i class="fas fa-lg fa-download text-secondery"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <!-- Downloaded -->
+                                        {% if psmf.lastVersion.pdfDownloadDate %}
+                                            {{ psmf.lastVersion.pdfDownloadDate|date('d-M-Y') }}
+                                        {% else %}
+                                            <span>{{ 'document.status.en_attente'|trans }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <!-- Applicable -->
+                                        {% if psmf.lastVersion.pdfDownloadDate %}
+                                            {% if psmf.lastVersion.pdfSigneUploadDate %}
+                                                <a class="icon text-success" href="{{ path('admin_published_document_download', {'publishedDocument': psmf.lastVersion.id, 'format': constant('App\\Entity\\PSMFManagement\\PSMF::PDF_SIGNE') }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.status.signed'|trans }} (PDF), V{{ psmf.lastVersion.version }}" target="_blank">
+                                                    <i class="fas fa-lg fa-file-pdf"></i>
+                                                </a> &nbsp;
+                                                {{ psmf.lastVersion.pdfSigneUploadDate|date('d-M-Y') }} 
+                                            {% else %}
+                                                <span>{{ 'document.status.en_attente'|trans }}</span>
+                                            {% endif %}
+                                                &nbsp;
+                                                <a class="icon text-success" href="{{ path('admin_published_document_importer', {'publishedDocument': psmf.lastVersion.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'document.importer'|trans }}">
+                                                    <i class="fas fa-lg fa-upload"></i>
+                                                </a> 
+                                                &nbsp;
+                                                {% if psmf.lastVersion.lastImport and psmf.lastVersion.lastImport.version == psmf.lastVersion.version %}
+                                                    <a class="icon text-success" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.audit'|trans }}" data-target="#psmf{{ psmf.lastVersion.id }}" data-toggle="modal">
+                                                        <i class="fas fa-lg fa-code-branch"></i>
+                                                    </a>
+                                                    <div class="modal fade" id="psmf{{ psmf.lastVersion.id }}" role="dialog">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title">{{ 'document.import_history'|trans }}</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ include('PSMFManagement/PublishedDocument/_history_importer.html.twig') }}                       
+                                                                </div>
+                                                            </div>
+                                                        </div>    
+                                                    </div>  
+                                                {% endif %}
+                                        {% else %}
+                                            <span>{{ 'document.status.en_attente'|trans }}</span>
+                                        {% endif %}
+
+                                    </td>                            
+                                </tr>
+                            {% endif %}
+                        {% endfor %}                   
+                        </tbody>
+                    </table>
+                </div>        
+            </div>
+
+            <div class="row">
+                <div class="card-body p-4">
+                    <p><i class="fas fa-lg fa-file-pdf text-warning"></i>&nbsp;&nbsp;<span class="font-weight-bold">{{ 'document.label'|trans }} {{ 'document.status.published'|trans }}</span></p> 
+                    <p><i class="fas fa-lg fa-download text-warning"></i>&nbsp;&nbsp;<span class="font-weight-bold">{{ 'document.download'|trans }}</span></p> 
+                    <p><i class="fas fa-lg fa-file-pdf text-success"></i>&nbsp;&nbsp;<span class="font-weight-bold">{{ 'document.label'|trans }} {{ 'document.status.signed'|trans }}</span></p> 
+                    <p><i class="fas fa-lg fa-upload text-success"></i>&nbsp;&nbsp;<span class="font-weight-bold">{{ 'document.importer'|trans }}</span></p> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/datatables') }}
+{% endblock %}

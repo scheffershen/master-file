@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Correspondance{% endblock %}
+
+{% block body %}
+    <h1>Correspondance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ correspondance.id }}</td>
+            </tr>
+            <tr>
+                <th>ValueLocal</th>
+                <td>{{ correspondance.valueLocal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('template_management_correspondance_index') }}">back to list</a>
+
+    <a href="{{ path('template_management_correspondance_edit', {'id': correspondance.id}) }}">edit</a>
+
+    {{ include('template_management_correspondance/_delete_form.html.twig') }}
+{% endblock %}

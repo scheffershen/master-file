@@ -1,0 +1,19 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        uploads:
+            uri_prefix: /uploads/files
+            upload_destination: '%kernel.project_dir%/public/uploads/files'
+            #upload_destination: '%kernel.project_dir%/data'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        uploads_private:
+            #uri_prefix: /uploads/files
+            #upload_destination: '%kernel.project_dir%/public/uploads/files'
+            upload_destination: '%kernel.project_dir%/data'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer 
+            delete_on_update: false           
+        uploads_psmf_signe:
+            upload_destination: '%kernel.project_dir%/PSMD_SIGNE'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer 
+            delete_on_update: false               

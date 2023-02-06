@@ -1,0 +1,101 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'clients'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} /{{ 'clients'|trans }}
+                        <a href="/docs/{{ app.request.locale }}/site/clients/index.html" class="icon text-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.help'|trans }}" target="_blank">
+                                <i class="fas fa-lg fa-question-circle text-purple"></i>
+                            </a>
+                        <a class="btn btn-sm btn-purple float-right mt-2" href="{{ path('admin_client_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>      
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->    
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered table-striped" id="tablefiltre">
+                        <thead class="">
+                            <tr>
+                                <th>{{ 'label.name'|trans }}</th>
+                                <th>{{ 'label.adresse'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>
+                        <thead id="filtreForm">
+                            <tr>                                
+                                <th>{{ 'label.name'|trans }}</th>
+                                <th>{{ 'label.adresse'|trans }}</th>
+                                <th class="col-1">{{ 'table.action'|trans }}</th>
+                            </tr>
+                        </thead>                         
+                        <tbody>
+                        {% for client in clients %}
+                            <tr>
+                                <td>
+                                    {% if client.logoUri is not null %}
+                                        <img src="{{ path('admin_private_upload', {'upload': client.logoUri, 'format': 'small'}) }}" class="rounded-circle avatar-md bx-shadow-lg" >
+                                    {% else %}
+                                        <img src="/images/users/avatar-9.jpg" alt="user-pic" class="rounded-circle avatar-md bx-shadow-lg">
+                                    {% endif %}
+                                    <span class="ml-2">
+                                        {% if client.isValid == false %}<del>{% endif %}{{ client.name }}{% if client.isValid == false %}</del>{% endif %}
+                                    </span>
+                                </td>
+                                <td>{% if client.isValid == false %}<del>{% endif %}{{ client.adress }}{% if client.isValid == false %}</del>{% endif %}</td>
+                                <td>
+                                    <span class="badge badge-pill badge-purple" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.label'|trans }}">{{ client.pSMFs|length }}</span>
+                                    <a class="icon text-purple" href="{{ path('admin_client_edit', {'id': client.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                                        <i class="fas fa-lg fa-pencil-alt"></i>
+                                    </a>              
+                                    {% if client.pSMFs|length == 0 %}   
+                                        {% if client.isValid == false %}                
+                                            <a class="icon text-danger" href="{{ path('admin_client_show', {'id': client.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                                <i class="fas fa-lg fa-trash"></i>
+                                            </a>   
+                                        {% endif %}
+                                        {% if client.isValid %}
+                                            <a class="icon text-purple"  href="{{ path('admin_client_show', {'id': client.id, 'action': 'disable'}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>  
+                                        {% else %}
+                                            <a class="icon text-danger" href="{{ path('admin_client_show', {'id': client.id, 'action': 'enable'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>   
+                                        {% endif %}
+
+                                    {% endif %}    
+                                    <a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-UserManagement-Client', id: client.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>  
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>    
+            </div>
+
+        </div> 
+    </div>
+</div>
+
+<a href="{{ path('admin_client_new') }}" class="btn waves-effect waves-light btn-purple float">
+    <i class="fas fa-plus float-icon"></i>
+</a>  
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }}  
+    {{ encore_entry_script_tags('js/datatables') }}
+{% endblock %}

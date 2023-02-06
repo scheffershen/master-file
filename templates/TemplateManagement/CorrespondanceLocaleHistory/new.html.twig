@@ -1,0 +1,237 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'correspondances'|trans }}{% endblock %}
+
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+{% block body %}
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="text-purple"><i class="fas fa-spinner fa-spin"></i></div>
+</div>
+
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">                       
+                        <div class="page-title-right mt-2">
+                            <a class="btn waves-effect waves-light btn-purple" href="{{ path('admin_psmf_correspondance_locale3_download', {'psmf': psmf.id, 'format': 'csv'}) }}" target="_blank">
+                                <i class="fas fa-solid fa-file-csv"></i>&nbsp; {{ 'document.download'|trans }}
+                            </a>
+                        </div>                     
+                        <h4 class="page-title">
+                            {{ psmf.title }} <span class="d-none">{{ variablesLocalesDisables|length }} variablesLocalesDisables</span>
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceLocale_missing_text(psmf, variables)}}
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceLocale_disable_text(psmf, variablesLocalesDisables)}}
+                            &nbsp;&nbsp;
+                            {{ correspondances.correspondanceGlobale_missing_text(variablesGlobale)}}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title --> 
+
+            <div class="row">
+                <div class="col-12">
+                    {{ include('partials/_flash_messages.html.twig') }}
+
+                    {% form_theme form 'bootstrap_4_layout.html.twig' %}      
+                        {{ form_start(form, {'multipart': true })  }}
+                        {{ form_errors(form) }}
+						<div class="card mb-3 bg-light">
+                            <div class="card-header">{{ 'psmf.label'|trans }}
+                            <button type="button" class="btn btn-purple waves-effect waves-light btn-sm float-right mt-2" id="psmfBtn"><i class="fas fa-angle-right"></i> Show</button></div>
+                            <div class="card-body" id="psmfBlock">
+                                <div class="row">
+        						    <div class="col-6">
+                                        {{ form_row(form.psmf.title) }}
+        							    {{ form_row(form.psmf.client) }}
+        							    {{ form_row(form.psmf.euqppvEntity) }}
+        							    {{ form_row(form.psmf.eudravigNum) }}
+        							</div>
+        							<div class="col-6">
+        							    {{ form_row(form.psmf.euQPPV) }}
+        							    {{ form_row(form.psmf.deputyEUQPPV) }}
+        							    {# form_row(form.psmf.frRPV) #}
+        							    {{ form_row(form.psmf.contactPvClient) }}
+                                        {{ form_row(form.psmf.basePV) }}
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ form_row(form.psmf.isOldClientBbac) }}  
+                                        {{ form_row(form.psmf.activitesUM) }}    
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_row(form.psmf.hasOtherPVProviders) }}
+                                    </div>  
+                                </div>
+                                <div class="row">
+                                    <div class="col-6"></div>
+                                    <div class="col-6">
+                                        {{ form_row(form.psmf.localQPPVUM) }}
+                                    </div>
+                                </div>
+                              <div class="row">
+                                    <div class="col-6">
+                                        {{ form_row(form.psmf.localQPPVPays) }}      
+                                    </div>
+                                    <div class="col-6"></div>  
+                                </div>
+                            </div> 
+                        </div>
+                        <hr>
+                        <div class="card mt-4">
+                            <div class="card-header">{{ 'psmf.locale'|trans }}</div>
+                        <div class="card-body">
+                            <div class="table-responsive bg-light">
+                                <table class="table table-centered">
+                                    <tr><td>{{ 'section.filtre'|trans }}</td><td>
+                                        <select id="sectionFilter" {#class="chosen form-control" #}>
+                                            <option value="all">{{ 'correspondance.all'|trans }}</option>
+                                            {{ correspondances.correspondanceLocale_option(sections) }}
+                                        </select>
+                                    </td></tr>
+                                </table>
+                            </div>   
+                            <br/>     
+    				        {% for correspondance in form.correspondances %}
+    						    {% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE') and correspondance.vars.data.variable.isValid %}
+
+                                    <fieldset class="form-group bg-light p-3 correspondanceLocale {{ correspondances.correspondanceLocale_classe(correspondance) }}" id="field{{ correspondance.vars.data.variable.id }}">
+        							    {% if correspondance.vars.data.valueLocal is not null %}
+        						            {% if correspondance.vars.data.valueLocal|isImage == true %}
+        						    			<img src="{{ asset('images/image-coming-soon.jpg') }}" data-src="{{ path('admin_private_upload', {'upload': correspondance.vars.data.valueLocal}) }}" class="img-fluid lazy" id="preview{{ correspondance.vars.data.variable.id }}">
+        						            {% endif %}    
+        							    {% endif %}
+                                        <div class="form_group mb-4"> 
+                                            <small class="form-text text-muted">
+                                            {% if correspondance.vars.data.variable.classes|length > 0 %}
+                                                {{ correspondances.correspondanceLocale_section(correspondance.vars.data.variable.classes, correspondance.vars.data.variable.balise) }}
+                                            {% endif %}
+                                            {% if correspondance.vars.data.variable.description %}
+                                                <i class="fas fa-lg fa-question-circle text-purple" data-toggle="tooltip" data-placement="top" title="{{ correspondance.vars.data.variable.description }}" ></i>
+                                            {% endif %}    
+                                            </small> 
+                                            {% if correspondance.vars.data.variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                                                {{ form_label(correspondance.upload, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')', {'label_attr': {'class': 'required text-danger font-weight-bold'}} ) }} 
+                                            {% else %}
+    		                                    {{ form_label(correspondance.upload, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')', {'label_attr': {'class': 'text-success font-weight-bold'}} ) }}
+                                            {% endif %}
+                                        	<div class="row">
+    						    				<div class="col-8">                                        
+    		    							        {{ form_widget(correspondance.upload, { 'attr': {'data-id': correspondance.vars.data.variable.id} }) }}
+    		    							    </div>
+    		    							    <div class="col-4">
+    		    							    	{{ correspondance.vars.data.variable.userHelp|raw }}
+    		    							    </div>
+    		    							</div>
+                                        </div>
+                                    </fieldset> 
+    						    {% elseif correspondance.vars.data.variable.isValid %}
+                                    <div class="form_group mb-4 bg-light p-3 correspondanceLocale {{ correspondances.correspondanceLocale_classe(correspondance) }}">   
+                                        <small class="form-text text-muted">
+                                            {% if correspondance.vars.data.variable.classes|length > 0 %}
+                                                {{ correspondances.correspondanceLocale_section(correspondance.vars.data.variable.classes, correspondance.vars.data.variable.balise) }}
+                                            {% endif %}          
+                                            {% if correspondance.vars.data.variable.description %}
+                                                <i class="fas fa-lg fa-question-circle text-purple" data-toggle="tooltip" data-placement="top" title="{{ correspondance.vars.data.variable.description }}" ></i>
+                                            {% endif %}    
+                                        </small> 
+                                         {% if correspondance.vars.data.variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                                            {{ form_label(correspondance.valueLocal, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')', {'label_attr': {'class': 'required text-danger font-weight-bold'}} ) }} 
+                                        {% else %}
+                                            {{ form_label(correspondance.valueLocal, correspondance.vars.data.variable.label~' ('~correspondance.vars.data.variable.balise~')', {'label_attr': {'class': 'text-success font-weight-bold'}} ) }}  
+                                        {% endif %}
+                                    	<div class="row">
+    					    				<div class="{% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG')  %}col-7{% else %}col-8{% endif %}"> 		                                    
+    		                                    {{ form_widget(correspondance.valueLocal, { 'attr': {'data-id': correspondance.vars.data.variable.id} }) }}
+
+    	    							    </div>
+                                            {% if correspondance.vars.data.variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG')  %}
+                                            <div class="col-1">
+                                                <button data-id="{{ loop.index0 }}" type="button" class="btn btn-purple waves-effect waves-light btnCopier" data-toggle="tooltip" data-placement="top" title="{{ 'action.copier'|trans }}">&lt;&lt;</button>
+                                            </div>    
+                                            {% endif %}
+    	    							    <div class="col-4" id="help{{ loop.index0 }}">
+    	    							    	{{ correspondance.vars.data.variable.userHelp|raw }} 
+    	    							    </div>
+    	    							</div>			                                    
+                                    </div>  
+    						    {% endif %} 
+    				        {% endfor %}
+
+                            {{ form_row(form.isMajeur) }}
+
+                            <div id="reasonDiv">   
+                                {{ form_row(form.reason) }}
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+                            </div>
+                        </div>
+                    {{ form_end(form) }}                           
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn waves-effect waves-light btn-purple floatUp" data-toggle="tooltip" data-original-title="{{ 'Top' | trans }}" >
+    <i class="fas fa-angle-up"></i>
+</button> 
+<button class="btn waves-effect waves-light btn-purple floatDown" data-toggle="tooltip" data-placement="right" data-original-title="{{ 'Bottom' | trans }}" >
+    <i class="fas fa-angle-down"></i>
+</button>
+
+<input type="hidden" id="admin_psmf_correspondance_locale3_edit" value="{{ path("admin_psmf_correspondance_locale3_edit", {'psmf': psmf.id}) }}">    
+<input type="hidden" id="admin_psmf_correspondance_locale_draft" value="{{ path("admin_psmf_correspondance_locale_draft", {'psmf': psmf.id, 'format': 'pdf'}) }}">    
+<input type="hidden" id="admin_published_document_download_locale" value="{{ path("admin_published_document_download_locale") }}">    
+{% endblock %}
+
+{% block javascripts %} 
+    {{ parent() }} 
+    {{ encore_entry_script_tags('js/locale') }}
+<script type="text/javascript">
+  var CKEDITOR_BASEPATH = "/libs/ckeditor/";
+</script>
+<script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
+<script>
+$(() => {
+    let editors = [];
+    $('.btnCopier').each(function(index) {
+            if (CKEDITOR.instances['correspondance_locale_history_correspondances_'+$(this).data('id')+'_valueLocal']) { 
+                CKEDITOR.instances['correspondance_locale_history_correspondances_'+$(this).data('id')+'_valueLocal'].destroy(true); 
+                delete CKEDITOR.instances['correspondance_locale_history_correspondances_'+$(this).data('id')+'_valueLocal'];
+            }
+            editors[$(this).data('id')] = CKEDITOR.replace('correspondance_locale_history_correspondances_'+$(this).data('id')+'_valueLocal', {
+                toolbar: [
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike'] },
+                    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },    
+                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl'] },
+                    { name: 'insert', items: ['Table', 'HorizontalRule'] },
+                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Undo', 'Redo' ] },
+                    '/',
+                    { name: 'styles', items: [ 'Styles', 'Format', 'FontSize' ] },
+                    { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+                    { name: 'others', items: [ '-' ] },
+                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] }
+                ]
+            });
+
+    }); 
+    $('.btnCopier').on('click', function() {
+      editors[$(this).data('id')].setData($('#help'+$(this).data('id')).html().trimStart());
+    }); 
+});
+</script>
+{% endblock %}

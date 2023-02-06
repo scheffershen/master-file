@@ -1,0 +1,83 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'trackings' | trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'nav.outil'|trans }} / {{ 'tracking.login'|trans }} 
+                          &nbsp;&nbsp;<a class="btn btn-sm btn-purple" href="{{ path('admin_tracking_connexion_download') }}"><i class="fas fa-lg fa-download"></i>&nbsp;{{ "action.download" | trans }}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-body">
+                      <div class="table-responsive">
+                         <table class="table table-bordered table-striped">
+                          <thead class="">
+                            <tr>
+                                  <th>{{ "tracking.created" | trans  }}</th>
+                                  <th>{{ "tracking.ip" | trans  }}</th>
+                                  <th>{{ "tracking.user" | trans  }}</th>
+                                  <th>{{ "tracking.login" | trans  }}</th>   
+                            </tr>
+                         </thead>
+                         <tbody> 
+                           {% for tracking in trackings %}
+                              <tr>                                              
+                                <td>{{ tracking.created|date('d-M-Y H:i')}}</td>
+                                <td>{{ tracking.ipRequest }}</td>
+                                <td>
+                                  {% set data = tracking.queryRequest|json_decode%}
+                                  {% if tracking.user == false %}
+                                    <del data-toggle="tooltip" data-original-title="{{ 'message.user_not_found' | trans }}">{{ data.username|default("-") }}</del>
+                                  {% else %}
+                                    {{ data.username|default("-") }}
+                                  {% endif %}
+                                </td>
+                                <td>{% if data.authenticated %}<i class="fas fa-lg fa-check"></i>{% else %}<i class="fas fa-lg fa-times"></i>{% endif %}</td>
+                              </tr>
+                           {% endfor %}
+                         </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex">
+                              <ul class="pagination ml-auto">
+                                  {% if pagination.page > 1 %}
+                                      <li class="page-item page-prev"><a class="page-link showSpinner" aria-label="Previous" href="{{ path(pagination.route,pagination.route_params|merge({'page': 1})) }}">&laquo;</a></li>
+                                  {% endif %}
+                                          {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+                                            {% if p == pagination.page %} 
+                                               <li  class="page-item active"><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                              {% else %}
+                                               <li  class="page-item "><a class="page-link showSpinner" href="{{ path(pagination.route, pagination.route_params|merge({'page': p} )) }}">{{ p }}</a></li>
+                                            {% endif %}
+                                          {% endfor %}
+                                  {% if pagination.page < pagination.pages_count %}
+                                      
+                                      <li class="page-item page-next"><a class="page-link showSpinner" aria-label="Next" href="{{ path(pagination.route, pagination.route_params|merge({ 'page': pagination.pages_count})) }}">&raquo;</a></li>
+                                  {% endif %}
+                              </ul>  
+                        </div>      
+                    </div>  
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>         
+
+{% endblock %}

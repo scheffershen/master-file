@@ -1,0 +1,70 @@
+<table class="table table-bordered table-striped">
+    <thead class="">
+        <tr>
+            <th>{{ 'psmfHistory.date'|trans }}</th>
+            {#<th>{{ 'psmfHistory.action'|trans }}</th>#}
+            <th>{{ 'psmfHistory.commentaire'|trans }}</th>
+            <th>{{ 'psmfHistory.author'|trans }}</th>
+            <th>{{ 'psmfHistory.detail'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% if pSMFVariableHistories|length > 0 %}      
+        {% for pSMFHistory in pSMFVariableHistories %}
+            {% if pSMFHistory.reason|length > 0 %}
+            <tr>
+                <td>{{ pSMFHistory.createDate|date('d-M-Y H:i') }}</td>
+                <td>{{ pSMFHistory.reason }}</td>
+                {#<td>{{ pSMFHistory.action }}</td>#}  
+                <td>{{ pSMFHistory.createUser }}</td>
+                <td>
+                    {% if pSMFHistory.action == "add" or pSMFHistory.action == "edit" or pSMFHistory.action == "delete" %}
+                      <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#variable{{ pSMFHistory.id }}" data-toggle="modal">
+                        <i class="fas fa-lg fa-eye"></i>
+                      </a>
+                    {% else %}
+                        {% if pSMFHistory.client %}{{ pSMFHistory.client }}
+                        {% elseif pSMFHistory.pvuser %}{{ pSMFHistory.pvuser }}
+                        {% endif %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6"></td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>  
+
+
+{% for pSMFHistory in pSMFVariableHistories %}
+<div class="modal fade" id="variable{{ pSMFHistory.id }}" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ pSMFHistory.reason|u.truncate(120, '...') }}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped">
+                    <thead class="">
+                        <tr>
+                            <th>{{ 'psmfHistory.key'|trans }}</th>
+                            <th>{{ 'psmfHistory.value.old'|trans }}</th>
+                            <th>{{ 'psmfHistory.value.new'|trans }}</th>
+                        </tr>
+                    </thead>                    
+                    <tbody>
+                        {{ include('PSMFManagement/PSMFHistory/__diffs.html.twig') }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+</div> 
+{% endfor %}

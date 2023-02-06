@@ -1,0 +1,29 @@
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+<table class="table table-bordered table-striped">
+    <thead class="">
+        <tr>
+            <th>{{ 'variable.label'|trans }}</th>
+            <th>{{ 'variable.balise'|trans }}</th>
+            <th>{{ 'label.obligation'|trans }}</th>
+            <th>{{ 'correspondance.label'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for variable in variables %}
+        <tr>
+            <td>{{ variable.label }}</td>
+            <td>
+                {% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                    <span style="color:red">{{ variable.balise }}</span>
+                {% else %}
+                    <span style="color:green">{{ variable.balise }}</span>
+                {% endif %}    
+            </td>
+            <td>{{ variable.obligation.code=='VO'?'oui':'non' }}</td>                             
+            <td>{{ correspondances.correspondanceLocale_valueLocal(psmf, variable)}}
+            {{ correspondances.correspondanceLocale_action(psmf, variable)}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

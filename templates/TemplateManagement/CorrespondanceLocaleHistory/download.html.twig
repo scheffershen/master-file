@@ -1,0 +1,52 @@
+<meta charset="UTF-8" />
+{% import "PSMFManagement/Correspondance/widget/correspondance.html.twig" as correspondances %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ 'client.label'|trans }}</th>
+            <th>{{ 'psmf.label'|trans }}</th>
+            <th>{{ 'lov.classe'|trans }}</th>
+            <th>{{ 'variable.label'|trans }}</th>
+            <th>{{ 'variable.balise'|trans }}</th>
+            <th>{{ 'lov.typeVariable'|trans }}</th>
+            <th>{{ 'lov.scope'|trans }}</th>
+            <th>{{ 'label.description'|trans }}</th> 
+            <th>{{ 'label.obligation'|trans }}</th>
+            <th>{{ 'correspondance.label'|trans }}</th> 
+            <th>{{ 'label.help'|trans }}</th> 
+            <th>{{ 'user.isEnable'|trans }}</tr>  
+        </tr>
+    </thead>
+    <tbody>
+    {{ include('PSMFManagement/PSMF/_download.html.twig') }} 
+    {% for variable in variables %}
+        <tr>
+            <td valign="top">{{ psmf.client.name }}</td>
+            <td valign="top">{{ psmf.title }}</td>
+            <td valign="top">
+                {% for classe in variable.classes %}
+                    {{ classe.title }}{% if loop.last != true %}<br/>{% endif %}
+                {% endfor %}
+            </td>
+            <td valign="top">{{ variable.label }}</td>
+            <td valign="top">
+            {% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') %}
+                <span style="color:red">{{ variable.balise }}</span>
+            {% else %}
+                <span style="color:green">{{ variable.balise }}</span>
+            {% endif %}
+            </td>            
+            <td valign="top">{{ variable.type }}</td>
+            <td valign="top">{{ variable.scope }}</td>
+            <td valign="top">{{ variable.description }}</td>
+            <td valign="top">{{ variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE')?'Valeur de remplacement obligatoire':'Valeur de remplacement facultative' }}</td> 
+            <td valign="top">
+                {{ correspondances.correspondanceLocale_valueLocal_download(psmf, variable)}}
+            </td>
+            <td valign="top">{{ variable.userHelp|raw }}</td>
+            <td valign="top">{{ variable.isValid?'visible':'masquée' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

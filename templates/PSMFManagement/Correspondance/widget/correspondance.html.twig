@@ -1,0 +1,339 @@
+{% macro correspondanceLocale_valueLocal(psmf, variable) %}	
+    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::LOCALE') %}  
+
+    	{%  set correspondanceLocale = null %}
+
+		{% for correspondance in variable.correspondances %}
+			{%  if correspondance.psmf == psmf %}
+				{%  set correspondanceLocale = correspondance %}
+			{%  endif  %}
+		{%  endfor %}      
+
+        {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE')  and correspondanceLocale %} 
+          {% if correspondanceLocale.valueLocal|isImage == true %}
+          	<img src="{{ asset('images/image-coming-soon.jpg') }}" data-src="{{ path('admin_private_upload', {'upload': correspondanceLocale.valueLocal}) }}" class="img-fluid lazy">
+			{% if variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::FACULTATIVE') %}
+				<a class="icon text-danger" href="{{ path('admin_psmf_correspondance_locale3_image_delete', {'psmf': psmf.id, 'variable': variable.id, 'correspondance': correspondanceLocale.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+					<i class="fas fa-lg fa-trash"></i>
+				</a>
+			{% endif %}	
+          {% endif %}
+        {% elseif correspondanceLocale %}
+            {% autoescape %}
+                {{ correspondanceLocale.valueLocal|raw }} 
+            {% endautoescape %}
+        {% endif %} 
+    {% endif %}
+{% endmacro %}
+
+{% macro correspondanceLocale_valueLocal_download(psmf, variable) %}	
+    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::LOCALE') %}  
+
+    	{%  set correspondanceLocale = null %}
+
+		{% for correspondance in variable.correspondances %}
+			{%  if correspondance.psmf == psmf %}
+				{%  set correspondanceLocale = correspondance %}
+			{%  endif  %}
+		{%  endfor %}      
+
+        {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE')  and correspondanceLocale %} 
+          {% if correspondanceLocale.valueLocal|isImage == true %}
+          	{{ url('admin_public_upload', {'upload': correspondanceLocale.valueLocal}) }}
+          {% endif %}
+        {% elseif correspondanceLocale %}
+            {% autoescape %}
+                {{ correspondanceLocale.valueLocal|raw }} 
+            {% endautoescape %}
+        {% endif %} 
+    {% endif %}
+{% endmacro %}
+
+{% macro correspondanceLocale_action3(psmf, variable) %}
+    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::LOCALE') %}  
+
+    	{%  set correspondanceLocale = null %}
+
+		{% for correspondance in variable.correspondances %}
+			{%  if correspondance.psmf == psmf %}
+				{%  set correspondanceLocale = correspondance %}
+			{%  endif  %}
+		{%  endfor %}      
+
+        {% if correspondanceLocale and correspondanceLocale.valueLocal|length %}
+	        {#<a class="icon text-purple" href="{{ path('admin_psmf_correspondance_locale3_edit', {'psmf': psmf.id }) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+	            <i class="fas fa-lg fa-pencil-alt"></i>
+	        </a> #}
+	        {% if variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::TEXT_LONG') or variable.type.code == constant('App\\Entity\\LovManagement\\TypeVariable::IMAGE')  %}
+	        	{#<a class="icon text-purple" href="{{ path('admin_psmf_correspondance_draft', {'id': variable.id, 'psmf': psmf.id, 'format': 'pdf'}) }}"  data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}" target="_blank">
+                    <i class="fas fa-lg fa-file-pdf"></i>
+                </a>#}
+	        {% endif %} 
+	    {% else %}
+	        <a class="icon text-danger" href="{{ path('admin_psmf_correspondance_locale3_edit', {'psmf': psmf.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.add'|trans }}">
+	            <i class="fas fa-lg fa-plus"></i>
+	        </a>	        
+	    {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro correspondanceLocale_missing(psmf, variables) %}	
+	{%  set total_obligation = 0 %}
+	{%  set nb_correspondanceLocale = 0 %}
+	{% for variable in variables %}
+	    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::LOCALE') and variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') and variable.isValid %}  
+	    	{%  set total_obligation = total_obligation + 1 %}
+
+			{% for correspondance in variable.correspondances %}
+				{%  if correspondance.psmf == psmf and correspondance.valueLocal|length %}
+					{%  set nb_correspondanceLocale = nb_correspondanceLocale + 1 %}
+				{%  endif  %}
+			{%  endfor %}      
+	    {% endif %}
+	{%  endfor %}
+	{% if total_obligation > nb_correspondanceLocale %}
+		<span data-id="{{ psmf.id }}" class="badge badge-danger correspondanceLocaleMissing" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.nbCorrespondanceLocaleMissing'|trans }}">{{ total_obligation-nb_correspondanceLocale }}</span>
+	{% else %}	
+		<span data-id="{{ psmf.id }}" class="badge badge-purple correspondanceLocaleMissing" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.nbCorrespondanceLocaleMissing'|trans }}">0</span>
+    {% endif %}		
+{% endmacro %}
+
+{% macro correspondanceGlobale_missing(variables) %}	
+	{%  set total_obligation = 0 %}
+	{%  set nb_correspondanceGlobale = 0 %}
+	{% for variable in variables %}
+	    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::GLOBALE') and variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') and variable.isValid %}  
+	    	{%  set total_obligation = total_obligation + 1 %}
+
+			{% for correspondance in variable.correspondances %}
+				{%  if correspondance.valueLocal|length %}
+					{%  set nb_correspondanceGlobale = nb_correspondanceGlobale + 1 %}
+				{%  endif  %}
+			{%  endfor %}      
+	    {% endif %}
+	{%  endfor %}
+	{% if total_obligation > nb_correspondanceGlobale %}
+		<span class="badge badge-danger" data-toggle="tooltip" data-placement="top" title="{{ 'psmf.nbCorrespondanceGlobaleMissing'|trans }}">{{ total_obligation-nb_correspondanceGlobale }}</span>
+    {% endif %}		
+{% endmacro %}
+
+{% macro correspondanceLocale_missing_text(psmf, variables) %}	
+	{%  set total_obligation = 0 %}
+	{%  set nb_correspondanceLocale = 0 %}
+
+	<div class="modal fade" id="correspondanceLocaleMissing" role="dialog">
+	    <div class="modal-dialog modal-xl">
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title">{{ 'psmf.correspondanceLocaleMissing'|trans }}</h4>
+	                <button type="button" class="close" data-dismiss="modal">&times;
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	            	<table class="table-bordered table-striped" width="100%">
+						{% for variable in variables %}
+						    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::LOCALE') and variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') and variable.isValid %}  
+						    	{%  set total_obligation = total_obligation + 1 %}
+
+								{% for correspondance in variable.correspondances %}
+									{%  if correspondance.psmf == psmf and correspondance.valueLocal|length > 0  %}
+										{%  set nb_correspondanceLocale = nb_correspondanceLocale + 1 %}
+									{% elseif correspondance.psmf == psmf and correspondance.valueLocal|length == 0 %}
+										<tr><td><small class="text-danger">{{ variable.balise }}</small> <small class="text-muted">({{ variable.label }})</small></td></tr>
+									{%  endif  %}
+								{%  endfor %}      
+						    {% endif %}
+						{%  endfor %}
+				    </table>
+					{# missingVariables(variables, psmf)|raw #}
+	            </div>
+	        </div>
+	    </div>    
+	</div>
+
+	{% if total_obligation > nb_correspondanceLocale %}
+		<a href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#correspondanceLocaleMissing" data-toggle="modal">
+			<span class="badge badge-danger">{{ total_obligation - nb_correspondanceLocale }} {{ 'psmf.correspondanceLocaleMissing'|trans }}</span>
+		</a>
+    {% endif %}
+{% endmacro %}
+
+{% macro correspondanceLocale_disable_text(psmf, variablesLocalesDisables) %}	
+	<div class="modal fade" id="correspondanceLocaleDisabled" role="dialog">
+	    <div class="modal-dialog modal-xl">
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title">{{ 'psmf.correspondanceLocaleDisabled'|trans }}</h4>
+	                <button type="button" class="close" data-dismiss="modal">&times;
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	            	<table class="table-bordered table-striped" width="100%">
+	            		<tr><th>{{ 'variable.balise'|trans }}</th><th>{{ 'correspondance.locale'|trans }}</th></tr>
+						{% for variable in variablesLocalesDisables %}							
+							{% for correspondance in variable.correspondances %}
+								{%  if correspondance.psmf == psmf %}
+									<tr>
+										<td>
+											<small class="text-warning">{{ variable.balise }}</small> 
+										</td>
+										{#<td>
+											<small class="text-muted">({{ variable.label }})</small>
+										</td>#}
+										<td>
+											{% if correspondance.valueLocal|isImage == true %}
+    						    				<img src="{{ path('admin_private_upload', {'upload': correspondance.valueLocal}) }}" class="img-fluid">
+    						        		{% else %}
+    						        			{{ correspondance.valueLocal|raw }}
+    						        		{% endif %}    
+										</td>
+									</tr>
+								{% endif %}
+							{% endfor %}   
+						{%  endfor %}
+				    </table>
+	            </div>
+	        </div>
+	    </div>    
+	</div>
+
+	{% if variablesLocalesDisables|length > 0 %}
+		<a href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#correspondanceLocaleDisabled" data-toggle="modal">
+			<span class="badge badge-warning">{{ variablesLocalesDisables|length }} {{ 'psmf.correspondanceLocaleDisabled'|trans }}</span>
+		</a>
+    {% endif %}
+{% endmacro %}
+{% macro correspondanceGlobale_missing_text(variables) %}	
+	{%  set total_obligation = 0 %}
+	{%  set nb_correspondanceGlobale = 0 %}
+
+	<div class="modal fade" id="correspondanceGlobaleMissing" role="dialog">
+	    <div class="modal-dialog modal-xl">
+	        <!-- Modal content-->
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h4 class="modal-title">{{ 'psmf.correspondanceGlobaleMissing'|trans }}</h4>
+	                <button type="button" class="close" data-dismiss="modal">&times;
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	            	<table class="table-bordered table-striped" width="100%">
+						{% for variable in variables %}
+						    {% if variable.scope.code == constant('App\\Entity\\LovManagement\\Scope::GLOBALE') and variable.obligation.code == constant('App\\Entity\\LovManagement\\Obligation::OBLIGATOIRE') and variable.isValid %}  
+						    	{%  set total_obligation = total_obligation + 1 %}
+
+								{% for correspondance in variable.correspondances %}
+									{%  if correspondance.valueLocal|length > 0  %}
+										{%  set nb_correspondanceGlobale = nb_correspondanceGlobale + 1 %}
+									{% elseif correspondance.valueLocal|length == 0 %}
+										<tr><td><small class="text-danger">{{ variable.balise }}</small> <small class="text-muted">({{ variable.label }})</small></td></tr>
+									{%  endif  %}
+								{%  endfor %}      
+						    {% endif %}
+						{%  endfor %}
+				    </table>
+					{# missingVariables(variables, psmf)|raw #}
+	            </div>
+	        </div>
+	    </div>    
+	</div>
+
+	{% if total_obligation > nb_correspondanceGlobale %}
+		<a href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#correspondanceGlobaleMissing" data-toggle="modal">
+			<span class="badge badge-danger">{{ total_obligation-nb_correspondanceGlobale }} {{ 'psmf.correspondanceGlobaleMissing'|trans }}</span>
+		</a>
+    {% endif %}
+
+{% endmacro %}
+
+{% macro correspondanceLocale_classe(correspondance) %}
+    {% if correspondance.vars.data.variable.classes|length > 0 %}
+	        {% for classe in correspondance.vars.data.variable.classes %}
+	            {% if classe.sections|length > 0 %}
+	                {% for section in classe.sections %}
+	                    position{{ section.id }}
+	                {% endfor %}
+	            {% endif %}
+	        {% endfor %}
+	{% endif %}
+{% endmacro %}	
+
+{% macro correspondanceLocale_variable_classe(variable) %}
+    {% if variable.classes|length > 0 %}
+	        {% for classe in variable.classes %}
+	            {% if classe.sections|length > 0 %}
+	                {% for section in classe.sections %}
+	                    position{{ section.id }}
+	                {% endfor %}
+	            {% endif %}
+	        {% endfor %}
+	{% endif %}
+{% endmacro %}
+
+{% macro correspondanceLocale_option(sections) %}
+	{% import _self as utils %}
+    {% for _section in sections %}
+        {% if _section.id > 2 and _section.editable and _section.isDeleted == false and _section.isValid == true %}
+            <option value="{{ _section.id }}">{{ _section.title|u.truncate(140, '...')  }}</option> 
+            {% if _section.sections|length > 0 %}
+                {{ utils.correspondanceLocale_option(_section.sections) }}        
+            {% endif %}           
+        {% endif %}               
+    {% endfor %}                                    
+{% endmacro %}
+
+{% macro correspondanceLocale_section(classes, balise) %}
+    {% for classe in classes %}        	
+        {% if classe.sections|length > 0 %}
+        	<select>
+        		{% set first_section = null %}
+            	{% for section in classe.sections %}
+            		{% if first_section == null %}{% set first_section = section %}{% endif %}
+                	<option>{{ section.title|u.truncate(140, '...')  }}</option>
+            		}
+            	{% endfor %}
+        	</select>&nbsp;&nbsp;
+        	<a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ first_section.id }}{{ balise }}" data-toggle="modal">
+                <i class="fas fa-lg fa-eye"></i>
+            </a>
+		    <div class="modal fade" id="section{{ first_section.id }}{{ balise }}" role="dialog">
+		        <div class="modal-dialog modal-lg">
+		            <!-- Modal content-->
+		            <div class="modal-content">
+		                <div class="modal-header">
+		                    <h4 class="modal-title">{{ first_section.title }}</h4>
+		                    <button type="button" class="close" data-dismiss="modal">&times;
+		                    </button>
+		                </div>
+		                <div class="modal-body">
+						    <table class="table">
+						        <tbody>						            
+						            <tr>
+						                <th>{{ 'section.parent'|trans }}</th>
+						                <td>{{ first_section.parent|default('Global') }}</td>
+						            </tr> 
+						            {% if first_section.position %}
+						            <tr>
+						                <th>{{ 'section.position'|trans }}</th>
+						                <td>{{ first_section.position }}</td>
+						            </tr>                        
+						            {% endif %}                     
+						            <tr>
+						                <th>{{ 'section.contenu'|trans }}</th>
+						                <td>
+						                    {% autoescape %}
+						                        {{  first_section.contenu|highlights(balise)|raw }} 
+						                    {% endautoescape %}                                
+						                </td>
+						            </tr>
+						        </tbody>
+						    </table>                       
+		                </div>
+		            </div>
+		        </div>    
+		    </div>            
+        {% endif %}
+    {% endfor %}	
+{% endmacro %}

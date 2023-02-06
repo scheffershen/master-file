@@ -1,0 +1,29 @@
+{% for type, messages in app.flashes %}
+    {% for message in messages %}
+        {# Bootstrap alert, see https://getbootstrap.com/docs/4.4/components/alerts/ #}
+        {% if type == "error" %} 
+	        <div class="alert alert-dismissible alert-danger mt-2" role="alert">
+	            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+	            </button>
+
+	            {{ message|trans }}
+	        </div>
+    	{% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashBag.all %}
+        {% for message in messages %}
+            {% if type == "error" %}    
+		        <div class="alert alert-dismissible alert-danger mt-2" role="alert">
+		            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                <span aria-hidden="true">&times;</span>
+		            </button>
+		            {{ message|trans }}
+		        </div>                             
+            {% endif %}    
+        {% endfor %}
+    {% endfor %}
+{% endif %}

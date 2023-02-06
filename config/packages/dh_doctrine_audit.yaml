@@ -1,0 +1,21 @@
+dh_doctrine_audit:
+    # Configuration reference available at:
+    # https://github.com/DamienHarper/DoctrineAuditBundle#configuration
+    table_prefix: ''
+    table_suffix: '_audit'
+    timezone: 'Europe/Paris'
+    ignored_columns:    # properties ignored by the audit process in any audited entity
+        - createDate
+        - updateDate
+        - updateVariableDetails
+        - updateSectionDetails
+        
+    entities:
+        # App\Entity\ProduitManagement\SpecimenProduit: 
+        #     ignored_columns:    # properties ignored by the audit process in any audited entity
+        #         - createDate
+        #         - updateDate
+#        MyBundle\Entity\MyAuditedEntity2:
+#            ignored_columns:                  # MyAuditedEntity2 properties to be ignored by the audit process
+#                - createdAt
+#                - updatedAt

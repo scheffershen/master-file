@@ -1,0 +1,70 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}{{ 'plateforme.label'|trans }}{% endblock %}
+
+{% block body %}
+<div class="content-page">
+    <div class="content mb-2">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+            
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <h4 class="page-title">{{ 'plateforme.label'|trans }}
+                        &nbsp;&nbsp;
+                        {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-UserManagement-Plateforme', id: plateforme.id}) }}" class="icon text-secondary" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-code-branch"></i></a>#}
+                        </h4>
+                    </div>
+                </div>
+            </div>     
+            <!-- end page title -->   
+            <div class="row">
+                <div class="col-12">  
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>{{ 'plateforme.nom'|trans }}</th>
+                                    <td>{{ plateforme.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.email'|trans }}</th>
+                                    <td>{{ plateforme.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.logo'|trans }}</th>
+                                    <td>
+                                        {% if plateforme.logoUri|isImage == true %}
+                                            <img src="{{ path('admin_private_upload', {'upload': plateforme.logoUri}) }}" class="img-fluid"  >
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.version'|trans }}</th>
+                                    <td>{{ plateforme.version }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ 'plateforme.poweredBy'|trans }}</th>
+                                    <td>{{ plateforme.poweredBy }}</td>
+                                </tr>                                                                
+                            </tbody>
+                        </table>
+                </div>      
+            </div>
+
+            <div class="row">
+                <div class="col-12"> 
+                    <div class="row align-items-center justify-content-center">
+                        <a href="{{ path('admin_plateforme_edit') }}" class="btn waves-effect waves-light btn-primary mt-2">{{ 'action.edit'|trans }}</a>
+                    </div>                     
+                </div>      
+            </div>
+
+        </div>
+
+    </div>              
+</div>
+{% endblock %}  
+

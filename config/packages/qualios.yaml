@@ -1,0 +1,7 @@
+parameters:
+    qualios_key: "%env(QUALIOS_KEY)%"
+    qualios_login: "%env(QUALIOS_LOGIN)%"
+    qualios_password: "%env(QUALIOS_PWD)%"
+    qualios_token_url: "%env(QUALIOS_TOKEN_URL)%"
+    qualios_docs_url: "%env(QUALIOS_DOCS_URL)%"
+    qualios_typesDoc_url: "%env(QUALIOS_TYPESDOC_URL)%"

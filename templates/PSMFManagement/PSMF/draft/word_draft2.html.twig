@@ -1,0 +1,17 @@
+<table width="100%">
+<tr><td>========================================================================</td></tr>
+<tr><td>========================================================================</td></tr>
+<tr><td>========================================================================</td></tr>
+<tr><td align="center">Ce document est un draft</td></tr>
+<tr><td>Il peut être utilisé comme support d'échange mais ne peut pas être considéré comme une version finale</td></tr>
+<tr><td>Nom du PSMF: {{ psmf.title }}</td></tr>
+<tr><td>Nom du client: {{ psmf.client }}</td></tr>
+<tr><td>========================================================================</td></tr>
+<tr><td>========================================================================</td></tr>
+<tr><td>========================================================================</td></tr>
+</table>
+<table width="100%" background="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ '/images/pdf-draft-background.png' }}"><tr><td>
+	{% autoescape %}
+        {{ contenu|raw }} 
+    {% endautoescape %}  
+</td></tr></table>

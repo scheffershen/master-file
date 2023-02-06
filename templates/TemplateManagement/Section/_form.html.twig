@@ -1,0 +1,108 @@
+{{ include('partials/_flash_messages.html.twig') }}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form)  }}
+{{ form_errors(form) }}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+   		 	{{ form_row(form.title) }}
+        </div> 
+    </div> 
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card-box">  
+            {{ form_row(form.parent) }}
+        </div>
+    </div> 
+    <div class="col-md-6">
+        <div class="card-box">
+    		{{ form_row(form.position) }}    
+    	</div>
+    </div>    
+</div>
+
+<div class="row">   
+    <div class="col-md-3">
+        <div class="card-box">
+    		{{ form_row(form.isAnnexe) }}
+        </div> 
+    </div> 
+    <div class="col-md-3">
+        <div class="card-box">
+            {{ form_row(form.isValid) }}
+        </div> 
+    </div> 
+    <div class="col-md-3">
+        <div class="card-box">
+            {{ form_row(form.allowSubSection) }}
+        </div> 
+    </div>     
+    <div class="col-md-3">
+        <div class="card-box">
+            {{ form_row(form.isPageBreak) }}
+        </div> 
+    </div>        
+</div>
+
+{% if section and section.contenuEditable == false %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-box">
+                <label for="section_edit_contenu">{{ 'section.contenu'|trans }}</label>
+                <div class="card bg-light">
+                    <div class="card-body">
+                        {{ section.contenu|raw }} 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+{% else %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-box">
+                {{ form_label(form.contenu) }}&nbsp;        
+                {#<a href="javascript:void();" class="btn btn-sm btn-secondary btnPdfPreview" type="button" data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}">
+                    <i class="fas fa-lg fa-file-pdf"></i>
+                </a>&nbsp;
+                <a href="/docs/{{ app.request.locale }}/site/editeur_html/index.html" class="btn btn-sm btn-purple" data-toggle="tooltip" data-placement="top" title="{{ 'label.html_help'|trans }}" target="_blank">
+                    <i class="fas fa-lg fa-question-circle text-purple"></i>
+                </a>#}
+                {{ form_widget(form.contenu) }}
+        	</div>
+        </div>
+    </div>  
+{% endif %}
+
+<div class="row pt-4"></div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+            {{ form_row(form.isMajeur) }}
+        </div> 
+    </div>
+</div>
+
+<div class="row" id="reasonDiv">
+    <div class="col-lg-12">
+        <div class="card-box">
+            {{ form_row(form.reason) }}  
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-box">
+			<div class="form-group">
+			    <button type="submit" class="btn waves-effect waves-light btn-purple"><i class="fas fa-save"></i>&nbsp; {{ 'action.save'|trans }}</button>
+			</div>
+    	</div>
+    </div>
+</div>  			
+{{ form_end(form) }}

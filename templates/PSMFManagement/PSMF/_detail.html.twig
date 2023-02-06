@@ -1,0 +1,274 @@
+{% import "PSMFManagement/PSMF/widget/help.html.twig" as help %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{{ 'variable.balise'|trans }}</th>
+            <th>{{ 'psmf.label'|trans }}</th>    
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'psmf.title'|trans }}</td>
+            <td><span style="color:red">SYS_PSMF_TITRE</span></td>
+            <td>{{ psmf.title }}</td>
+        </tr>
+        <tr>            
+            <td>{{ 'psmf.euQPPV'|trans }}</td>
+            <td>
+                <select class="form-control">
+                    <option>SYS_EUQPPV_FIRSTNAME</option>
+                    <option>SYS_EUQPPV_LASTNAME</option> 
+                    <option>SYS_EUQPPV_FUNCTION</option> 
+                    <option>SYS_EUQPPV_HE_SHE</option> 
+                    <option>SYS_EUQPPV_HIM_HER</option>
+                    <option>SYS_EUQPPV_MAIL</option>
+                    <option>SYS_EUQPPV_MOBILE</option>
+                    <option>SYS_EUQPPV_FIX</option> 
+                    <option>SYS_EUQPPV_FAX</option>
+                    <option>SYS_EUQPPV_CV</option>
+                    <option>SYS_EUQPPV_COMPANY</option> 
+                    <option>SYS_EUQPPV_ADRESS</option>     
+                </select>
+            </td>
+            <td>{{ psmf.euQPPV }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'psmf.client'|trans }}</td>
+            <td>
+                <select class="form-control">
+                    <option>SYS_CLIENT_NAME</option> 
+                    <option>SYS_CLIENT_ADRESS</option>  
+                    <option>SYS_CLIENT_LOGO</option>   
+                </select>
+            </td>
+            <td>{{ psmf.client }}</td>
+        </tr>
+        
+        {% if psmf.deputyEUQPPV %}
+            <tr>            
+                <td>{{ 'psmf.deputyEUQPPV'|trans }}</td>
+                <td>
+                    <select class="form-control">
+                        <option>SYS_DEPUTY_EUQPPV_FIRSTNAME</option>
+                        <option>SYS_DEPUTY_EUQPPV_LASTNAME</option> 
+                        <option>SYS_DEPUTY_EUQPPV_FUNCTION</option> 
+                        <option>SYS_DEPUTY_EUQPPV_HE_SHE</option> 
+                        <option>SYS_DEPUTY_EUQPPV_HIM_HER</option>
+                        <option>SYS_DEPUTY_EUQPPV_MAIL</option>
+                        <option>SYS_DEPUTY_EUQPPV_MOBILE</option>
+                        <option>SYS_DEPUTY_EUQPPV_FIX</option> 
+                        <option>SYS_DEPUTY_EUQPPV_FAX</option>
+                        <option>SYS_DEPUTY_EUQPPV_CV</option>
+                        <option>SYS_DEPUTY_EUQPPV_COMPANY</option> 
+                        <option>SYS_DEPUTY_EUQPPV_ADRESS</option>     
+                    </select>
+                </td>
+                <td>{{ psmf.deputyEUQPPV }}</td>
+            </tr>
+        {% endif %}   
+
+        <tr>
+            <td>{{ 'psmf.euqppvEntity'|trans }}</td>
+            <td>{% if psmf.euqppvEntity.code == "um" %}
+                <span style="color:green;font-style:italic;">_if_um_euqppv_ ... _endif_</span> 
+            {% elseif psmf.euqppvEntity.code == "presta" %}
+                <span style="color:green;font-style:italic;">_if_presta_euqppv_ ... _endif_</span> 
+            {% elseif psmf.euqppvEntity.code == "client" %}
+                <span style="color:green;font-style:italic;">_if_client_euqppv_ ... _endif_</span> 
+            {% endif %}</td>
+            <td>{{ psmf.euqppvEntity }}</td>
+        </tr>
+
+        {% if psmf.eudravigNum %}
+            <tr>
+                <td>{{ 'psmf.eudravigNum'|trans }}</td>
+                <td><span style="color:red">SYS_PSMF_EUDRA_NUMBER</span></td>
+                <td>{{ psmf.eudravigNum }}</td>
+            </tr>
+        {% endif %}  
+
+        <tr>            
+            <td>{{ 'psmf.contactPvClient'|trans }}</td>
+            <td>
+                <select class="form-control">
+                    <option>SYS_CONTACT_PV_CLIENT_FIRSTNAME</option>
+                    <option>SYS_CONTACT_PV_CLIENT_LASTNAME</option> 
+                    <option>SYS_CONTACT_PV_CLIENT_FUNCTION</option> 
+                    <option>SYS_CONTACT_PV_CLIENT_HE_SHE</option> 
+                    <option>SYS_CONTACT_PV_CLIENT_HIM_HER</option>
+                    <option>SYS_CONTACT_PV_CLIENT_MAIL</option>
+                    <option>SYS_CONTACT_PV_CLIENT_MOBILE</option>
+                    <option>SYS_CONTACT_PV_CLIENT_FIX</option> 
+                    <option>SYS_CONTACT_PV_CLIENT_FAX</option>
+                    <option>SYS_CONTACT_PV_CLIENT_CV</option>
+                    <option>SYS_CONTACT_PV_CLIENTV_COMPANY</option> 
+                    <option>SYS_CONTACT_PV_CLIENT_ADRESS</option>     
+                </select>            
+            </td>
+            <td>{{ psmf.contactPvClient }}</td>
+        </tr>  
+
+        {% if psmf.activitesUM|length > 0 %}
+            <tr>
+                <td>{{ 'psmf.activitesUM'|trans }}</td>
+                <td>
+                    {% if psmf.hasActiviteUM("EU_QPPV_BACKUP") %}
+                        <span style="color:green;font-style:italic;">_if_UM_EU_QPPV_BACKUP_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_EU_QPPV_BACKUP_ _endif_</span><br/>
+                    {% endif %}
+
+                    {% if psmf.hasActiviteUM("CALL_MANAGEMENT_WORKING_HOURS") %}
+                        <span style="color:green;font-style:italic;">_if_UM_CALL_MANAGEMENT_WORKING_HOURS_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_CALL_MANAGEMENT_WORKING_HOURS_ _endif_</span><br/>
+                    {% endif %}    
+               
+                    {% if psmf.hasActiviteUM("CALL_MANAGEMENT_NON_WORKING_HOURS") %}
+                        <span style="color:green;font-style:italic;">_if_UM_CALL_MANAGEMENT_NON_WORKING_HOURS_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_CALL_MANAGEMENT_NON_WORKING_HOURS_ _endif_</span><br/>
+                    {% endif %}    
+                
+                    {% if psmf.hasActiviteUM("CASE_MANAGEMENT") %}
+                        <span style="color:green;font-style:italic;">_if_UM_CASE_MANAGEMENT_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_CASE_MANAGEMENT_ _endif_</span><br/>
+                    {% endif %} 
+                
+                    {% if psmf.hasActiviteUM("ICSR_SUBMISSION") %}
+                        <span style="color:green;font-style:italic;">_if_UM_ICSR_SUBMISSION_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_ICSR_SUBMISSION_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("LITERATURE_MONITORING") %}
+                        <span style="color:green;font-style:italic;">_if_UM_LITERATURE_MONITORING_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_LITERATURE_MONITORING_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("SIGNAL_MANAGEMENT") %}
+                        <span style="color:green;font-style:italic;">_if_UM_SIGNAL_MANAGEMENT_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_SIGNAL_MANAGEMENT_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("PSUR_MANAGEMENT") %}
+                        <span style="color:green;font-style:italic;">_if_UM_PSUR_MANAGEMENT_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_PSUR_MANAGEMENT_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("RMP_MANAGEMENT") %}
+                        <span style="color:green;font-style:italic;">_if_UM_RMP_MANAGEMENT_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_RMP_MANAGEMENT_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("VARIATION_MANAGEMENT") %}
+                        <span style="color:green;font-style:italic;">_if_UM_VARIATION_MANAGEMENT_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_VARIATION_MANAGEMENT_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("RESPONSES_TO_THE_AUTHORITIES") %}
+                        <span style="color:green;font-style:italic;">_if_UM_RESPONSES_TO_THE_AUTHORITIES_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_RESPONSES_TO_THE_AUTHORITIES_ _endif_</span><br/>
+                    {% endif %} 
+
+                    {% if psmf.hasActiviteUM("COMMUNICATION_OF_SAFETY_CONCERNS") %}
+                        <span style="color:green;font-style:italic;">_if_UM_COMMUNICATION_OF_SAFETY_CONCERNS_ _endif_</span><br/>
+                    {% else %}
+                        <span style="color:green;font-style:italic;">_if_OTHER_COMMUNICATION_OF_SAFETY_CONCERNS_ _endif_</span><br/>
+                    {% endif %} 
+                </td>          
+                <td>
+                    {% if psmf.activitesUM|length > 0 %}
+                            {% for activiteUM in psmf.activitesUM %}
+                                {{ activiteUM }}<br/>  
+                            {% endfor %}
+                    {% endif %}  
+                </td>
+            </tr>
+        {% endif %} 
+
+        {% if psmf.localQPPVPays|length > 0 %}
+            <tr>            
+                <td>{{ 'psmf.localQPPVOther'|trans }}</td>
+                <td>
+                    {% for pays in psmf.localQPPVPays %} 
+                        <span style="color:green;font-style:italic;">_if_LOCAL_QPPV_{{ pays }}_OTHER_ ... _endif_</span>      
+                    {% endfor %}
+                </td>
+                <td>
+                    <select class="form-control">
+                        {% for pays in psmf.localQPPVPays %}
+                            <option>{{ pays }}</option>    
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>   
+        {% endif %}    
+        
+        {% if psmf.localQPPVUM|length > 0 %}
+            <tr>
+                <td>{{ 'psmf.localQPPVUM'|trans }}</td>
+                <td>
+                    {% for localQPPVUM in psmf.localQPPVUM %}  
+                        <span style="color:green;font-style:italic;">_if_LOCAL_QPPV_{{ localQPPVUM }}_UM_ ... _endif_</span>     
+                    {% endfor %}
+                    
+                </td>
+                <td>
+                    <select class="form-control">
+                        {% for localQPPVUM in psmf.localQPPVUM %}
+                            <option>{{ localQPPVUM }}</option>    
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        {% endif %}   
+
+        {% if psmf.basePV is not null  %}      
+            <tr>
+                <td>{{ 'psmf.basePV'|trans }}</td>
+                <td><span style="color:green;font-style:italic;">_if_PV_DATABASE_EVEREPORT_ ... _endif_</span></td>  
+                <td>{{ psmf.basePV }}</td>
+            </tr>
+        {% endif %}        
+
+        {% if psmf.hasOtherPVProviders is not null %}
+            <tr>
+                <td>{{ 'psmf.hasOtherPVProviders'|trans }}</td>
+                <td>{% if psmf.hasOtherPVProviders == true %}
+                        <span style="color:green;font-style:italic;">_if_UM_NOT_ONLY_PV_PROVIDER_ ... _endif_</span>
+                    {% endif %}
+                    {% if psmf.hasOtherPVProviders == false %}
+                        <span style="color:green;font-style:italic;">_if_UM_ONLY_PV_PROVIDER_ ... _endif_</span>
+                    {% endif %}
+                </td>
+                <td>{{ psmf.hasOtherPVProviders?'yes':'no' }}</td>
+            </tr>
+        {% endif %}    
+
+        {% if psmf.isOldClientBbac is not null %} 
+            <tr>
+                <td>{{ 'psmf.isOldClientBbac'|trans }}</td>
+                <td>{% if psmf.isOldClientBbac is not null and psmf.isOldClientBbac == true %}
+                        <span style="color:green;font-style:italic;">_if_CLINET_BBAC_ ... _endif_</span>
+                    {% endif %}
+                    {% if psmf.hasOtherPVProviders is not null and psmf.isOldClientBbac == false %}
+                        <span style="color:green;font-style:italic;">_if_NOT_CLINET_BBAC_ ... _endif_</span>
+                    {% endif %}
+                </td>            
+                <td>{% if psmf.isOldClientBbac is not null  %}{{ psmf.isOldClientBbac?'yes':'no' }}{% endif %} </td>
+            </tr> 
+        {% endif %}
+
+    </tbody>
+</table>
+

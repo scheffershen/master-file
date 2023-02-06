@@ -1,0 +1,151 @@
+{% macro li(section) %}	
+  {% import _self as utils %}
+        <ul class="list-unstyled">
+        {% for children in section.sections %}
+            {% if children.isDeleted == false %}
+            <li {% if children.sections|length == 0 %}style="border-bottom-style: dashed; border-bottom-color: #c3c3c3;"{% endif %}>
+                <span data-toggle="tooltip" data-placement="top" title="{{ children.title }}">
+                    {% if children.isValid %}
+                        {{ children.title|u.truncate(140, '...')|titleParser|raw }}
+                    {% else %}
+                       <del>{{ children.title|u.truncate(140, '...')|titleParser|raw }}</del>
+                    {% endif %}
+                </span> {% if children.isPageBreak %} <i class="fas fa-lg fa-pager text-purple" data-toggle="tooltip" data-original-title="{{ 'section.isPageBreak' | trans }}"></i>{% endif %}
+                <div class="float-right">
+                    {% if children.allowSubSection %}                                
+                      <a class="icon text-danger" href="{{ path('admin_section_new', {'parent': children.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'section.add_subsection'|trans }}">
+                          <i class="fas fa-lg fa-plus"></i>
+                      </a>  
+                    {% endif %}                   
+                    {% if children.editable %}
+                        <a class="icon text-purple" href="{{ path('admin_section_edit', {'id': children.id}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.edit'|trans }}">
+                            <i class="fas fa-lg fa-pencil-alt"></i>
+                        </a>
+                    {% endif %}
+                    <a class="icon text-purple" href="javascript:void();" alt="{{ 'action.show'|trans }}" title="{{ 'action.show'|trans }}" data-target="#section{{ children.id }}" data-toggle="modal">
+                        <i class="fas fa-lg fa-eye"></i>
+                    </a>  
+                    {#<a class="icon text-purple" href="{{ path('admin_template_section', {'id': children.id, 'format': 'pdf'}) }}"  data-toggle="tooltip" data-placement="top" title="Pdf {{ 'action.preview'|trans }}" target="_blank">
+                        <i class="fas fa-lg fa-file-pdf"></i>
+                    </a> #}
+                    {% if children.editable %}
+                        {% if children.isValid %}
+                            <a class="icon text-purple"  href="{{ path('admin_section_show', {'id': children.id, 'action': 'disable'}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'action.disable'|trans }}" ><i class="fas fa-lg fa-toggle-on"></i></a>
+                        {% else %}
+                            <a class="icon text-danger" href="{{ path('admin_section_show', {'id': children.id, 'action': 'enable'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.enable'|trans }}"><i class="fas fa-lg fa-toggle-off"></i></a>
+                        {% endif %}  
+                        {% if children.isValid == false %}
+                            <a class="icon text-danger" href="{{ path('admin_section_show', {'id': children.id, 'action': 'delete'}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'action.delete'|trans }}">
+                                <i class="fas fa-lg fa-trash"></i>
+                            </a>
+                        {% endif %} 
+                        {#<a href="{{ path('admin_audit_show_entity_history', {'entity': 'App-Entity-TemplateManagement-Section', id: children.id}) }}" class="icon text-purple" data-toggle="tooltip" data-original-title="{{ 'action.audit' | trans }}" target="_blank"><i class="fas fa-lg fa-code-branch"></i></a>#}
+                    {% endif %}
+                </div>  
+                {% if children.sections|length > 0 %} 
+                  <div class="ml-3">
+                  {{ utils.li(children) }}
+                  </div>
+                {% endif %}                       
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+{% endmacro %}
+
+{% macro view(section) %}
+    <table class="table">
+        <tbody>
+            {% if section.position %}
+            <tr>
+                <th>{{ 'section.position'|trans }}</th>
+                <td>{{ section.position }}</td>
+            </tr>                        
+            {% endif %}
+            <tr>
+                <th>{{ 'section.parent'|trans }}</th>
+                <td>{{ section.parent|default('Global') }}</td>
+            </tr>                        
+            <tr>
+                <th>{{ 'section.isValid'|trans }}</th>
+                <td>{{ section.isValid?'yes':'no' }}</td>
+            </tr>   
+            <tr>
+                <th>{{ 'section.isAnnexe'|trans }}</th>
+                <td>{{ section.isAnnexe?'yes':'no' }}</td>
+            </tr> 
+            <tr>
+                <th>{{ 'section.allowSubSection'|trans }}</th>
+                <td>{{ section.allowSubSection?'yes':'no' }}</td>
+            </tr>                                                                    
+            <tr>
+                <th>{{ 'section.isPageBreak'|trans }}</th>
+                <td>{{ section.isPageBreak?'yes':'no' }}</td>
+            </tr>                                 
+            <tr>
+                <th colspan="2">{{ 'section.contenu'|trans }}</th>
+            </tr>                        
+            <tr>                
+                <td colspan="2">
+                    {% autoescape %}
+                        {{  section|parser|raw }} 
+                    {% endautoescape %}                                
+                </td>
+            </tr>
+        </tbody>
+    </table>   
+{% endmacro %}
+
+{% macro modal(sections) %}
+  {% import _self as utils %}
+  {% for section in sections %}
+    <div class="modal fade" id="section{{ section.id }}" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ section.title|titleParser|raw }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ utils.view(section) }}                        
+                </div>
+            </div>
+        </div>    
+    </div>
+        {% if section.sections|length > 0 %}
+           {{ utils.modal(section.sections) }}  
+        {% endif %}    
+    {% endfor %}
+{% endmacro %}
+
+{% macro sidebar_li(_section, section=null) %}
+    {% import _self as utils %}
+    <ul class="nav-second-level" aria-expanded="{% if 'admin_section_edit' in app.request.attributes.get('_route')  %}true{% else %}false{% endif %}">
+        {# childrens #}
+        {% for children in _section.sections %}
+            <li class="{% if  section is not null and section.id == children.id %}mm-active{% endif %}">
+                {% if children.editable %} 
+                    <a href="{{ path('admin_section_edit', {'id': children.id }) }}" class="">
+                {% else %}
+                    <a href="{{ path('admin_section_show', {'id': children.id }) }}" class="">  
+                {% endif %}        
+                    <span data-toggle="tooltip" data-placement="top" title="{#{{ children.position }}. #}{{ children.title }}">
+                      {% if children.isValid %}
+                         {{ children.title|u.truncate(30, '...') }}
+                     {% else %}
+                         <del>{{ children.title|u.truncate(30, '...') }}</del>
+                     {% endif %}  
+                    </span>
+                {% if children.editable %} </a>{% endif %}
+
+                {% if children.sections|length > 0 %} 
+                  <div class="ml-2">
+                  {{ utils.sidebar_li(children) }}
+                  </div>
+                {% endif %}   
+            </li>
+        {% endfor %}
+    </ul>     
+{% endmacro %}

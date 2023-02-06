@@ -1,0 +1,206 @@
+psmf: PSMF
+bonjour: Hello
+profile: Profile
+dashboard: Dashboard
+no_items_found: No items found.
+view_details: View Details
+users: Users
+helps: User manual
+admins: Admins
+chefProjets: Project Manager 
+managers: Managers
+welcome: Welcome! Please log in here
+    
+menu:
+  account: Account
+  admin: Admin
+  back: Back
+  edit_profile: Edit profile
+  homepage: Homepage
+  faq: FAQ
+  login: Login
+  logout: Logout
+  lov: 
+    title: LOVs
+  audit: 
+    title: Audits  
+
+message:
+  created: Created successfully
+  updated: Updated successfully
+  deleted: Deleted successfully
+  uploaded: Uploaded successfully
+  token_expired: Sorry, your token has expired. Please try again.
+  was_sent: Your message was sent successfully. Thanks.
+  password_has_been_reset: Password has been changed successfully. Now you can log in with new password.
+  emailed_reset_link: We have e-mailed your password reset link! It contains a link that you will need to click to reset your password. This link is active 30 mintutes. If you don't receive an email, check your spam folder.
+  password_request_non_expired: You must wait 2 hours between each request.
+  denied: Access denied
+  user_not_found: Username or email could not be found.
+  user_is_disenabled: Your account is disabled. 
+  error404: Oups ! Il semble que la page que vous cherchez soit introuvable.
+  connexion_perdue: "Lost connection with the server. Please note: your data has not been saved and will be lost if you close this page. Please validate again when the connection is reestablished."
+ 
+action:
+  search: Search
+  save: Save changes
+  add: Add
+  edit: Edit
+  delete: Delete
+  audit: Audit
+  sign_in: Sign in
+  sign_out: Sign out
+  forgot_password: Forgot Your Password?
+  change_password: Change your password
+  send_reset_link: Send Password Reset Link
+  submit: Submit
+  continue: Continue
+  enable: Enabled
+  disable: Disabled
+  download: Download
+  show: Detail
+  preview: Preview
+  backToSearch: Go Back To Search
+  back: Go back 
+  copier: Copy help
+  go_back: Back to the homepage
+  afficher: Show
+  cache: Hide
+
+state:
+  enable: Enabled
+  disable: Disabled
+  delete: Deleted
+
+table: 
+  username: Username
+  email: Email
+  group: Group
+  action: Action
+
+confirmation:
+  delete_user: Are you sure you want to delete this user?
+  delete_item: Are you sure you want to delete this item?
+  delete_service: Are you sure you want to delete this service?
+  delete_organisation: Are you sure you want to delete this organisation?
+  delete_photo: Are you sure you want to delete this photo?
+  delete_dppsi: Are you sure you want to delete this dppsi?
+  delete_dppsi_fichier: Are you sure you want to delete this dppsi file?
+  
+title:
+  login: Secure Sign in
+  reset_password: Reset Password
+  set_new_pass: Set a new password
+  settings: Settings
+
+label:
+  submit: Submit  
+  remember_me: Keep me logged in
+  roles: 
+    admin: Admin
+    manager: Manager
+    chefDeProjet: Project manager
+    user: user
+  fullname: Full name
+  firstname: First name
+  lastname: Last name
+  username: Username
+  mobile: Phone mobile
+  fixe: Phone fix
+  fax: Fax
+  email: Email
+  adresse: Adresse
+  city: City
+  zipCode: ZipCode
+  sexe: Sexe
+  isValid: Is valid
+  password: Password
+  new_password: New password
+  confirm_password: Confirm new password
+  name: Name
+  logo: Logo 
+  title: Title 
+  sort: Order
+  description: Description
+  fichiers: Fichiers joints
+  create_chefProjet: Créer un chef de projet
+  create_manager: Créer un manager
+  create_admin: Créer un administrateur
+  create_user: Create user
+  save_and_create_new: Save and create new
+  sort_by: Sort by
+  revision: Revision
+  createDate: Creation date
+  updateDate: Updated date
+  createBy: Création par
+  updateBy: MAJ par
+  specimen: Specimen
+  en_cours: On going
+  termine: Finished
+  help: Hint
+  user_help: User guide
+  html_help: HTML editor help  
+  userHelp: Hint
+  obligatoire: Mandatory
+  obligation: Mandatory
+  code: Code
+  oui: "Yes"
+  non: "No"
+  systeme: System
+  globale: Overall
+  locale: Local
+  reason: Reason
+
+languages: Languages
+language: 
+  label: Language
+  code: Code
+  french: French
+  english: English
+
+placeholder:
+  enter_identifiant: Enter your username
+  enter_password: Enter your password
+  enter_email: Enter your e-mail
+
+processing: Please wait...
+
+trackings: Tracking
+tracking:  
+  label: Tracking
+  login: Login
+  login_failed: Login failed
+  mail: E-mail
+  url: Url
+  ip: IP
+  user: User
+  session: Session
+  created: Date
+  event: Event 
+  userNotfound: User does not exist in the database
+
+mailLog:
+    action_list: List of emails sent automatically
+    date: Date of dispatch
+    from: From
+    to: To
+    cc: CC
+    subject: Suject
+    body: Body 
+
+email:
+  new_message: New Message From Your Website
+  new_log: Log from user import
+  new_user: Your account has been created
+  produit_missing: Product missing 
+
+resetting:
+  email:
+    subject: Reset Password
+    message: |
+        Hello %username%!
+        <br><br>To reset your password - please visit <a href='%confirmationUrl%' target='_blank'>%confirmationUrl%</a>
+        <br><br>Regards, the Team.
+
+form:
+  required: required field
