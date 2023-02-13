@@ -1,0 +1,96 @@
+<!DOCTYPE html><html><head><title>Cuttlebelle - Users</title><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/css/site.css"/></head><body><div class="top"><header role="banner"><p><a href="../index.html">Retourner à la sommaire</a></p>
+</header><main><h1 id="utilisateurs">Utilisateurs</h1>
+<p>Il existe deux types d&#39;uilisateurs: l&#39;un pour l&#39;administration de la plateforme (ROLE_ADMIN, ROLE_UTILISATEUR, ROLE_CONSULTANT, ROLE_SUPER_CONSULTANT), l&#39;autre pour le document psmf (PV user). mais les deux sont dans la même liste.</p>
+<h3 id="1-liste-des-utilisateurs">1. Liste des utilisateurs</h3>
+<p><img src="../images/users/liste.png" alt="code"> </p>
+<ul>
+<li><img src="../images/chiffre.png" alt="code"> Nombre de documents crées par cet utilisateur.</li>
+<li><img src="../images/view.png" alt="code"> Visualisez un utilisateur.</li>
+<li><img src="../images/edit.png" alt="code"> Modifiez un utilisateur. </li>
+<li><img src="../images/disable.png" alt="code"> Désactivez/activez un utilisateur.  </li>
+<li><img src="../images/audit.png" alt="code"> Historique des modification d&#39;un utilisateur.</li>
+<li><img src="../images/add.png" alt="code"> Ajoutez un utilisateur.</li>
+<li><img src="../images/aide.png" alt="code"> Guide d&#39;utilisation</li>
+</ul>
+<h3 id="2-ajoutez-un-utilisateur">2. Ajoutez un utilisateur</h3>
+<p><img src="../images/users/add_1.png" alt="code"> 
+<img src="../images/users/add_2.png" alt="code"></p>
+<blockquote>
+<p><code>1</code> l&#39;utilisateur peut associer plusieurs clients.</p>
+</blockquote>
+<blockquote>
+<p><code>2</code> si coché l’utilisateur recevra les e-amils par semaine de l&#39;historique des modifications de psmf de ses clients.</p>
+</blockquote>
+<blockquote>
+<p><code>3</code> si coché l’utilisateur liée à l’activité de PV (<code>SYS_EUQPPV_xxx</code>, <code>SYS_DEPUTY_EUQPPV_xxx</code>, <code>SYS_CONTACT_PV_CLIENT_xxx</code>)</p>
+</blockquote>
+<blockquote>
+<p><code>4</code> PV utilisateur peut avoir plusieurs &quot;Work Role (EUQPPV, Deputy EUQPPV et Contact PV client)&quot;</p>
+</blockquote>
+<blockquote>
+<p><code>5</code> PV utilisateur peut avoir que une seule &quot;Rattachement (Entity EUQPPV)&quot;</p>
+</blockquote>
+<p>Un compte utilisateur est caractérisé par :</p>
+<ul>
+<li>Données liées au profil :<ul>
+<li>Un identifiant – Obligatoire,</li>
+<li>Un mot de passe – Obligatoire,</li>
+<li>Un mail – Obligatoire,</li>
+<li>Un statut – Obligatoire (actif ou inactif),</li>
+<li>Un niveau d’accès – Obligatoire<ul>
+<li>Administrateur, (ROLE_ADMIN)</li>
+<li>Utilisateur, (ROLE_UTILISATEUR)</li>
+<li>Consultant, (ROLE_CONSULTANT)</li>
+<li>Super Consultant, (ROLE_SUPER_CONSULTANT)</li>
+</ul>
+</li>
+<li>Une liste de clients auxquels il a accès – Obligatoire,</li>
+<li>Activation de mail alerte – si coché l’utilisateur recevra les mails d’alerte.</li>
+</ul>
+</li>
+<li>Données liées à l’activité de PV (<code>SYS_EUQPPV_xxx</code>, <code>SYS_DEPUTY_EUQPPV_xxx</code>, <code>SYS_CONTACT_PV_CLIENT_xxx</code>):<ul>
+<li>Un nom – Obligatoire,</li>
+<li>Un prénom – Obligatoire,</li>
+<li>Un CV – Obligatoire (Image),</li>
+<li>Un genre – Obligatoire (« Femme » / « Homme »),</li>
+<li>Une liste de rôles – Obligatoire<ul>
+<li>EUQPPV</li>
+<li>Deputy EUQPPV</li>
+<li>Contact PV Client</li>
+<li>Autre</li>
+</ul>
+</li>
+<li>Fonction – Obligatoire,</li>
+<li>Un mobile – Facultatif,</li>
+<li>Un fixe – Obligatoire,</li>
+<li>Un Fax – Obligatoire,</li>
+<li>Un mail – Obligatoire,</li>
+<li>Un entity EUQPPV – Obligatoire (« UM » / « Client / « Presta »)</li>
+<li>Une adresse d’exercice – Obligatoire,</li>
+<li>Un nom d’entreprise – Obligatoire,</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-mot-de-passe-dun-utilisateur">3. Mot de passe d&#39;un utilisateur</h3>
+<p>Après avoir créé un utilisateur, l&#39;utilisateur recevra un mail contenant un mot de passe qui est automatiquement généré par la plateforme.</p>
+<p><img src="../images/users/mail_creation_user.png" alt="code"></p>
+<h3 id="4-rôles-et-accès">4. Rôles et accès</h3>
+<p>Un utilisateur non-administrateur ne peut accéder uniquement aux clients qui lui sont attribués.</p>
+<table>
+    <tr><th></th><th>Administrateur</th><th>Utilisateur</th><th>Super consultant</th><th>Consultant</th></tr>
+    <tr><td>La gestion du Template</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>	
+    <tr><td>La gestion des variables</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td align="center">Equivalence locale</td><td align="center">oui</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td align="center">Equivalence globale</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td align="center">Autre</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td>La gestion du PSMF</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td align="center">Gestion Client</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td align="center">Modification des champs du PSMF</td><td align="center">oui</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td align="center">Gestion des montée de version du doucment</td><td align="center">oui</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td>La génération du document</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td align="center">Télécharger documents applications</td><td align="center">oui</td><td align="center">oui</td><td align="center">oui</td><td align="center">oui</td></tr>
+    <tr><td align="center">Télécharger documents toutes versions</td><td align="center">oui</td><td align="center">non</td><td align="center">oui</td><td align="center">non</td></tr>
+    <tr><td>L'administration de la plateforme</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>
+    <tr><td>L'audit et l'historique des modifications</td><td align="center">oui</td><td align="center">non</td><td align="center">non</td><td align="center">non</td></tr>
+</table></main></div><footer><p>MF CORE</p>
+</footer></body></html>
